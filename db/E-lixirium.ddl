@@ -12,8 +12,8 @@
 -- Database Section
 -- ________________ 
 
-create database elixirium;
-use elixirium;
+create database `e-lixirium`;
+use `e-lixirium`;
 
 
 -- Tables Section

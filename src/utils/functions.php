@@ -31,6 +31,14 @@ function registerLoggedUser($user)
     $_SESSION["username"] = $user["username"];
     $_SESSION["name"] = $user["name"];
     $_SESSION["surname"] = $user["surname"];
+    $_SESSION["email"] = $user["email"];
+}
+
+function logout(){
+    unset($_SESSION["username"]);
+    unset($_SESSION["name"]);
+    unset($_SESSION["surname"]);
+    unset($_SESSION["email"]);
 }
 
 // TODO: rewrite for empty product (only in the case we decide to opt for a separate edit page)

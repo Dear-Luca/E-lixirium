@@ -60,11 +60,33 @@ class DatabaseHelper
     //     return true;
     // }
 
+    public function insertUser($name, $surname, $username, $email, $password)
+    {
+        $query = "INSERT INTO user (name, surname, username, email, password, birthday) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $currentDate = date('Y-m-d H:i:s');
+        $stmt->bind_param('ssssss', $name, $surname, $username, $email, $password, $currentDate);
+        $stmt->execute();
+
+        return $stmt->insert_id;
+    }
+
     public function checkLogin($username, $password)
     {
-        $query = "SELECT idautore, username, nome FROM autore WHERE attivo=1 AND username = ? AND password = ?";
+        $query = "SELECT * FROM user WHERE username = ? AND password = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ss', $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function checkRegister($username)
+    {
+        $query = "SELECT username FROM user WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
 

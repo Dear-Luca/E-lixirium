@@ -1,4 +1,4 @@
-body, header, h1, h2, h5, ul{
+/* body, header, h1, h2, h5, ul{
     margin: 0;
     padding: 0;
 }
@@ -33,7 +33,7 @@ nav ul li{
     width: 45%;
     margin: 10px 0 0;
     text-align: center;
-    /* background-color:rgb(54,54,54); */
+    background-color:rgb(54,54,54);
 }
 
 nav ul li:nth-child(odd){
@@ -52,14 +52,14 @@ nav ul li a{
 
 body > section {
     display: none;
-}
+}*/
 
 nav ul li img{
     width: 50px;
     height: 50px;
 }
 
-nav ul li:hover a, nav ul li a.active{
+/*nav ul li:hover a, nav ul li a.active{
     color:rgb(219, 69,83);
 }
 
@@ -287,4 +287,4 @@ body > footer > p{
         width: 80%;
         margin: 0 10%;    
     }
-}
+} */

@@ -3,20 +3,21 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $templateParams["title"]; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
 <body>
     <header>
-        <h1>E-lixirium</h1>
+        <h1 class="text-danger">E-lixirium</h1>
     </header>
     <nav>
-        <ul>
-            <li><button class="menu-button" onclick="toggleMenu()"><!-- Navbar --><img src="upload/menu-hamburger-nav.svg" alt="Menu" /></button></li>
-            <li><input type="text" placeholder="Search product"/><!-- Searchbar --></li>
-            <li><a href="index.php?page=contatti"><!-- Cart --><img src="upload/cart-shopping.svg" alt="Shopping Cart" /></a></li>
-            <li><a href="index.php?page=login"><!-- Notifications --><img src="upload/notification-13.svg" alt="Notifications" /></a></li>
-            <li><a href="index.php?page=login"><!-- Account --><img src="upload/account-avatar.svg" alt="Account" /></a></li>
-            <li><a href="index.php?page=login"><!-- Login --></a></li>
+        <ul class="list-group">
+            <li class="list-group-item"><button class="menu-button" onclick="toggleMenu()"><!-- Navbar --><img src="upload/menu-hamburger-nav.svg" alt="Menu" /></button></li>
+            <li class="list-group-item"><input type="text" placeholder="Search product"/><!-- Searchbar --></li>
+            <li class="list-group-item"><a href="index.php?page=contatti"><!-- Cart --><img src="upload/cart-shopping.svg" alt="Shopping Cart" /></a></li>
+            <li class="list-group-item"><a href="index.php?page=login"><!-- Notifications --><img src="upload/notification-13.svg" alt="Notifications" /></a></li>
+            <li class="list-group-item"><a href="index.php?page=login"><!-- Account --><img src="upload/account-avatar.svg" alt="Account" /></a></li>
+            <li class="list-group-item"><a href="index.php?page=login"><!-- Login --></a></li>
         </ul>
         <script src="js/scripts.js"></script>
     </nav>
@@ -80,6 +81,6 @@
         endforeach;
     endif;
     ?>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

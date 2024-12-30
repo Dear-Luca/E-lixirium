@@ -10,7 +10,7 @@ $templateParams["title"] = "E-lixirium - Home";
 if (!isset($_GET["page"])) {
     $_GET["page"] = "home";
 }
-var_dump(isUserLoggedIn());
+
 switch ($_GET["page"]) {
     case "home":
         // Home Template

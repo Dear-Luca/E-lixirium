@@ -23,7 +23,7 @@ function getIdFromName($name)
 
 function isUserLoggedIn()
 {
-    return isset($_SESSION["logged"]) && $_SESSION["logged"];
+    return isset($_SESSION["logged"]) && isset($_SESSION["admin"]) && $_SESSION["logged"] && !$_SESSION["admin"];
 }
 
 function isAdminLoggedIn()

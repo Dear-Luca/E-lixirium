@@ -34,7 +34,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?page=home">Home</a>
+                        <a class="nav-link" href="?page=home">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -48,7 +48,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?page=about">About us</a>
+                        <a class="nav-link" href="?page=about">About us</a>
                     </li>
                 </ul>
             </div>
@@ -58,21 +58,27 @@
             </form>
             <span class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>
-                    <a href="index.php?page=cart"><img src="upload/cart-speed.svg" alt="Shopping Cart" /></a>
-                    <a href="index.php?page=orders"><img src="upload/box-check.svg" alt="Orders" /></a>
-                    <a href="index.php?page=notifications"><img src="upload/notification-13.svg" alt="Notifications" /></a>
-                    <a href="index.php?page=account"><img src="upload/user.svg" alt="Account" /></a>
-                    <a href="index.php?page=logout"><img src="upload/sign-out.svg" alt="Logout" /></a>
+                    <!-- User logged in: -->
+                    <a href="?page=cart"><img src="upload/cart-speed.svg" alt="Shopping Cart" /></a>
+                    <a href="?page=orders"><img src="upload/box-check.svg" alt="Orders" /></a>
+                    <a href="?page=notifications"><img src="upload/notification-13.svg" alt="Notifications" /></a>
+                    <a href="?page=account"><img src="upload/user.svg" alt="Account" /></a>
+                    <a href="?page=logout"><img src="upload/sign-out.svg" alt="Logout" /></a>
+                <?php elseif (isAdminLoggedIn()): ?>
+                    <!-- Admin logged in: -->
+                    <a href="?page=account"><img src="upload/user.svg" alt="Account" /></a>
+                    <a href="?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
                 <?php else: ?>
-                    <a href="index.php?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
+                    <!-- User not logged in: -->
+                    <a href="?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
                 <?php endif; ?>
             </span>
         </div>
     </nav>
     <main>
         <?php
-        if (isset($templateParams["nome"])) {
-            require($templateParams["nome"]);
+        if (isset($templateParams["content"])) {
+            require($templateParams["content"]);
         }
         ?>
     </main>

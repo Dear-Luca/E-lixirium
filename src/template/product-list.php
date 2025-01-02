@@ -14,6 +14,7 @@
                         <h3 class="card-title"><?php echo $product["name"]; ?></h3>
                         <p class="card-text"><?php echo $product["price"] . "€"; ?></p>
                         <p class="card-text">stars (number)</p>
+                        <a href="?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                     </div>
                 </article>
             <?php endif;

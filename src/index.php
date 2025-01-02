@@ -25,6 +25,22 @@ switch ($_GET["page"]) {
         $templateParams["title"] = "E-lixirium - About Us";
         // $templateParams["content"] = "PAGE.php";
         break;
+    case "product":
+        if (isset($_GET["id"])) {
+            $templateParams["product"] = $dbh->getProduct($_GET["id"]);
+            if (count($templateParams["product"])) {
+                // Product existing
+                $templateParams["error"] = "A user with that username already exists";
+                $templateParams["title"] = "E-lixirium - Product " . $_GET["id"];
+                // $templateParams["content"] = "PAGE.php";
+            } else {
+                // Product not existing
+                header("Location: ?page=products");
+            }
+        } else {
+            header("Location: ?page=products");
+        }
+        break;
     case "register":
         if (!isUserLoggedIn() && !isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Register";
@@ -56,7 +72,7 @@ switch ($_GET["page"]) {
                     header("Location: ?page=account");
                 } else {
                     $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
-                    if (count($login_result) == 0) {
+                    if (!count($login_result)) {
                         // Login failed
                         $templateParams["error"] = "Error! Check username or password!";
                     } else {

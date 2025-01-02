@@ -84,6 +84,16 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getProduct($id_product)
+    {
+        $query = "SELECT * FROM product WHERE id_product= ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $id_product);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function checkAdmin($username, $password)
     {
         $query = "SELECT * FROM admin WHERE username = ? AND password = ?";

@@ -23,35 +23,52 @@
             document.querySelector("body header").classList.add("text-success");
         }
     </script>
-    <nav>
-        <ul class="list-group">
-            <li class="list-group-item"><button class="menu-button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseMenu"><!-- Navbar --><img src="upload/menu-hamburger-nav.svg"
-                        alt="Menu" /></button></li>
-            <li class="list-group-item"><input type="text" placeholder="Search product" /><!-- Searchbar --></li>
-            <li class="list-group-item"><a href="index.php?page=contatti"><!-- Cart --><img
-                        src="upload/cart-shopping.svg" alt="Shopping Cart" /></a></li>
-            <li class="list-group-item"><a href="index.php?page=login"><!-- Notifications --><img
-                        src="upload/notification-13.svg" alt="Notifications" /></a></li>
-            <li class="list-group-item"><a href="index.php?page=login"><!-- Account --><img
-                        src="upload/account-avatar.svg" alt="Account" /></a></li>
-            <li class="list-group-item"><a href="index.php?page=login"><!-- Login --></a></li>
-        </ul>
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#">E-lixirium</a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?page=home">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Product1</a></li>
+                            <li><a class="dropdown-item" href="#">Product2</a></li>
+                            <li><a class="dropdown-item" href="#">Product3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?page=about">About us</a>
+                    </li>
+                </ul>
+            </div>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search">
+                <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+            </form>
+            <span class="nav-link d-none d-md-flex">
+                <?php if (isUserLoggedIn()): ?>
+                    <a href="index.php?page=cart"><img src="upload/cart-speed.svg" alt="Shopping Cart" /></a>
+                    <a href="index.php?page=orders"><img src="upload/box-check.svg" alt="Orders" /></a>
+                    <a href="index.php?page=notifications"><img src="upload/notification-13.svg" alt="Notifications" /></a>
+                    <a href="index.php?page=account"><img src="upload/user.svg" alt="Account" /></a>
+                    <a href="index.php?page=logout"><img src="upload/sign-out.svg" alt="Logout" /></a>
+                <?php else: ?>
+                    <a href="index.php?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
+                <?php endif; ?>
+            </span>
+        </div>
     </nav>
-    <section class="collapse" id="collapseMenu">
-        <ul class="list-group">
-            <li class="list-group-item"><a href="index.php?page=home">Home</a></li>
-            <li class="list-group-item"><a href="index.php?page=products">Products</a></li>
-            <li class="list-group-item"><a href="index.php?page=about">About Us</a></li>
-
-            <li class="list-group-item"><a href="index.php?page=register">Register</a></li>
-            <li class="list-group-item"><a href="index.php?page=login">Login</a></li>
-            <li class="list-group-item"><a href="index.php?page=account">Account</a></li>
-            <li class="list-group-item"><a href="index.php?page=cart">Shopping Cart</a></li>
-            <li class="list-group-item"><a href="index.php?page=orders">Orders</a></li>
-            <li class="list-group-item"><a href="index.php?page=logout">Logout</a></li>
-        </ul>
-    </section>
     <main>
         <?php
         if (isset($templateParams["nome"])) {
@@ -59,27 +76,6 @@
         }
         ?>
     </main>
-    <!-- <aside>
-        <section>
-            <h2>Post Casuali</h2>
-            <ul>
-            <?php foreach ($templateParams["articolicasuali"] as $articolocasuale): ?>
-                <li>
-                    <img src="<?php echo UPLOAD_DIR . $articolocasuale["imgarticolo"]; ?>" alt="" />
-                    <a href="articolo.php?id=<?php echo $articolocasuale["idarticolo"]; ?>"><?php echo $articolocasuale["titoloarticolo"]; ?></a>
-                </li>
-            <?php endforeach; ?>
-            </ul>
-        </section>
-        <section>
-            <h2>Categorie</h2>
-            <ul>
-            <?php foreach ($templateParams["categorie"] as $categoria): ?>
-                <li><a href="articoli-categoria.php?id=<?php echo $categoria["idcategoria"]; ?>"><?php echo $categoria["nomecategoria"]; ?></a></li>
-            <?php endforeach; ?>
-            </ul>
-        </section>
-    </aside> -->
     <footer>
         <h2>Info</h2>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga architecto totam sint quia dolores similique!

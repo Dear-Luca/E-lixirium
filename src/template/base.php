@@ -12,27 +12,26 @@
     </header>
     <nav>
         <ul class="list-group">
-            <li class="list-group-item"><button class="menu-button" onclick="toggleMenu()"><!-- Navbar --><img src="upload/menu-hamburger-nav.svg" alt="Menu" /></button></li>
+            <li class="list-group-item"><button class="menu-button" data-bs-toggle="collapse" data-bs-target="#collapseMenu"><!-- Navbar --><img src="upload/menu-hamburger-nav.svg" alt="Menu" /></button></li>
             <li class="list-group-item"><input type="text" placeholder="Search product"/><!-- Searchbar --></li>
             <li class="list-group-item"><a href="index.php?page=contatti"><!-- Cart --><img src="upload/cart-shopping.svg" alt="Shopping Cart" /></a></li>
             <li class="list-group-item"><a href="index.php?page=login"><!-- Notifications --><img src="upload/notification-13.svg" alt="Notifications" /></a></li>
             <li class="list-group-item"><a href="index.php?page=login"><!-- Account --><img src="upload/account-avatar.svg" alt="Account" /></a></li>
             <li class="list-group-item"><a href="index.php?page=login"><!-- Login --></a></li>
         </ul>
-        <script src="js/scripts.js"></script>
     </nav>
-    <section>
-        <ul>
-            <li><a href="index.php?page=home">Home</a></li>
-            <li><a href="index.php?page=products">Products</a></li>
-            <li><a href="index.php?page=about">About Us</a></li>
+    <section class="collapse" id="collapseMenu">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="index.php?page=home">Home</a></li>
+            <li class="list-group-item"><a href="index.php?page=products">Products</a></li>
+            <li class="list-group-item"><a href="index.php?page=about">About Us</a></li>
 
-            <li><a href="index.php?page=register">Register</a></li>
-            <li><a href="index.php?page=login">Login</a></li>
-            <li><a href="index.php?page=account">Account</a></li>
-            <li><a href="index.php?page=cart">Shopping Cart</a></li>
-            <li><a href="index.php?page=orders">Orders</a></li>
-            <li><a href="index.php?page=logout">Logout</a></li>
+            <li class="list-group-item"><a href="index.php?page=register">Register</a></li>
+            <li class="list-group-item"><a href="index.php?page=login">Login</a></li>
+            <li class="list-group-item"><a href="index.php?page=account">Account</a></li>
+            <li class="list-group-item"><a href="index.php?page=cart">Shopping Cart</a></li>
+            <li class="list-group-item"><a href="index.php?page=orders">Orders</a></li>
+            <li class="list-group-item"><a href="index.php?page=logout">Logout</a></li>
         </ul>
     </section>
     <main>

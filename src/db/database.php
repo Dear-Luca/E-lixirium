@@ -69,6 +69,21 @@ class DatabaseHelper
         return $stmt->insert_id;
     }
 
+    public function getProducts($n = -1)
+    {
+        $query = "SELECT * FROM product ORDER BY RAND()";
+        if ($n > 0) {
+            $query .= " LIMIT ?";
+        }
+        $stmt = $this->db->prepare($query);
+        if ($n > 0) {
+            $stmt->bind_param('i', $n);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function checkAdmin($username, $password)
     {
         $query = "SELECT * FROM admin WHERE username = ? AND password = ?";

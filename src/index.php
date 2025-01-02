@@ -18,7 +18,8 @@ switch ($_GET["page"]) {
         break;
     case "products":
         $templateParams["title"] = "E-lixirium - Products";
-        // $templateParams["content"] = "PAGE.php";
+        $templateParams["products"] = $dbh->getProducts();
+        $templateParams["content"] = "product-list.php";
         break;
     case "about":
         $templateParams["title"] = "E-lixirium - About Us";

@@ -30,8 +30,7 @@ switch ($_GET["page"]) {
             $templateParams["product"] = $dbh->getProduct($_GET["id"]);
             if (count($templateParams["product"])) {
                 // Product existing
-                $templateParams["error"] = "A user with that username already exists";
-                $templateParams["title"] = "E-lixirium - Product " . $_GET["id"];
+                $templateParams["title"] = "E-lixirium - " . $templateParams["product"][0]["name"];
                 // $templateParams["content"] = "PAGE.php";
             } else {
                 // Product not existing

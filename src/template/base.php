@@ -48,7 +48,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=about">About us</a>
+                        <a class="nav-link" href="?page=about">About Us</a>
                     </li>
                 </ul>
             </div>
@@ -82,20 +82,22 @@
         }
         ?>
     </main>
-    <footer>
-        <h2>Info</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga architecto totam sint quia dolores similique!
-            Possimus repellat voluptas vero ea? Ducimus explicabo maxime delectus fugit non! Saepe pariatur et quo.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga architecto totam sint quia dolores similique!
-            Possimus repellat voluptas vero ea? Ducimus explicabo maxime delectus fugit non! Saepe pariatur et quo.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga architecto totam sint quia dolores similique!
-            Possimus repellat voluptas vero ea? Ducimus explicabo maxime delectus fugit non! Saepe pariatur et quo.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga architecto totam sint quia dolores similique!
-            Possimus repellat voluptas vero ea? Ducimus explicabo maxime delectus fugit non! Saepe pariatur et quo.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga architecto totam sint quia dolores similique!
-            Possimus repellat voluptas vero ea? Ducimus explicabo maxime delectus fugit non! Saepe pariatur et quo.
-        </p>
-    </footer>
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item">
+                    <a href="?page=home" class="nav-link px-2 text-body-secondary">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="?page=products" class="nav-link px-2 text-body-secondary">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a href="?page=about" class="nav-link px-2 text-body-secondary">About Us</a>
+                </li>
+            </ul>
+            <p class="text-center text-body-secondary">© 2024 E-lixirium</p>
+        </footer>
+    </div>
     <?php
     if (isset($templateParams["js"])):
         foreach ($templateParams["js"] as $script):
@@ -108,6 +110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>

@@ -27,38 +27,37 @@ switch ($_GET["page"]) {
         break;
     case "register":
         $templateParams["nome"] = "register-form.php";
-        if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"])) {
-            if (strlen($_POST["name"]) && strlen($_POST["surname"]) && strlen($_POST["username"]) && strlen($_POST["email"]) && strlen($_POST["password"])) {
-                $register_result = $dbh->checkRegister($_POST["username"]);
-                if (count($register_result)) {
-                    // Registration failed
-                    $templateParams["error"] = "A user with that username already exists";
-                } else {
-                    $dbh->insertUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["password"]);
-                    $templateParams["error"] = "Registration succesfull";
-                    header("Location: index.php?page=login");
-                }
+        if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["birthday"])) {
+            $register_result = $dbh->checkRegister($_POST["username"]);
+            if (count($register_result)) {
+                // Registration failed
+                $templateParams["error"] = "A user with that username already exists";
             } else {
-                $templateParams["error"] = "Insert all fields!";
+                $dbh->insertUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["password"], $_POST["birthday"]);
+                $templateParams["error"] = "Registration succesfull";
+                header("Location: index.php?page=login");
             }
         }
         break;
     case "login":
         $templateParams["nome"] = "login-form.php";
         if (isset($_POST["username"]) && isset($_POST["password"])) {
-            if (strlen($_POST["username"]) && strlen($_POST["password"])) {
+            $login_result = $dbh->checkAdmin($_POST["username"], $_POST["password"]);
+            if (count($login_result) != 0) {
+                // Admin login
+                registerAdminLogged($login_result[0]);
+                header("Location: index.php?page=account");
+            } else {
                 $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
                 //var_dump($login_result);
                 if (count($login_result) == 0) {
-                    //Login failed
+                    // Login failed
                     $templateParams["error"] = "Error! Check username or password!";
                 } else {
+                    // User login
                     registerLoggedUser($login_result[0]);
                     header("Location: index.php?page=account");
-                    exit();
                 }
-            } else {
-                $templateParams["error"] = "Insert all fields!";
             }
         }
 

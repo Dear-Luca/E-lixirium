@@ -60,15 +60,23 @@ class DatabaseHelper
     //     return true;
     // }
 
-    public function insertUser($name, $surname, $username, $email, $password)
+    public function insertUser($name, $surname, $username, $email, $password, $birthday)
     {
         $query = "INSERT INTO user (name, surname, username, email, password, birthday) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $currentDate = date('Y-m-d H:i:s');
-        $stmt->bind_param('ssssss', $name, $surname, $username, $email, $password, $currentDate);
+        $stmt->bind_param('ssssss', $name, $surname, $username, $email, $password, $birthday);
         $stmt->execute();
-
         return $stmt->insert_id;
+    }
+
+    public function checkAdmin($username, $password)
+    {
+        $query = "SELECT * FROM admin WHERE username = ? AND password = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ss', $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function checkLogin($username, $password)
@@ -78,7 +86,6 @@ class DatabaseHelper
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
         $result = $stmt->get_result();
-
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -89,9 +96,7 @@ class DatabaseHelper
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
-
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-
 }
 ?>

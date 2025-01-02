@@ -23,18 +23,35 @@ function getIdFromName($name)
 
 function isUserLoggedIn()
 {
-    return !empty($_SESSION["username"]);
+    return $_SESSION["logged"];
+}
+
+function isAdminLoggedIn()
+{
+    return $_SESSION["logged"] && $_SESSION["admin"];
 }
 
 function registerLoggedUser($user)
 {
+    $_SESSION["logged"] = true;
+    $_SESSION["admin"] = false;
     $_SESSION["username"] = $user["username"];
     $_SESSION["name"] = $user["name"];
     $_SESSION["surname"] = $user["surname"];
     $_SESSION["email"] = $user["email"];
 }
 
-function logout(){
+function registerAdminLogged($admin)
+{
+    $_SESSION["username"] = $admin["username"];
+    $_SESSION["logged"] = true;
+    $_SESSION["admin"] = true;
+}
+
+function logout()
+{
+    unset($_SESSION["logged"]);
+    unset($_SESSION["admin"]);
     unset($_SESSION["username"]);
     unset($_SESSION["name"]);
     unset($_SESSION["surname"]);

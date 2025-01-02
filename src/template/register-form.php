@@ -5,22 +5,31 @@
     <?php endif; ?>
     <ul>
         <li>
-            <label for="name">Name:</label><input type="text" id="name" name="name" />
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required />
         </li>
         <li>
-            <label for="surname">Surname:</label><input type="text" id="surname" name="surname" />
+            <label for="surname" class="form-label">Surname:</label>
+            <input type="text" class="form-control" id="surname" name="surname" required/>
         </li>
         <li>
-            <label for="username">Username:</label><input type="text" id="username" name="username" />
+            <label for="birthday" class="form-label">Birthday:</label>
+            <input type="date" class="form-control" id="birthday" name="birthday" required/>
         </li>
         <li>
-            <label for="email">Email:</label><input type="text" id="email" name="email" />
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required/>
         </li>
         <li>
-            <label for="password">Password:</label><input type="password" id="password" name="password" />
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required/>
         </li>
         <li>
-            <input type="submit" name="submit" value="Invia" />
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required/>
+        </li>
+        <li>
+            <input type="submit" name="submit" value="Register" />
         </li>
     </ul>
 </form>

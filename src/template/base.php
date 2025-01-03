@@ -14,6 +14,7 @@
         <h1>E-lixirium</h1>
     </header>
     <script>
+        // TODO: debug only, remove before release
         // Change header color based on login status: black(not logged), green(user logged), red(admin logged)
         const userLogged = <?php echo isUserLoggedIn() ? "true" : "false"; ?>;
         const adminLogged = <?php echo isAdminLoggedIn() ? "true" : "false"; ?>;

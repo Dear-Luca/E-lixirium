@@ -11,6 +11,6 @@ nav img {
     }
 }
 
-.row>.form-floating>label {
-    margin-left: 0.75em;
+main>div>form {
+    max-width: 330px;
 }

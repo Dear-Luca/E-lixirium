@@ -10,3 +10,7 @@ nav img {
         width: 14.28571429%;
     }
 }
+
+.row>.form-floating>label {
+    margin-left: 0.75em;
+}

@@ -31,7 +31,7 @@ switch ($_GET["page"]) {
             if (count($templateParams["product"])) {
                 // Product existing
                 $templateParams["title"] = "E-lixirium - " . $templateParams["product"][0]["name"];
-                // $templateParams["content"] = "PAGE.php";
+                $templateParams["content"] = "product.php";
             } else {
                 // Product not existing
                 header("Location: ?page=products");

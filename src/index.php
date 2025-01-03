@@ -98,7 +98,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
             $templateParams["content"] = "cart.php";
             $templateParams["cart"] = $dbh->getCart($_SESSION["username"]);
-            header("Location: ?page=cart");
+            var_dump($templateParams["cart"]);
         } else {
             header("Location: ?page=home");
         }

@@ -50,6 +50,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="?page=about">About Us</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=cart">Cart</a>
+                    </li>
                 </ul>
             </div>
             <form class="d-flex" role="search">

@@ -96,7 +96,9 @@ switch ($_GET["page"]) {
     case "cart":
         if (isUserLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
-            // $templateParams["content"] = "PAGE.php"
+            $templateParams["content"] = "cart.php";
+            $templateParams["cart"] = $dbh->getCart($_SESSION["username"]);
+            header("Location: ?page=cart");
         } else {
             header("Location: ?page=home");
         }

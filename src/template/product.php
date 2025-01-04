@@ -33,7 +33,7 @@
                         <div class="form-floating col-4">
                             <input type="number" id="amount" name="amount" class="form-control" required value="1"
                                 min="1" max="<?php echo $product["amount_left"]; ?>" />
-                            <label for="typeNumber">Amount</label>
+                            <label for="amount">Amount</label>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary w-100 my-3">Add to cart</button>

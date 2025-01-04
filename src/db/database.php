@@ -124,9 +124,9 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getCart($username)
+    public function getCartProducts($username)
     {
-        $query = "SELECT id_product FROM wishes WHERE username=?";
+        $query = "SELECT W.id_product, P.name, P.price FROM wishes as W, product as P WHERE W.username=? and W.id_product=P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();

@@ -3,10 +3,9 @@
     <p>Your cart is empty</p>
 <?php else: ?>
     <ul>
-        
         <?php foreach ($templateParams["cart"] as $product): ?>
             <li>
-                <?php echo $product["id_product"] ?>
+                <?php echo $product["name"] ?>
             </li>
         <?php endforeach; ?>
     </ul>

@@ -86,10 +86,41 @@ switch ($_GET["page"]) {
         }
         break;
     case "account":
-        if (isUserLoggedIn() || isAdminLoggedIn()) {
+        if (isUserLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Account";
-            // $templateParams["content"] = "PAGE.php"
-        } else {
+            $templateParams["content"] = "account-user.php";
+            if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"])){
+                // if username does't change
+                if ($_POST["username"] == $_SESSION["username"]){
+                    //var_dump($_POST);
+                    $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_SESSION["username"]);
+                    $templateParams["error"] = "Update successful";
+                    $_SESSION["name"] = $_POST["name"];
+                    $_SESSION["surname"] = $_POST["surname"];
+                    $_SESSION["username"] = $_POST["username"];
+                    $_SESSION["email"] = $_POST["email"];
+                    //header("Location: ?page=home");
+                }
+                else if(count($dbh->checkRegister($_POST["username"])) > 0){
+                    $templateParams["error"] = "A user with that username already exists";
+                } else {
+                    $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_SESSION["username"]);
+                    $templateParams["error"] = "Update succesfull";
+                    $_SESSION["name"] = $_POST["name"];
+                    $_SESSION["surname"] = $_POST["surname"];
+                    $_SESSION["username"] = $_POST["username"];
+                    $_SESSION["email"] = $_POST["email"];
+
+                    //header("Location: ?page=home");
+                }
+            }
+
+        }
+        else if (isAdminLoggedIn()) {
+            $templateParams["title"] = "E-lixirium - Admin";
+            $templateParams["content"] = "account-admin.php";
+        }
+        else {
             header("Location: ?page=login");
         }
         break;
@@ -98,7 +129,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
             $templateParams["content"] = "cart.php";
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
-            var_dump($templateParams["cart"]);
+            //var_dump($templateParams["cart"]);
         } else {
             header("Location: ?page=home");
         }

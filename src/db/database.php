@@ -133,5 +133,22 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getUserInfo($username){
+        $query = "SELECT * FROM user WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateUser($name, $surname, $username, $email, $currentUsername){
+        $query = "UPDATE user SET name = ?, surname = ?, username = ?, email = ? WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sssss', $name, $surname, $username, $email, $currentUsername);
+        $stmt->execute();
+    }
+
 }
 ?>

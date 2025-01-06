@@ -152,11 +152,11 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function updateUser($name, $surname, $username, $email, $currentUsername)
+    public function updateUser($name, $surname, $username, $email,$birthday, $cardNumber, $password ,$currentUsername)
     {
-        $query = "UPDATE user SET name = ?, surname = ?, username = ?, email = ? WHERE username = ?";
+        $query = "UPDATE user SET name = ?, surname = ?, username = ?, email = ?, birthday = ?, card_number = ?, password = ? WHERE username = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssss', $name, $surname, $username, $email, $currentUsername);
+        $stmt->bind_param('sssssiss', $name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername);
         $stmt->execute();
     }
 

@@ -10,6 +10,9 @@ form div button:nth-of-type(3) {
     display: none;
 }
 
+div section form div:nth-child(8){
+    display: none;
+}
 /* Bootstrap-derived new layout */
 @media (min-width: 1400px) {
     .row-cols-xxl-7>* {

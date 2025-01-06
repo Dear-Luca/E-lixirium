@@ -89,19 +89,25 @@ switch ($_GET["page"]) {
         if (isUserLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Account";
             $templateParams["content"] = "account-user.php";
-            if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"])){
-                // if username does't change
-                if ($_POST["username"] == $_SESSION["username"]){
-                    $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_SESSION["username"]);
-                    $templateParams["error"] = "Update successful";
-                    updateUser();
-                }
-                else if(count($dbh->checkRegister($_POST["username"])) > 0){
-                    $templateParams["error"] = "A user with that username already exists";
-                } else {
-                    $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_SESSION["username"]);
-                    $templateParams["error"] = "Update succesfull";
-                    updateUser();
+            $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
+
+            if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) &&  isset($_POST["card_number"]) && isset($_POST["password"])) {
+                var_dump($_POST);
+                if($_POST["password"] == $_POST["confirmPassword"]){
+                    // if username does't change or new username is not used
+                    if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkRegister($_POST["username"])) == 0)){
+                        $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"],$_POST["birthday"], $_POST["card_number"], $_POST["password"] ,$_SESSION["username"]);
+                        $templateParams["error"] = "Update successful";
+                        $_SESSION["username"] = $_POST["username"];
+                        $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
+                        // update variable session
+                        updateUser($templateParams);
+                    }
+                    else {
+                        $templateParams["error"] = "A user with that username already exists";
+                    }
+                }else{
+                    $templateParams["error"] = "You need to confirm the password";
                 }
             }
         }

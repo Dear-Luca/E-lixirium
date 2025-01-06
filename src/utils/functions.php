@@ -58,11 +58,12 @@ function logout()
     unset($_SESSION["email"]);
 }
 
-function updateUser(){
-    $_SESSION["name"] = $_POST["name"];
-    $_SESSION["surname"] = $_POST["surname"];
-    $_SESSION["username"] = $_POST["username"];
-    $_SESSION["email"] = $_POST["email"];
+function updateUser($templateParams){
+    $_SESSION["name"] = $templateParams["userInfo"][0]["name"];
+    $_SESSION["surname"] = $templateParams["userInfo"][0]["surname"];
+    $_SESSION["email"] = $templateParams["userInfo"][0]["email"];
+    $_SESSION["birthday"] = $templateParams["userInfo"][0]["birthday"];
+    $_SESSION["card_number"] = $templateParams["userInfo"][0]["card_number"];
 }
 
 // TODO: rewrite for empty product (only in the case we decide to opt for a separate edit page)

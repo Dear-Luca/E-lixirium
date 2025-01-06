@@ -21,12 +21,12 @@ use `e-lixirium`;
 
 create table PRODUCT (
      name char(30) not null,
-     id_product int not null,
+     id_product int not null auto_increment,
      description varchar(300) not null,
      image_name char(30) not null,
-     price int not null,
+     price float not null,
      amount_left int not null,
-     duration int not null,
+     duration varchar(30) not null,
      constraint ID_PRODUCT_ID primary key (id_product));
 
 create table USER (

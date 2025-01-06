@@ -4,7 +4,10 @@
     </header>
     <h3 class="mb-3">User Information</h3>
     <?php if (isset($templateParams["error"])): ?>
-        <p><?php echo $templateParams["error"]; ?></p>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?php echo $templateParams["error"]; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     <?php endif; ?>
     <section class="card-body">
         <form id="user-form" method="POST" action="?page=account">

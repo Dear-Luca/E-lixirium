@@ -1,17 +1,35 @@
 <div class="container my-5">
+
     <h2 class="mb-4">Admin</h2>
     <?php if (isset($templateParams["error"])): ?>
-        <p><?php echo $templateParams["error"]; ?></p>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?php echo $templateParams["error"]; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     <?php endif; ?>
+
     <div class="d-flex align-items-center mb-4">
-        <span>Add product</span>
+        <h3>Add category</h3>
     </div>
 
-    <!-- Form for Adding Product -->
+    <form method="POST" action="?page=account">
+        <div class="mb-3">
+            <label for="categoryName" class="form-label">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" name="categoryName"
+                placeholder="Enter category name" required />
+        </div>
+        <button type="submit" class="btn btn-success">Create Category</button>
+    </form>
+
+    <div class="d-flex align-items-center mb-4 mt-4">
+        <h3>Add product</h3>
+    </div>
+
     <form class="mb-4" method="POST" action="?page=account">
         <div class="mb-3">
             <label for="productName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="productName" name="productName" placeholder="Enter product name" required />
+            <input type="text" class="form-control" id="productName" name="productName" placeholder="Enter product name"
+                required />
         </div>
 
         <div class="mb-3">
@@ -22,12 +40,27 @@
 
         <div class="mb-3">
             <label for="productPrice" class="form-label">Price</label>
-            <input type="number" step="0.01" class="form-control" id="productPrice" name="productPrice" placeholder="Enter price" required />
+            <input type="number" step="0.01" class="form-control" id="productPrice" name="productPrice"
+                placeholder="Enter price" required />
         </div>
 
         <div class="mb-3">
             <label for="productAmount" class="form-label">Amount</label>
-            <input type="number" class="form-control" id="productAmount" name="productAmount" placeholder="Enter amount" required />
+            <input type="number" class="form-control" id="productAmount" name="productAmount" placeholder="Enter amount"
+                required />
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <?php foreach ($templateParams["categories"] as $category): ?>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category[]" value="<?php echo $category["name"]; ?>"
+                        id="category-<?php echo $category["name"]; ?>" />
+                    <label class="form-check-label" for="category-<?php echo $category["name"]; ?>">
+                        <?php echo $category["name"]; ?>
+                    </label>
+                </div>
+            <?php endforeach; ?>
         </div>
 
         <fieldset class="mb-3" required>

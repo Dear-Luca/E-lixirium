@@ -90,9 +90,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Account";
             $templateParams["content"] = "account-user.php";
             $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
-
             if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) &&  isset($_POST["card_number"]) && isset($_POST["password"])) {
-                var_dump($_POST);
                 if($_POST["password"] == $_POST["confirmPassword"]){
                     // if username does't change or new username is not used
                     if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkRegister($_POST["username"])) == 0)){
@@ -110,13 +108,28 @@ switch ($_GET["page"]) {
                     $templateParams["error"] = "You need to confirm the password";
                 }
             }
+
         }
         else if (isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Admin";
             $templateParams["content"] = "account-admin.php";
-            if (isset($_POST["productName"]) && isset($_POST["productDescription"]) && isset($_POST["productPrice"]) && isset($_POST["productAmount"]) && isset($_POST["duration"]) && isset($_POST["productImages"])){
+            $templateParams["categories"] = $dbh->getCategories();
+            //add category
+            if (isset($_POST["categoryName"])){
+                $dbh->insertCategory($_POST["categoryName"]);
+                $templateParams["error"] = "Category added successfully";
+                $templateParams["categories"] = $dbh->getCategories();
+            }
+
+            // add product
+            if (isset($_POST["productName"]) && isset($_POST["productDescription"]) && isset($_POST["productPrice"]) && isset($_POST["productAmount"]) && isset($_POST["duration"]) && isset($_POST["productImages"]) && isset($_POST["category"]) && is_array($_POST['category'])){
                 $dbh->insertProduct($_POST["productName"], $_POST["productDescription"], $_POST["productPrice"], $_POST["productAmount"], $_POST["duration"], $_POST["productImages"]);
                 $templateParams["error"] = "Insertion successful";
+                $id = $dbh->getLastInsertId();
+                foreach ($_POST["category"] as $category) {
+                    var_dump($id, $category);
+                    $dbh->insertProductIsCategory($category, $id);
+                }
             }
         }
         else {
@@ -128,7 +141,8 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
             $templateParams["content"] = "cart.php";
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
-            //var_dump($templateParams["cart"]);
+
+            var_dump($templateParams["cart"]);
         } else {
             header("Location: ?page=home");
         }

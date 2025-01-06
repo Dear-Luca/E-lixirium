@@ -60,6 +60,8 @@ class DatabaseHelper
     //     return true;
     // }
 
+
+    //INSERT SECTION
     public function insertUser($name, $surname, $username, $email, $password, $birthday)
     {
         $query = "INSERT INTO user (name, surname, username, email, password, birthday) VALUES (?, ?, ?, ?, ?, ?)";
@@ -77,6 +79,21 @@ class DatabaseHelper
 
     }
 
+    public function insertCategory($name){
+        $query = "INSERT INTO category (name) VALUES (?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $name);
+        $stmt->execute();
+    }
+
+    public function insertProductIsCategory($category, $id_product){
+        $query = "INSERT INTO `is` (name, id_product) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $category, $id_product);
+        $stmt->execute();
+    }
+
+    //GET SECTION
     public function getProducts($n = -1)
     {
         $query = "SELECT * FROM product ORDER BY RAND()";
@@ -151,6 +168,26 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getCategories(){
+        $query = "SELECT name FROM category";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getLastInsertId(){
+        $query = "SELECT LAST_INSERT_ID()";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc(); 
+        return $row['LAST_INSERT_ID()'];
+
+    }
+
+    //UPDATE SECTION
 
     public function updateUser($name, $surname, $username, $email,$birthday, $cardNumber, $password ,$currentUsername)
     {

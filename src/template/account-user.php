@@ -1,4 +1,4 @@
-<article class="card">
+<div class="card">
     <header class="card-header">
         <h2>Account</h2>
     </header>
@@ -39,4 +39,4 @@
             </div>
         </form>
     </section>
-</article>
+    </div>

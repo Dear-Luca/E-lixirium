@@ -58,6 +58,13 @@ function logout()
     unset($_SESSION["email"]);
 }
 
+function updateUser(){
+    $_SESSION["name"] = $_POST["name"];
+    $_SESSION["surname"] = $_POST["surname"];
+    $_SESSION["username"] = $_POST["username"];
+    $_SESSION["email"] = $_POST["email"];
+}
+
 // TODO: rewrite for empty product (only in the case we decide to opt for a separate edit page)
 // function getEmptyArticle()
 // {

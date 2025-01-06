@@ -68,6 +68,14 @@ class DatabaseHelper
         $stmt->execute();
         return $stmt->insert_id;
     }
+    public function insertProduct($productName, $productDescription, $productPrice, $productAmount, $duration, $productImages)
+    {
+        $query = "INSERT INTO product (name, description, image_name, price, amount_left, duration) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sssdis', $productName, $productDescription, $productImages, $productPrice, $productAmount, $duration);
+        $stmt->execute();
+
+    }
 
     public function getProducts($n = -1)
     {
@@ -134,7 +142,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserInfo($username){
+    public function getUserInfo($username)
+    {
         $query = "SELECT * FROM user WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
@@ -143,12 +152,14 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function updateUser($name, $surname, $username, $email, $currentUsername){
+    public function updateUser($name, $surname, $username, $email, $currentUsername)
+    {
         $query = "UPDATE user SET name = ?, surname = ?, username = ?, email = ? WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sssss', $name, $surname, $username, $email, $currentUsername);
         $stmt->execute();
     }
+
 
 }
 ?>

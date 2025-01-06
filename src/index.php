@@ -92,33 +92,26 @@ switch ($_GET["page"]) {
             if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"])){
                 // if username does't change
                 if ($_POST["username"] == $_SESSION["username"]){
-                    //var_dump($_POST);
                     $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_SESSION["username"]);
                     $templateParams["error"] = "Update successful";
-                    $_SESSION["name"] = $_POST["name"];
-                    $_SESSION["surname"] = $_POST["surname"];
-                    $_SESSION["username"] = $_POST["username"];
-                    $_SESSION["email"] = $_POST["email"];
-                    //header("Location: ?page=home");
+                    updateUser();
                 }
                 else if(count($dbh->checkRegister($_POST["username"])) > 0){
                     $templateParams["error"] = "A user with that username already exists";
                 } else {
                     $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_SESSION["username"]);
                     $templateParams["error"] = "Update succesfull";
-                    $_SESSION["name"] = $_POST["name"];
-                    $_SESSION["surname"] = $_POST["surname"];
-                    $_SESSION["username"] = $_POST["username"];
-                    $_SESSION["email"] = $_POST["email"];
-
-                    //header("Location: ?page=home");
+                    updateUser();
                 }
             }
-
         }
         else if (isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Admin";
             $templateParams["content"] = "account-admin.php";
+            if (isset($_POST["productName"]) && isset($_POST["productDescription"]) && isset($_POST["productPrice"]) && isset($_POST["productAmount"]) && isset($_POST["duration"]) && isset($_POST["productImages"])){
+                $dbh->insertProduct($_POST["productName"], $_POST["productDescription"], $_POST["productPrice"], $_POST["productAmount"], $_POST["duration"], $_POST["productImages"]);
+                $templateParams["error"] = "Insertion successful";
+            }
         }
         else {
             header("Location: ?page=login");

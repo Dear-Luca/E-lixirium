@@ -82,18 +82,18 @@
             <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>
                     <!-- User logged in: -->
-                    <a href="?page=cart"><img src="upload/cart-speed.svg" alt="Shopping Cart" /></a>
-                    <a href="?page=orders"><img src="upload/box-check.svg" alt="Orders" /></a>
-                    <a href="?page=notifications"><img src="upload/notification-13.svg" alt="Notifications" /></a>
-                    <a href="?page=account"><img src="upload/user.svg" alt="Account" /></a>
-                    <a href="?page=logout"><img src="upload/sign-out.svg" alt="Logout" /></a>
+                    <a href="?page=cart"><img src="<?php echo UPLOAD_DIR?>cart-speed.svg" alt="Shopping Cart" /></a>
+                    <a href="?page=orders"><img src="<?php echo UPLOAD_DIR?>box-check.svg" alt="Orders" /></a>
+                    <a href="?page=notifications"><img src="<?php echo UPLOAD_DIR?>notification-13.svg" alt="Notifications" /></a>
+                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR?>user.svg" alt="Account" /></a>
+                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR?>sign-out.svg" alt="Logout" /></a>
                 <?php elseif (isAdminLoggedIn()): ?>
                     <!-- Admin logged in: -->
-                    <a href="?page=account"><img src="upload/user.svg" alt="Account" /></a>
-                    <a href="?page=logout"><img src="upload/sign-out.svg" alt="Logout" /></a>
+                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR?>user.svg" alt="Account" /></a>
+                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR?>sign-out.svg" alt="Logout" /></a>
                 <?php else: ?>
                     <!-- User not logged in: -->
-                    <a href="?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
+                    <a href="?page=login"><img src="<?php echo UPLOAD_DIR?>sign-in.svg" alt="Login" /></a>
                 <?php endif; ?>
             </div>
         </div>
@@ -125,7 +125,7 @@
     if (isset($templateParams["js"])):
         foreach ($templateParams["js"] as $script):
             ?>
-            <script src="js/<?php echo $script; ?>"></script>
+            <script src="<?php echo SCRIPTS_DIR . $script; ?>"></script>
             <?php
         endforeach;
     endif;

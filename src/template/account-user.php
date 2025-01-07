@@ -10,7 +10,7 @@
         </div>
     <?php endif; ?>
     <section class="card-body">
-        <form id="user-form" method="POST" action="?page=account">
+        <form method="POST" action="?page=account">
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
                 <input type="text" id="name" name="name" class="form-control"
@@ -58,17 +58,17 @@
                     data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" disabled />
             </div>
 
-            <div class="mb-3" id="confirm-password-container">
+            <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Confirm password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                <input type="password" name="confirmPassword" class="form-control"
                     value="<?php echo $templateParams["userInfo"][0]["password"]; ?>"
                     data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" />
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="button" id="edit-button" class="btn btn-primary">Edit</button>
-                <button type="submit" id="save-button" class="btn btn-success">Save</button>
-                <button type="button" id="cancel-button" class="btn btn-danger">Cancel</button>
+                <button type="button"  class="btn btn-primary">Edit</button>
+                <button type="submit"  class="btn btn-success">Save</button>
+                <button type="button"  class="btn btn-danger">Cancel</button>
             </div>
         </form>
     </section>

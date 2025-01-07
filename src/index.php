@@ -127,7 +127,7 @@ switch ($_GET["page"]) {
                 $templateParams["error"] = "Insertion successful";
                 $id = $dbh->getLastInsertId();
                 foreach ($_POST["category"] as $category) {
-                    var_dump($id, $category);
+                    //var_dump($id, $category);
                     $dbh->insertProductIsCategory($category, $id);
                 }
             }
@@ -141,8 +141,19 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
             $templateParams["content"] = "cart.php";
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
+            // var_dump($templateParams["cart"]);
+            //upate quantity product
+            if (isset($_POST["update_quantity"]) && isset($_POST["quantity"])){
+                // var_dump($_POST);
+                $dbh->updateCartQuantity($_SESSION["username"], $_POST["id_product"] ,$_POST["quantity"]);
+                $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
+            }
 
-            var_dump($templateParams["cart"]);
+            //remove product from cart
+            if (isset($_POST["remove_product"]) && isset($_POST["remove"])){
+                $dbh->deleteCartProduct($_SESSION["username"], $_POST["id_product"]);
+                $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
+            }
         } else {
             header("Location: ?page=home");
         }

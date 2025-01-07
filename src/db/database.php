@@ -79,14 +79,16 @@ class DatabaseHelper
 
     }
 
-    public function insertCategory($name){
+    public function insertCategory($name)
+    {
         $query = "INSERT INTO category (name) VALUES (?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $name);
         $stmt->execute();
     }
 
-    public function insertProductIsCategory($category, $id_product){
+    public function insertProductIsCategory($category, $id_product)
+    {
         $query = "INSERT INTO `is` (name, id_product) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('si', $category, $id_product);
@@ -151,7 +153,7 @@ class DatabaseHelper
 
     public function getCartProducts($username)
     {
-        $query = "SELECT W.id_product, P.name, P.price FROM wishes as W, product as P WHERE W.username=? and W.id_product=P.id_product";
+        $query = "SELECT W.id_product, P.name, P.price, W.quantity FROM wishes as W, product as P WHERE W.username=? and W.id_product=P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
@@ -169,7 +171,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getCategories(){
+    public function getCategories()
+    {
         $query = "SELECT name FROM category";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
@@ -177,19 +180,19 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getLastInsertId(){
+    public function getLastInsertId()
+    {
         $query = "SELECT LAST_INSERT_ID()";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
-        $row = $result->fetch_assoc(); 
+        $row = $result->fetch_assoc();
         return $row['LAST_INSERT_ID()'];
-
     }
 
     //UPDATE SECTION
 
-    public function updateUser($name, $surname, $username, $email,$birthday, $cardNumber, $password ,$currentUsername)
+    public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)
     {
         $query = "UPDATE user SET name = ?, surname = ?, username = ?, email = ?, birthday = ?, card_number = ?, password = ? WHERE username = ?";
         $stmt = $this->db->prepare($query);
@@ -197,6 +200,20 @@ class DatabaseHelper
         $stmt->execute();
     }
 
+    public function updateCartQuantity($username, $id_product, $quantity)
+    {
+        $query = "UPDATE wishes SET quantity = ? WHERE username = ? AND id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("isi", $quantity, $username, $id_product);
+        $stmt->execute();
+    }
+
+    public function deleteCartProduct($username, $id_product){
+        $query = "DELETE FROM wishes WHERE username = ? AND id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si",$username, $id_product);
+        $stmt->execute();
+    }
 
 }
 ?>

@@ -138,6 +138,19 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function searchProducts($value)
+    {
+        $searchTerm = trim($value);
+        $searchTerm = "%{$searchTerm}%";
+
+        $query = "SELECT * FROM product WHERE name LIKE ? OR description LIKE ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ss', $searchTerm, $searchTerm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getCategoriesOfProduct($id_product)
     {
         $query = "SELECT is.name FROM product, `is` WHERE product.id_product = is.id_product AND product.id_product = ?";

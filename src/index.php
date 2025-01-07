@@ -22,10 +22,16 @@ switch ($_GET["page"]) {
             $categories[] = $category["name"];
         }
         $templateParams["title"] = "E-lixirium - Products";
+        // if (!isset($_GET["nav-search"])) {
+        //     // TODO
+        //     $templateParams["products"] = $dbh->searchProducts($_GET["nav-search"]);
+        //     $templateParams["header"] = "Search results";
+        // }
         if (isset($_GET["category"]) && in_array($_GET["category"], $categories)) {
-            $templateParams["category"] = $_GET["category"];
+            $templateParams["header"] = $_GET["category"];
             $templateParams["products"] = $dbh->getProductsOfCategory($_GET["category"]);
         } else {
+            $templateParams["header"] = "All products";
             $templateParams["products"] = $dbh->getProducts();
         }
         //var_dump($templateParams["products"]);

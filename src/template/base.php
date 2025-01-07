@@ -75,25 +75,27 @@
                     </div>
                 </ul>
             </div>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search">
+            <form class="d-flex" role="search" method="GET" action="?page=search">
+                <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
+                    name="search" id="search">
                 <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
             </form>
             <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>
                     <!-- User logged in: -->
-                    <a href="?page=cart"><img src="<?php echo UPLOAD_DIR?>cart-speed.svg" alt="Shopping Cart" /></a>
-                    <a href="?page=orders"><img src="<?php echo UPLOAD_DIR?>box-check.svg" alt="Orders" /></a>
-                    <a href="?page=notifications"><img src="<?php echo UPLOAD_DIR?>notification-13.svg" alt="Notifications" /></a>
-                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR?>user.svg" alt="Account" /></a>
-                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR?>sign-out.svg" alt="Logout" /></a>
+                    <a href="?page=cart"><img src="<?php echo UPLOAD_DIR ?>cart-speed.svg" alt="Shopping Cart" /></a>
+                    <a href="?page=orders"><img src="<?php echo UPLOAD_DIR ?>box-check.svg" alt="Orders" /></a>
+                    <a href="?page=notifications"><img src="<?php echo UPLOAD_DIR ?>notification-13.svg"
+                            alt="Notifications" /></a>
+                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
+                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php elseif (isAdminLoggedIn()): ?>
                     <!-- Admin logged in: -->
-                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR?>user.svg" alt="Account" /></a>
-                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR?>sign-out.svg" alt="Logout" /></a>
+                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
+                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php else: ?>
                     <!-- User not logged in: -->
-                    <a href="?page=login"><img src="<?php echo UPLOAD_DIR?>sign-in.svg" alt="Login" /></a>
+                    <a href="?page=login"><img src="<?php echo UPLOAD_DIR ?>sign-in.svg" alt="Login" /></a>
                 <?php endif; ?>
             </div>
         </div>

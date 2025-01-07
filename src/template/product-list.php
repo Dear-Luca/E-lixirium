@@ -1,7 +1,5 @@
-<?php if (isset($templateParams["category"])): ?>
-    <h2><?php echo $templateParams["category"]; ?></h2>
-<?php else: ?>
-    <h2>All products</h2>
+<?php if (isset($templateParams["header"])): ?>
+    <h2><?php echo $templateParams["header"]; ?></h2>
 <?php endif; ?>
 <div class="container-sm">
     <div

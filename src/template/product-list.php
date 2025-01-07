@@ -1,5 +1,7 @@
 <?php if (isset($templateParams["category"])): ?>
     <h2><?php echo $templateParams["category"]; ?></h2>
+<?php else: ?>
+    <h2>All products</h2>
 <?php endif; ?>
 <div class="container-sm">
     <div
@@ -17,9 +19,9 @@
                         $stars = $product["stars"];
                         for ($i = 0; $i < 5; $i++) {
                             if ($i < $stars) {
-                                echo "<img src='" . UPLOAD_DIR ."star-full.svg' alt='Filled star' />";
+                                echo "<img src='" . UPLOAD_DIR . "star-full.svg' alt='Filled star' />";
                             } else {
-                                echo "<img src='" . UPLOAD_DIR ."star-empty.svg' alt='Filled star' />";
+                                echo "<img src='" . UPLOAD_DIR . "star-empty.svg' alt='Filled star' />";
                             }
                         }
                         ?>

@@ -140,9 +140,9 @@ class DatabaseHelper
 
     public function getCategoriesOfProduct($id_product)
     {
-        $query = "SELECT * FROM product WHERE id_product= ?";
+        $query = "SELECT is.name FROM product, `is` WHERE product.id_product = is.id_product AND product.id_product = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $id_product);
+        $stmt->bind_param('i', $id_product);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);

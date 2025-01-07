@@ -18,8 +18,12 @@ switch ($_GET["page"]) {
         // $templateParams["content"] = "PAGE.php";
         break;
     case "products":
+        foreach ($dbh->getCategories() as $category) {
+            $categories[] = $category["name"];
+        }
         $templateParams["title"] = "E-lixirium - Products";
-        if (isset($_GET["category"])) {
+        if (isset($_GET["category"]) && in_array($_GET["category"], $categories)) {
+            $templateParams["category"] = $_GET["category"];
             $templateParams["products"] = $dbh->getProductsOfCategory($_GET["category"]);
         } else {
             $templateParams["products"] = $dbh->getProducts();

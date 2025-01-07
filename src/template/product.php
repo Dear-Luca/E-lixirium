@@ -1,15 +1,20 @@
 <!-- $templateParams["product"] name id_product description image_name price amount_left duration -->
-<?php $product = $templateParams["product"][0] ?>
+<?php $product = $templateParams["product"][0];
+$category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">
     <section class="row row-cols-1 row-cols-lg-2 m-0 justify-content-center">
         <section class="col">
+            <a href="?page=products&category=<?php echo $category; ?>"
+                class="btn btn-outline-primary mb-3 d-lg-none">Back to <?php echo $category; ?></a>
             <h2 class="d-block d-lg-none"><?php echo $product["name"]; ?></h2>
             <img src="<?php echo UPLOAD_DIR . $product["image_name"]; ?>" alt="<?php echo $product["image_name"]; ?>"
                 class="img-fluid w-100" />
         </section>
         <section class="col">
             <header>
-                <h2 class=" d-none d-lg-block"><?php echo $product["name"]; ?></h2>
+                <a href="?page=products&category=<?php echo $category; ?>"
+                    class="btn btn-outline-primary mb-3 d-none d-lg-inline-block">Back to <?php echo $category; ?></a>
+                <h2 class="d-none d-lg-block"><?php echo $product["name"]; ?></h2>
                 <?php if ($product["amount_left"] < 5): ?>
                     <p class="text-danger mb-0">Only <?php echo $product["amount_left"]; ?> left!</p>
                 <?php endif; ?>

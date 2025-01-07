@@ -54,7 +54,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="?page=about">About Us</a>
                     </li>
-                    <hr class="d-block d-md-none" />
+                    <!-- <hr class="d-block d-md-none" /> -->
                     <div class="nav-link d-block d-md-none p-0">
                         <?php if (isUserLoggedIn()): ?>
                             <!-- User logged in: -->

@@ -15,17 +15,19 @@
                     <div class="card-body">
                         <h3 class="card-title"><?php echo $product["name"]; ?></h3>
                         <p class="card-text">€<?php echo $product["price"] ?></p>
-                        <?php
-                        $stars = $product["stars"];
-                        for ($i = 0; $i < 5; $i++) {
-                            if ($i < $stars) {
-                                echo "<img src='" . UPLOAD_DIR . "star-full.svg' alt='Filled star' />";
-                            } else {
-                                echo "<img src='" . UPLOAD_DIR . "star-empty.svg' alt='Filled star' />";
+                        <span class="d-flex">
+                            <?php
+                            $stars = $product["stars"];
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= $stars) {
+                                    echo "<img src='" . UPLOAD_DIR . "star-full.svg' alt='Filled star' />";
+                                } else {
+                                    echo "<img src='" . UPLOAD_DIR . "star-empty.svg' alt='Empty star' />";
+                                }
                             }
-                        }
-                        ?>
-                        <p>(<?php echo $stars; ?>)</p>
+                            ?>
+                            <p class="m-0">(<?php echo $stars; ?>)</p>
+                        </span>
                         <a href="?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                     </div>
                 </article>

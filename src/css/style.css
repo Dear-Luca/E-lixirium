@@ -3,7 +3,7 @@ nav img {
     height: auto;
 }
 
-article div img {
+article div img, section.col header img {
     width: 20px;
     height: auto;
 }

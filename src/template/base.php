@@ -69,6 +69,7 @@
                             <li class="nav-item"><a class="nav-link" href="?page=logout">Logout</a></li>
                         <?php else: ?>
                             <!-- User not logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="?page=register">Register</a></li>
                             <li class="nav-item"><a class="nav-link" href="?page=login">Login</a></li>
                         <?php endif; ?>
                     </div>

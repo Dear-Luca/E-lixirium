@@ -27,6 +27,7 @@ create table PRODUCT (
      price float not null,
      amount_left int not null,
      duration varchar(30) not null,
+     stars float not null,
      constraint ID_PRODUCT_ID primary key (id_product));
 
 create table USER (
@@ -57,7 +58,7 @@ create table `ORDER` (
 create table REVIEW (
      id_product int not null,
      username char(30) not null,
-     stars int not null,
+     stars float not null,
      constraint ID_REVIEW_ID primary key (id_product, username));
 
 create table NOTIFICATION (

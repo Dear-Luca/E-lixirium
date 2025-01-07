@@ -4,8 +4,8 @@ require_once 'bootstrap.php';
 //Base Template
 $templateParams["title"] = "E-lixirium - Home";
 $templateParams["js"] = array("scripts.js");
+$templateParams["categories"] = $dbh->getCategories();
 // TODO: replace with actual products and categories getters
-// $templateParams["categorie"] = $dbh->getCategories();
 // $templateParams["articolicasuali"] = $dbh->getRandomPosts(2);
 
 if (!isset($_GET["page"])) {
@@ -19,7 +19,12 @@ switch ($_GET["page"]) {
         break;
     case "products":
         $templateParams["title"] = "E-lixirium - Products";
-        $templateParams["products"] = $dbh->getProducts();
+        if (isset($_GET["category"])) {
+            $templateParams["products"] = $dbh->getProductsOfCategory($_GET["category"]);
+        } else {
+            $templateParams["products"] = $dbh->getProducts();
+        }
+        //var_dump($templateParams["products"]);
         $templateParams["content"] = "product-list.php";
         break;
     case "about":
@@ -112,12 +117,10 @@ switch ($_GET["page"]) {
         } else if (isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Admin";
             $templateParams["content"] = "account-admin.php";
-            $templateParams["categories"] = $dbh->getCategories();
             //add category
             if (isset($_POST["categoryName"])) {
                 $dbh->insertCategory($_POST["categoryName"]);
                 $templateParams["error"] = "Category added successfully";
-                $templateParams["categories"] = $dbh->getCategories();
             }
 
             // add product

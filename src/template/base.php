@@ -43,9 +43,12 @@
                             Products
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Product1</a></li>
-                            <li><a class="dropdown-item" href="#">Product2</a></li>
-                            <li><a class="dropdown-item" href="#">Product3</a></li>
+                            <?php foreach ($templateParams["categories"] as $category): ?>
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="?page=products&category=<?php echo $category["name"] ?>"><?php echo $category["name"] ?></a>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </li>
                     <li class="nav-item">

@@ -111,7 +111,34 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getProductsOfCategory($category, $n = -1)
+    {
+        $query = "SELECT product.* FROM product, `is` WHERE product.id_product = is.id_product AND is.name = ? ORDER BY RAND()";
+        if ($n > 0) {
+            $query .= " LIMIT ?";
+        }
+        $stmt = $this->db->prepare($query);
+        if ($n > 0) {
+            $stmt->bind_param('si', $category, $n);
+        } else {
+            $stmt->bind_param('s', $category);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getProduct($id_product)
+    {
+        $query = "SELECT * FROM product WHERE id_product= ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $id_product);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getCategoriesOfProduct($id_product)
     {
         $query = "SELECT * FROM product WHERE id_product= ?";
         $stmt = $this->db->prepare($query);
@@ -171,10 +198,16 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getCategories()
+    public function getCategories($n = -1)
     {
-        $query = "SELECT name FROM category";
+        $query = "SELECT * FROM category ORDER BY RAND()";
+        if ($n > 0) {
+            $query .= " LIMIT ?";
+        }
         $stmt = $this->db->prepare($query);
+        if ($n > 0) {
+            $stmt->bind_param('i', $n);
+        }
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -208,10 +241,11 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function deleteCartProduct($username, $id_product){
+    public function deleteCartProduct($username, $id_product)
+    {
         $query = "DELETE FROM wishes WHERE username = ? AND id_product = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("si",$username, $id_product);
+        $stmt->bind_param("si", $username, $id_product);
         $stmt->execute();
     }
 

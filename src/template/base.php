@@ -51,16 +51,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="?page=about">About Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?page=cart">Cart</a>
-                    </li>
+                    <hr class="d-block d-md-none" />
+                    <div class="nav-link d-block d-md-none p-0">
+                        <?php if (isUserLoggedIn()): ?>
+                            <!-- User logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="?page=cart">Shopping Cart</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=orders">Orders</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=notifications">Notifications</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=account">Account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=logout">Logout</a></li>
+                        <?php elseif (isAdminLoggedIn()): ?>
+                            <!-- Admin logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="?page=account">Admin account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=logout">Logout</a></li>
+                        <?php else: ?>
+                            <!-- User not logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="?page=login">Login</a></li>
+                        <?php endif; ?>
+                    </div>
                 </ul>
             </div>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search">
                 <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
             </form>
-            <span class="nav-link d-none d-md-flex">
+            <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>
                     <!-- User logged in: -->
                     <a href="?page=cart"><img src="upload/cart-speed.svg" alt="Shopping Cart" /></a>
@@ -71,12 +86,12 @@
                 <?php elseif (isAdminLoggedIn()): ?>
                     <!-- Admin logged in: -->
                     <a href="?page=account"><img src="upload/user.svg" alt="Account" /></a>
-                    <a href="?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
+                    <a href="?page=logout"><img src="upload/sign-out.svg" alt="Logout" /></a>
                 <?php else: ?>
                     <!-- User not logged in: -->
                     <a href="?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
                 <?php endif; ?>
-            </span>
+            </div>
         </div>
     </nav>
     <main>

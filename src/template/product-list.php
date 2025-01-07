@@ -13,7 +13,17 @@
                     <div class="card-body">
                         <h3 class="card-title"><?php echo $product["name"]; ?></h3>
                         <p class="card-text">€<?php echo $product["price"] ?></p>
-                        <p class="card-text">stars (number)</p>
+                        <?php
+                        $stars = $product["stars"];
+                        for ($i = 0; $i < 5; $i++) {
+                            if ($i < $stars) {
+                                echo "<img src='" . UPLOAD_DIR ."star-full.svg' alt='Filled star' />";
+                            } else {
+                                echo "<img src='" . UPLOAD_DIR ."star-empty.svg' alt='Filled star' />";
+                            }
+                        }
+                        ?>
+                        <p>(<?php echo $stars; ?>)</p>
                         <a href="?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                     </div>
                 </article>

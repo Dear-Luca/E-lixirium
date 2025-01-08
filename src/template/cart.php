@@ -38,7 +38,7 @@
         </tbody>
     </table>
     <p>Total: <?php echo $templateParams["total"] . "€"; ?></p>
-    <form action="?post=cart" method="POST">
+    <form action="#" method="POST">
         <input type="submit" name="checkout" value="Checkout" />
     </form>
 

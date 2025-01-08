@@ -104,6 +104,9 @@ switch ($_GET["page"]) {
                 if ($_POST["password"] == $_POST["confirmPassword"]) {
                     // if username does't change or new username is not used
                     if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkRegister($_POST["username"])) == 0)) {
+                        if ($_POST["card_number"] == "") {
+                            $_POST["card_number"] = NULL;
+                        }
                         $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["birthday"], $_POST["card_number"], $_POST["password"], $_SESSION["username"]);
                         $templateParams["error"] = "Update successful";
                         $_SESSION["username"] = $_POST["username"];
@@ -165,7 +168,7 @@ switch ($_GET["page"]) {
                 $templateParams["total"] = getCartTotal($templateParams);
             }
 
-            if(isset($_POST["checkout-confirm"])){
+            if (isset($_POST["checkout-confirm"])) {
                 //var_dump($templateParams["curr"]);
                 header("Location: ?page=orders");
                 // $dbh->insertOrder($_SESSION["username"]);
@@ -182,7 +185,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Orders";
             $templateParams["content"] = "orders.php";
 
-            
+
 
         } else {
             header("Location: ?page=home");

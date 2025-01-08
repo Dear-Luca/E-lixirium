@@ -67,7 +67,7 @@
 
     <!-- Checkout Button -->
     <form action="?page=cart" method="POST">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target=".modal">Checkout</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".modal">Checkout</button>
     </form>
 
 

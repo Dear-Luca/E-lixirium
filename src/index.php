@@ -3,8 +3,9 @@ require_once 'bootstrap.php';
 
 //Base Template
 $templateParams["title"] = "E-lixirium - Home";
+$templateParams["js"] = array("scripts.js");
+$templateParams["categories"] = $dbh->getCategories();
 // TODO: replace with actual products and categories getters
-// $templateParams["categorie"] = $dbh->getCategories();
 // $templateParams["articolicasuali"] = $dbh->getRandomPosts(2);
 
 if (!isset($_GET["page"])) {
@@ -17,8 +18,23 @@ switch ($_GET["page"]) {
         // $templateParams["content"] = "PAGE.php";
         break;
     case "products":
+        foreach ($dbh->getCategories() as $category) {
+            $categories[] = $category["name"];
+        }
         $templateParams["title"] = "E-lixirium - Products";
-        $templateParams["products"] = $dbh->getProducts();
+        // if (!isset($_GET["nav-search"])) {
+        //     // TODO
+        //     $templateParams["products"] = $dbh->searchProducts($_GET["nav-search"]);
+        //     $templateParams["header"] = "Search results";
+        // }
+        if (isset($_GET["category"]) && in_array($_GET["category"], $categories)) {
+            $templateParams["header"] = $_GET["category"];
+            $templateParams["products"] = $dbh->getProductsOfCategory($_GET["category"]);
+        } else {
+            $templateParams["header"] = "All products";
+            $templateParams["products"] = $dbh->getProducts();
+        }
+        //var_dump($templateParams["products"]);
         $templateParams["content"] = "product-list.php";
         break;
     case "about":
@@ -90,39 +106,35 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Account";
             $templateParams["content"] = "account-user.php";
             $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
-            if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) &&  isset($_POST["card_number"]) && isset($_POST["password"])) {
-                if($_POST["password"] == $_POST["confirmPassword"]){
+            if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) && isset($_POST["card_number"]) && isset($_POST["password"])) {
+                if ($_POST["password"] == $_POST["confirmPassword"]) {
                     // if username does't change or new username is not used
-                    if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkRegister($_POST["username"])) == 0)){
-                        $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"],$_POST["birthday"], $_POST["card_number"], $_POST["password"] ,$_SESSION["username"]);
+                    if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkRegister($_POST["username"])) == 0)) {
+                        $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["birthday"], $_POST["card_number"], $_POST["password"], $_SESSION["username"]);
                         $templateParams["error"] = "Update successful";
                         $_SESSION["username"] = $_POST["username"];
                         $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
                         // update variable session
                         updateUser($templateParams);
-                    }
-                    else {
+                    } else {
                         $templateParams["error"] = "A user with that username already exists";
                     }
-                }else{
+                } else {
                     $templateParams["error"] = "You need to confirm the password";
                 }
             }
 
-        }
-        else if (isAdminLoggedIn()) {
+        } else if (isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Admin";
             $templateParams["content"] = "account-admin.php";
-            $templateParams["categories"] = $dbh->getCategories();
             //add category
-            if (isset($_POST["categoryName"])){
+            if (isset($_POST["categoryName"])) {
                 $dbh->insertCategory($_POST["categoryName"]);
                 $templateParams["error"] = "Category added successfully";
-                $templateParams["categories"] = $dbh->getCategories();
             }
 
             // add product
-            if (isset($_POST["productName"]) && isset($_POST["productDescription"]) && isset($_POST["productPrice"]) && isset($_POST["productAmount"]) && isset($_POST["duration"]) && isset($_POST["productImages"]) && isset($_POST["category"]) && is_array($_POST['category'])){
+            if (isset($_POST["productName"]) && isset($_POST["productDescription"]) && isset($_POST["productPrice"]) && isset($_POST["productAmount"]) && isset($_POST["duration"]) && isset($_POST["productImages"]) && isset($_POST["category"]) && is_array($_POST['category'])) {
                 $dbh->insertProduct($_POST["productName"], $_POST["productDescription"], $_POST["productPrice"], $_POST["productAmount"], $_POST["duration"], $_POST["productImages"]);
                 $templateParams["error"] = "Insertion successful";
                 $id = $dbh->getLastInsertId();
@@ -131,8 +143,7 @@ switch ($_GET["page"]) {
                     $dbh->insertProductIsCategory($category, $id);
                 }
             }
-        }
-        else {
+        } else {
             header("Location: ?page=login");
         }
         break;
@@ -157,7 +168,7 @@ switch ($_GET["page"]) {
             }
 
             //remove product from cart
-            if (isset($_POST["remove_product"]) && isset($_POST["remove"])){
+            if (isset($_POST["remove_product"]) && isset($_POST["remove"])) {
                 $dbh->deleteCartProduct($_SESSION["username"], $_POST["id_product"]);
                 $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
             }

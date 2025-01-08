@@ -43,40 +43,61 @@
                             Products
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Product1</a></li>
-                            <li><a class="dropdown-item" href="#">Product2</a></li>
-                            <li><a class="dropdown-item" href="#">Product3</a></li>
+                            <?php foreach ($templateParams["categories"] as $category): ?>
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="?page=products&category=<?php echo $category["name"] ?>"><?php echo $category["name"] ?></a>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?page=about">About Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?page=cart">Cart</a>
-                    </li>
+                    <!-- <hr class="d-block d-md-none" /> -->
+                    <div class="nav-link d-block d-md-none p-0">
+                        <?php if (isUserLoggedIn()): ?>
+                            <!-- User logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="?page=cart">Shopping Cart</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=orders">Orders</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=notifications">Notifications</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=account">Account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=logout">Logout</a></li>
+                        <?php elseif (isAdminLoggedIn()): ?>
+                            <!-- Admin logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="?page=account">Admin account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=logout">Logout</a></li>
+                        <?php else: ?>
+                            <!-- User not logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="?page=register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=login">Login</a></li>
+                        <?php endif; ?>
+                    </div>
                 </ul>
             </div>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search">
+            <form class="d-flex" role="search" method="GET" action="?page=search">
+                <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
+                    name="search" id="search">
                 <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
             </form>
-            <span class="nav-link d-none d-md-flex">
+            <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>
                     <!-- User logged in: -->
-                    <a href="?page=cart"><img src="upload/cart-speed.svg" alt="Shopping Cart" /></a>
-                    <a href="?page=orders"><img src="upload/box-check.svg" alt="Orders" /></a>
-                    <a href="?page=notifications"><img src="upload/notification-13.svg" alt="Notifications" /></a>
-                    <a href="?page=account"><img src="upload/user.svg" alt="Account" /></a>
-                    <a href="?page=logout"><img src="upload/sign-out.svg" alt="Logout" /></a>
+                    <a href="?page=cart"><img src="<?php echo UPLOAD_DIR ?>cart-speed.svg" alt="Shopping Cart" /></a>
+                    <a href="?page=orders"><img src="<?php echo UPLOAD_DIR ?>box-check.svg" alt="Orders" /></a>
+                    <a href="?page=notifications"><img src="<?php echo UPLOAD_DIR ?>notification-13.svg"
+                            alt="Notifications" /></a>
+                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
+                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php elseif (isAdminLoggedIn()): ?>
                     <!-- Admin logged in: -->
-                    <a href="?page=account"><img src="upload/user.svg" alt="Account" /></a>
-                    <a href="?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
+                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
+                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php else: ?>
                     <!-- User not logged in: -->
-                    <a href="?page=login"><img src="upload/sign-in.svg" alt="Login" /></a>
+                    <a href="?page=login"><img src="<?php echo UPLOAD_DIR ?>sign-in.svg" alt="Login" /></a>
                 <?php endif; ?>
-            </span>
+            </div>
         </div>
     </nav>
     <main>
@@ -106,7 +127,7 @@
     if (isset($templateParams["js"])):
         foreach ($templateParams["js"] as $script):
             ?>
-            <script src="<?php echo $script; ?>"></script>
+            <script src="<?php echo SCRIPTS_DIR . $script; ?>"></script>
             <?php
         endforeach;
     endif;
@@ -114,7 +135,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
 </body>
 
 </html>

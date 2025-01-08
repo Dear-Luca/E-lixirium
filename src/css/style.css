@@ -3,6 +3,11 @@ nav img {
     height: auto;
 }
 
+article div img, section.col header img {
+    width: 20px;
+    height: auto;
+}
+
 /* buttons to update user info */
 /* Nascondi i bottoni "Save" e "Cancel" inizialmente */
 form div button:nth-of-type(2),
@@ -10,9 +15,10 @@ form div button:nth-of-type(3) {
     display: none;
 }
 
-div section form div:nth-child(8){
+div section form div:nth-child(8) {
     display: none;
 }
+
 /* Bootstrap-derived new layout */
 @media (min-width: 1400px) {
     .row-cols-xxl-7>* {

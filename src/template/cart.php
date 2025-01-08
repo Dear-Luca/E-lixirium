@@ -14,6 +14,9 @@
         </thead>
         <tbody>
             <?php foreach ($templateParams["cart"] as $product): ?>
+                <?php 
+                    $productInfo = $dbh->getProduct($product["id_product"]);
+                ?>
                 <tr>
                     <td><?php echo $product["name"]; ?></td>
                     <td><?php echo $product["price"] . "€"; ?></td>
@@ -21,13 +24,13 @@
                         <form method="POST" action="?page=cart">
                             <input type="hidden" name="update_quantity"/>
                             <input type="hidden" name="id_product" value="<?php echo $product["id_product"]; ?>" />
-                            <input type="number" name="quantity" value="<?php echo $product["quantity"]; ?>" min="1" />
+                            <input type="number" name="quantity" value="<?php echo $product["quantity"]; ?>" min="1" max="<?php echo $productInfo[0]["amount_left"];?>" />
                             <input type="submit" name="update" value="Update" />
                         </form>
                     </td>
                     <td><?php echo $product["price"] * $product["quantity"] . "€"; ?></td>
                     <td>
-                        <form action="?page=cart" method="POST">
+                        <form action="?page=orders" method="POST">
                             <input type="hidden" name="remove_product"/>
                             <input type="hidden" name="id_product" value="<?php echo $product["id_product"]; ?>" />
                             <input type="submit" name="remove" value="Remove" />

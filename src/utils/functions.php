@@ -66,6 +66,14 @@ function updateUser($templateParams){
     $_SESSION["card_number"] = $templateParams["userInfo"][0]["card_number"];
 }
 
+function getCartTotal($templateParams){
+    $total = 0;
+    foreach($templateParams["cart"] as $product){
+        $total += $product["price"] * $product["quantity"];
+    }
+    return $total;
+}
+
 // TODO: rewrite for empty product (only in the case we decide to opt for a separate edit page)
 // function getEmptyArticle()
 // {

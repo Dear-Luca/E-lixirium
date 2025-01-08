@@ -152,25 +152,21 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
             $templateParams["content"] = "cart.php";
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
-            $total = 0;
             
-            foreach($templateParams["cart"] as $product){
-                $total += $product["price"] * $product["quantity"];
-            }
-            $templateParams["total"] = $total;
+            $templateParams["total"] = getCartTotal($templateParams);
 
-            //$templateParams["total"] = 
             //upate quantity product
             if (isset($_POST["update_quantity"]) && isset($_POST["quantity"])){
-                // need to add control to check if a product is available
                 $dbh->updateCartQuantity($_SESSION["username"], $_POST["id_product"] ,$_POST["quantity"]);
                 $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
+                $templateParams["total"] = getCartTotal($templateParams);
             }
 
             //remove product from cart
             if (isset($_POST["remove_product"]) && isset($_POST["remove"])) {
                 $dbh->deleteCartProduct($_SESSION["username"], $_POST["id_product"]);
                 $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
+                $templateParams["total"] = getCartTotal($templateParams);
             }
         } else {
             header("Location: ?page=home");

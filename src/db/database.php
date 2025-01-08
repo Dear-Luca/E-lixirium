@@ -70,11 +70,11 @@ class DatabaseHelper
         $stmt->execute();
         return $stmt->insert_id;
     }
-    public function insertProduct($productName, $productDescription, $productPrice, $productAmount, $duration, $productImages)
+    public function insertProduct($productName, $productDescription, $productPrice, $productAmount, $duration, $productImages, $stars)
     {
-        $query = "INSERT INTO product (name, description, image_name, price, amount_left, duration) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO product (name, description, image_name, price, amount_left, duration, stars) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssdis', $productName, $productDescription, $productImages, $productPrice, $productAmount, $duration);
+        $stmt->bind_param('sssdisd', $productName, $productDescription, $productImages, $productPrice, $productAmount, $duration, $stars);
         $stmt->execute();
 
     }
@@ -93,6 +93,10 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('si', $category, $id_product);
         $stmt->execute();
+    }
+
+    public function insertOrder($username, $id_order, $date){
+
     }
 
     //GET SECTION
@@ -259,6 +263,13 @@ class DatabaseHelper
         $query = "DELETE FROM wishes WHERE username = ? AND id_product = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("si", $username, $id_product);
+        $stmt->execute();
+    }
+
+    public function deleteCart($username){
+        $query = "DELETE FROM wishes WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
     }
 

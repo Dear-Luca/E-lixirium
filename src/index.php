@@ -127,15 +127,17 @@ switch ($_GET["page"]) {
         } else if (isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Admin";
             $templateParams["content"] = "account-admin.php";
+            $templateParams["categories"] = $dbh->getCategories();
             //add category
             if (isset($_POST["categoryName"])) {
                 $dbh->insertCategory($_POST["categoryName"]);
                 $templateParams["error"] = "Category added successfully";
+                $templateParams["categories"] = $dbh->getCategories();
             }
 
             // add product
             if (isset($_POST["productName"]) && isset($_POST["productDescription"]) && isset($_POST["productPrice"]) && isset($_POST["productAmount"]) && isset($_POST["duration"]) && isset($_POST["productImages"]) && isset($_POST["category"]) && is_array($_POST['category'])) {
-                $dbh->insertProduct($_POST["productName"], $_POST["productDescription"], $_POST["productPrice"], $_POST["productAmount"], $_POST["duration"], $_POST["productImages"]);
+                $dbh->insertProduct($_POST["productName"], $_POST["productDescription"], $_POST["productPrice"], $_POST["productAmount"], $_POST["duration"], $_POST["productImages"], 0.0);
                 $templateParams["error"] = "Insertion successful";
                 $id = $dbh->getLastInsertId();
                 foreach ($_POST["category"] as $category) {
@@ -168,6 +170,15 @@ switch ($_GET["page"]) {
                 $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
                 $templateParams["total"] = getCartTotal($templateParams);
             }
+
+            if(isset($_POST["checkout-confirm"])){
+                //var_dump($templateParams["curr"]);
+                header("Location: ?page=orders");
+                // $dbh->insertOrder($_SESSION["username"]);
+                //$dbh->deleteCart($_SESSION["username"]);
+            }
+
+
         } else {
             header("Location: ?page=home");
         }
@@ -175,7 +186,10 @@ switch ($_GET["page"]) {
     case "orders":
         if (isUserLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Orders";
-            // $templateParams["content"] = "PAGE.php";
+            $templateParams["content"] = "orders.php";
+
+            
+
         } else {
             header("Location: ?page=home");
         }

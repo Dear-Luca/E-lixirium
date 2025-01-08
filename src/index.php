@@ -22,11 +22,6 @@ switch ($_GET["page"]) {
             $categories[] = $category["name"];
         }
         $templateParams["title"] = "E-lixirium - Products";
-        // if (!isset($_GET["nav-search"])) {
-        //     // TODO
-        //     $templateParams["products"] = $dbh->searchProducts($_GET["nav-search"]);
-        //     $templateParams["header"] = "Search results";
-        // }
         if (isset($_GET["category"]) && in_array($_GET["category"], $categories)) {
             $templateParams["header"] = $_GET["category"];
             $templateParams["products"] = $dbh->getProductsOfCategory($_GET["category"]);
@@ -34,7 +29,6 @@ switch ($_GET["page"]) {
             $templateParams["header"] = "All products";
             $templateParams["products"] = $dbh->getProducts();
         }
-        //var_dump($templateParams["products"]);
         $templateParams["content"] = "product-list.php";
         break;
     case "about":
@@ -152,12 +146,12 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
             $templateParams["content"] = "cart.php";
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
-            
+
             $templateParams["total"] = getCartTotal($templateParams);
 
             //upate quantity product
-            if (isset($_POST["update_quantity"]) && isset($_POST["quantity"])){
-                $dbh->updateCartQuantity($_SESSION["username"], $_POST["id_product"] ,$_POST["quantity"]);
+            if (isset($_POST["update_quantity"]) && isset($_POST["quantity"])) {
+                $dbh->updateCartQuantity($_SESSION["username"], $_POST["id_product"], $_POST["quantity"]);
                 $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
                 $templateParams["total"] = getCartTotal($templateParams);
             }

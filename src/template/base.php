@@ -75,10 +75,10 @@
                     </div>
                 </ul>
             </div>
-            <form class="d-flex" role="search" method="GET" action="?page=search">
+            <form class="d-flex" role="search" method="GET" action="search.php">
                 <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
-                    name="search" id="search">
-                <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+                    name="value" id="search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>

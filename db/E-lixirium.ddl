@@ -50,7 +50,7 @@ create table ADMIN (
      constraint ID_ADMIN_ID primary key (username));
 
 create table `ORDER` (
-     id_order int not null,
+     id_order int not null auto_increment,
      date date not null,
      username char(30) not null,
      constraint ID_ORDER_ID primary key (id_order));
@@ -84,6 +84,7 @@ create table `IS` (
 create table WISHES (
      id_product int not null,
      username char(30) not null,
+     quantity int not null,
      constraint ID_WISHES_ID primary key (id_product, username));
 
 

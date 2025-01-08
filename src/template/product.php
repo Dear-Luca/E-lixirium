@@ -55,7 +55,16 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                             <label class="m-2 mt-0" for="amount">Amount</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 my-3">Add to cart</button>
+                    <button type="submit" class="btn btn-primary w-100 my-3" <?php if ($product["amount_left"] < 1)
+                        echo "disabled"; ?>>
+                        <?php
+                        if ($product["amount_left"] < 1) {
+                            echo "Product finished";
+                        } else {
+                            echo "Add to cart";
+                        }
+                        ?>
+                    </button>
                 </form>
             </section>
         </section>

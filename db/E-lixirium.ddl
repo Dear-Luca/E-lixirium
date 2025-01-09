@@ -23,7 +23,7 @@ create table PRODUCT (
      name char(30) not null,
      id_product int not null auto_increment,
      description varchar(300) not null,
-     image_name char(30) not null,
+     image_name char(50) not null,
      price float not null,
      amount_left int not null,
      duration varchar(30) not null,
@@ -34,7 +34,7 @@ create table USER (
      name char(30) not null,
      surname char(30) not null,
      username char(30) not null,
-     email char(30) not null,
+     email char(40) not null,
      password char(30) not null,
      birthday date not null,
      card_number varchar(20),
@@ -58,7 +58,8 @@ create table `ORDER` (
 create table REVIEW (
      id_product int not null,
      username char(30) not null,
-     stars float not null,
+     stars int not null,
+     comment varchar(300),
      constraint ID_REVIEW_ID primary key (id_product, username));
 
 create table NOTIFICATION (

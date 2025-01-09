@@ -286,6 +286,16 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getOthersReviews($id_product, $username)
+    {
+        $query = "SELECT * FROM review WHERE id_product = ? AND username != ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('is', $id_product, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     //UPDATE SECTION
 
     public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)
@@ -312,6 +322,23 @@ class DatabaseHelper
         $stmt->execute();
     }
 
+    public function updateProductStars($id_product, $newRating)
+    {
+        $othersReviews = $this->getOthersReviews($id_product, $_SESSION["username"]);
+        $sumRating = 0.0;
+        foreach ($othersReviews as $review) {
+            $sumRating += $review["stars"];
+        }
+        $sumRating += $newRating;
+        $numReviews = count($othersReviews) + 1;
+        $finalRating = $sumRating / $numReviews;
+
+        $query = "UPDATE product SET stars = ? WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("di", $finalRating, $id_product);
+        $stmt->execute();
+    }
+
     public function deleteCart($username)
     {
         $query = "DELETE FROM wishes WHERE username = ?";
@@ -332,7 +359,7 @@ class DatabaseHelper
     {
         $query = "UPDATE review SET stars = ?, comment = ? WHERE id_product = ? AND username = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param("issi", $stars, $comment, $id_product, $username);
+        $stmt->bind_param("isis", $stars, $comment, $id_product, $username);
         $stmt->execute();
     }
 }

@@ -46,6 +46,7 @@ switch ($_GET["page"]) {
                     // Review not existing
                     $dbh->insertReview($_POST["id_product"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
                 }
+                $dbh->updateProductStars($_POST["id_product"], $_POST["rating"]);
             }
         }
         if (isset($_POST["amount"]) && isUserLoggedIn()) {

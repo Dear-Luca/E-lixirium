@@ -95,8 +95,19 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function insertOrder($username, $id_order, $date){
+    public function insertOrder($username)
+    {
+        $query = "INSERT INTO `order` (username) VALUES (?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username,);
+        $stmt->execute();
+    }
 
+    public function insertIncludeOrder($id_product, $id_order, $quantity){
+        $query = "INSERT INTO includes (id_product, id_order, quantity) VALUES (?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('iii', $id_product, $id_order, $quantity);
+        $stmt->execute();
     }
 
     //GET SECTION
@@ -240,6 +251,16 @@ class DatabaseHelper
         return $row['LAST_INSERT_ID()'];
     }
 
+    public function getOrders($username)
+    {
+        $query = "SELECT * FROM `order` WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     //UPDATE SECTION
 
     public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)
@@ -266,10 +287,19 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function deleteCart($username){
+    public function deleteCart($username)
+    {
         $query = "DELETE FROM wishes WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
+        $stmt->execute();
+    }
+
+    public function updateAmountLeft($id_product, $quantity)
+    {
+        $query = "UPDATE product SET amount_left = amount_left - ? WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $quantity, $id_product);
         $stmt->execute();
     }
 

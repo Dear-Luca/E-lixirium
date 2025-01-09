@@ -2,6 +2,12 @@
 <?php if (count($templateParams["cart"]) == 0): ?>
     <p>Your cart is empty</p>
 <?php else: ?>
+<?php if (isset($templateParams["error"])): ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <?php echo $templateParams["error"]; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -55,8 +61,8 @@
                     <p>Are you sure you want to proceed with the payment?</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="?page=cart"  method="POST">
-                        <input type="hidden" name="checkout-confirm">
+                    <form action="?page=cart" method="POST">
+                        <input type="hidden" name="checkout-confirm" />
                         <button type="submit" class="btn btn-primary">Confirm</button>
                     </form>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -67,6 +73,7 @@
 
     <!-- Checkout Button -->
     <form action="?page=cart" method="POST">
+        <!-- <input type="hidden" name="checkout"/> -->
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target=".modal">Checkout</button>
     </form>
 

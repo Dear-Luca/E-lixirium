@@ -170,9 +170,19 @@ switch ($_GET["page"]) {
 
             if (isset($_POST["checkout-confirm"])) {
                 //var_dump($templateParams["curr"]);
-                header("Location: ?page=orders");
-                // $dbh->insertOrder($_SESSION["username"]);
-                //$dbh->deleteCart($_SESSION["username"]);
+                if($_SESSION["card_number"] == NULL){
+                    $templateParams["error"] = "You need to insert a card number in your account";
+                } else{
+                    $dbh->insertOrder($_SESSION["username"]);
+                    var_dump($templateParams["cart"]);
+                    $id_order = $dbh->getLastInsertId();
+                    foreach ($templateParams["cart"] as $product){
+                        $dbh->insertIncludeOrder($product["id_product"], $id_order, $product["quantity"]);
+                        $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
+                    }   
+                    $dbh->deleteCart($_SESSION["username"]);
+                    header("Location: ?page=orders");
+                }
             }
 
 
@@ -184,9 +194,22 @@ switch ($_GET["page"]) {
         if (isUserLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Orders";
             $templateParams["content"] = "orders.php";
+            $templateParams["orders"] = $dbh->getOrders($_SESSION["username"]);
 
 
-
+        } else {
+            header("Location: ?page=home");
+        }
+        break;
+    case "order_detail":
+        if (isUserLoggedIn()) {
+            // if (isset($_GET["id_order"])) {
+            //     $templateParams["title"] = "E-lixirium - Order Detail";
+            //     $templateParams["content"] = "order_detail.php";
+            //     $templateParams["order"] = $dbh->getOrderDetail($_GET["id_order"]);
+            // } else {
+            //     header("Location: ?page=orders");
+            // }
         } else {
             header("Location: ?page=home");
         }

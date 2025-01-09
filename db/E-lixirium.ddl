@@ -37,7 +37,7 @@ create table USER (
      email char(30) not null,
      password char(30) not null,
      birthday date not null,
-     card_number int,
+     card_number varchar(20),
      constraint ID_USER_ID primary key (username));
 
 create table CATEGORY (
@@ -51,7 +51,7 @@ create table ADMIN (
 
 create table `ORDER` (
      id_order int not null auto_increment,
-     date date not null,
+     date date default current_date,
      username char(30) not null,
      constraint ID_ORDER_ID primary key (id_order));
 

@@ -36,6 +36,18 @@ switch ($_GET["page"]) {
         // $templateParams["content"] = "PAGE.php";
         break;
     case "product":
+        if (isset($_POST["rating"]) && isset($_POST["comment"]) && isset($_POST["id_product"]) && isUserLoggedIn()) {
+            if (count($dbh->getProduct($_POST["id_product"]))) {
+                // Product existing
+                if (count($dbh->checkReview($_POST["id_product"], $_SESSION["username"]))) {
+                    // Review existing
+                    $dbh->updateReview($_POST["id_product"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
+                } else {
+                    // Review not existing
+                    $dbh->insertReview($_POST["id_product"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
+                }
+            }
+        }
         if (isset($_POST["amount"]) && isUserLoggedIn()) {
             $cartProduct = $dbh->checkCartProduct($_SESSION["username"], $_POST["id_product"]);
             if (count($cartProduct)) {

@@ -67,6 +67,14 @@ class DatabaseHelper
         $stmt->execute();
     }
 
+    public function insertReview($id_product, $username, $stars, $comment)
+    {
+        $query = "INSERT INTO review (id_product, username, stars, comment) VALUES (?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('isis', $id_product, $username, $stars, $comment);
+        $stmt->execute();
+    }
+
     //GET SECTION
     public function getProducts($n = -1)
     {
@@ -258,6 +266,15 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function checkReview($id_product, $username)
+    {
+        $query = "SELECT * FROM review WHERE id_product = ? AND username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('is', $id_product, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
     //UPDATE SECTION
 
@@ -298,6 +315,14 @@ class DatabaseHelper
         $query = "UPDATE product SET amount_left = amount_left - ? WHERE id_product = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $quantity, $id_product);
+        $stmt->execute();
+    }
+
+    public function updateReview($id_product, $username, $stars, $comment)
+    {
+        $query = "UPDATE review SET stars = ?, comment = ? WHERE id_product = ? AND username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("issi", $stars, $comment, $id_product, $username);
         $stmt->execute();
     }
 }

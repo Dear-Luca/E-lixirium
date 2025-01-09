@@ -276,6 +276,16 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getReviews($id_product)
+    {
+        $query = "SELECT * FROM review WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id_product);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     //UPDATE SECTION
 
     public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)

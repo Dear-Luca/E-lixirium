@@ -77,15 +77,17 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
     </div>
     <?php if (isUserLoggedIn()):
         $existingReview = $dbh->checkReview($product["id_product"], $_SESSION["username"]);
-        $existingRating = count($existingReview) ? $existingReview[0]["stars"] : "";
-        $existingComment = count($existingReview) ? $existingReview[0]["comment"] : ""; ?>
-        <div class="row">
+        $existingRating = $existingReview ? $existingReview[0]["stars"] : "";
+        $existingComment = $existingReview ? $existingReview[0]["comment"] : ""; ?>
+        <section class="row">
             <h3><?php echo count($existingReview) ? "Your review:" : "Leave a review:"; ?></h3>
             <form action="#" method="POST">
                 <input type="hidden" id="id_product" name="id_product" value="<?php echo $product["id_product"]; ?>" />
                 <div class="form-floating">
                     <select class="form-select" id="rating" name="rating" aria-label="Rating" required>
-                        <option disabled value="">Select a rating</option>
+                        <option disabled value="" <?php echo !$existingReview ? "selected" : ""; ?>>
+                            Select a rating
+                        </option>
                         <option value="1" <?php echo $existingRating == 1 ? "selected" : ""; ?>>1 - Very Poor</option>
                         <option value="2" <?php echo $existingRating == 2 ? "selected" : ""; ?>>2 - Poor</option>
                         <option value="3" <?php echo $existingRating == 3 ? "selected" : ""; ?>>3 - Average</option>
@@ -100,9 +102,34 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                     <label class="m-2 mt-0" for="comment">Comment</label>
                 </div>
                 <button type="submit" class="btn btn-primary w-100 my-3">
-                    <?php echo count($existingReview) ? "Update Review" : "Submit Review"; ?>
+                    <?php echo $existingReview ? "Update Review" : "Submit Review"; ?>
                 </button>
             </form>
-        </div>
+        </section>
     <?php endif; ?>
+    <section class="row">
+        <h3>Comments:</h3>
+        <?php
+        $comments = $dbh->getReviews($product["id_product"]);
+        if (count($comments) > 0):
+            foreach ($comments as $comment): ?>
+                <div class="mb-3">
+                    <p><?php echo htmlspecialchars($comment["username"]); ?>:</p>
+                    <?php
+                    $stars = $comment["stars"];
+                    for ($i = 1; $i <= 5; $i++) {
+                        if ($i <= $stars) {
+                            echo "<img src='" . UPLOAD_DIR . "star-full.svg' alt='Filled star' />";
+                        } else {
+                            echo "<img src='" . UPLOAD_DIR . "star-empty.svg' alt='Empty star' />";
+                        }
+                    }
+                    ?>
+                    <p><?php echo htmlspecialchars($comment["comment"]); ?></p>
+                </div>
+            <?php endforeach;
+        else: ?>
+            <p>No comments yet. Be the first to comment!</p>
+        <?php endif; ?>
+    </section>
 </div>

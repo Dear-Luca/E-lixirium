@@ -36,6 +36,10 @@ switch ($_GET["page"]) {
         // $templateParams["content"] = "PAGE.php";
         break;
     case "product":
+        if (isset($_POST["amount"]) && isUserLoggedIn()) {
+            $dbh->insertIntoCart($_POST["id_product"], $_SESSION["username"], $_POST["amount"]);
+            header("Location: ?page=cart");
+        }
         if (isset($_GET["id"])) {
             $templateParams["product"] = $dbh->getProduct($_GET["id"]);
             if (count($templateParams["product"])) {
@@ -170,16 +174,16 @@ switch ($_GET["page"]) {
 
             if (isset($_POST["checkout-confirm"])) {
                 //var_dump($templateParams["curr"]);
-                if($_SESSION["card_number"] == NULL){
+                if ($_SESSION["card_number"] == NULL) {
                     $templateParams["error"] = "You need to insert a card number in your account";
-                } else{
+                } else {
                     $dbh->insertOrder($_SESSION["username"]);
                     var_dump($templateParams["cart"]);
                     $id_order = $dbh->getLastInsertId();
-                    foreach ($templateParams["cart"] as $product){
+                    foreach ($templateParams["cart"] as $product) {
                         $dbh->insertIncludeOrder($product["id_product"], $id_order, $product["quantity"]);
                         $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
-                    }   
+                    }
                     $dbh->deleteCart($_SESSION["username"]);
                     header("Location: ?page=orders");
                 }

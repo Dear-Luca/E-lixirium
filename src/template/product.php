@@ -36,7 +36,9 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
             </header>
             <section>
                 <h3>Configure your spell:</h3>
-                <form action="handle_add_to_cart.php" method="POST">
+                <form action="#" method="POST">
+                    <input type="hidden" name="id_product" id="id_product"
+                        value="<?php echo $product["id_product"]; ?>" />
                     <div class="row">
                         <div class="form-floating col-8">
                             <select class="form-select" id="duration" name="duration" aria-label="Spell duration"

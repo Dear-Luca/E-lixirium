@@ -11,56 +11,6 @@ class DatabaseHelper
         }
     }
 
-    # Get example
-    // public function getPosts($n = -1)
-    // {
-    //     $query = "SELECT idarticolo, titoloarticolo, imgarticolo, anteprimaarticolo, dataarticolo, nome FROM articolo, autore WHERE autore=idautore ORDER BY dataarticolo DESC";
-    //     if ($n > 0) {
-    //         $query .= " LIMIT ?";
-    //     }
-    //     $stmt = $this->db->prepare($query);
-    //     if ($n > 0) {
-    //         $stmt->bind_param('i', $n);
-    //     }
-    //     $stmt->execute();
-    //     $result = $stmt->get_result();
-
-    //     return $result->fetch_all(MYSQLI_ASSOC);
-    // }
-
-    # Insert example
-    // public function insertArticle($titoloarticolo, $testoarticolo, $anteprimaarticolo, $dataarticolo, $imgarticolo, $autore)
-    // {
-    //     $query = "INSERT INTO articolo (titoloarticolo, testoarticolo, anteprimaarticolo, dataarticolo, imgarticolo, autore) VALUES (?, ?, ?, ?, ?, ?)";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bind_param('sssssi', $titoloarticolo, $testoarticolo, $anteprimaarticolo, $dataarticolo, $imgarticolo, $autore);
-    //     $stmt->execute();
-
-    //     return $stmt->insert_id;
-    // }
-
-    # Update example
-    // public function updateArticleOfAuthor($idarticolo, $titoloarticolo, $testoarticolo, $anteprimaarticolo, $imgarticolo, $autore)
-    // {
-    //     $query = "UPDATE articolo SET titoloarticolo = ?, testoarticolo = ?, anteprimaarticolo = ?, imgarticolo = ? WHERE idarticolo = ? AND autore = ?";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bind_param('ssssii', $titoloarticolo, $testoarticolo, $anteprimaarticolo, $imgarticolo, $idarticolo, $autore);
-
-    //     return $stmt->execute();
-    // }
-
-    # Delete example
-    // public function deleteArticleOfAuthor($idarticolo, $autore)
-    // {
-    //     $query = "DELETE FROM articolo WHERE idarticolo = ? AND autore = ?";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->bind_param('ii', $idarticolo, $autore);
-    //     $stmt->execute();
-    //     var_dump($stmt->error);
-    //     return true;
-    // }
-
-
     //INSERT SECTION
     public function insertUser($name, $surname, $username, $email, $password, $birthday)
     {
@@ -68,7 +18,6 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssssss', $name, $surname, $username, $email, $password, $birthday);
         $stmt->execute();
-        return $stmt->insert_id;
     }
     public function insertProduct($productName, $productDescription, $productPrice, $productAmount, $duration, $productImages, $stars)
     {
@@ -76,7 +25,6 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sssdisd', $productName, $productDescription, $productImages, $productPrice, $productAmount, $duration, $stars);
         $stmt->execute();
-
     }
 
     public function insertCategory($name)
@@ -99,14 +47,23 @@ class DatabaseHelper
     {
         $query = "INSERT INTO `order` (username) VALUES (?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username,);
+        $stmt->bind_param('s', $username, );
         $stmt->execute();
     }
 
-    public function insertIncludeOrder($id_product, $id_order, $quantity){
+    public function insertIncludeOrder($id_product, $id_order, $quantity)
+    {
         $query = "INSERT INTO includes (id_product, id_order, quantity) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('iii', $id_product, $id_order, $quantity);
+        $stmt->execute();
+    }
+
+    public function insertIntoCart($id_product, $username, $quantity)
+    {
+        $query = "INSERT INTO wishes (id_product, username, quantity) VALUES (?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('isi', $id_product, $username, $quantity);
         $stmt->execute();
     }
 
@@ -261,7 +218,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getOrderDetail($id_order){
+    public function getOrderDetail($id_order)
+    {
         $query = "SELECT P.name, P.price, I.quantity FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id_order);
@@ -270,7 +228,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getOrderTotal($id_order){
+    public function getOrderTotal($id_order)
+    {
         $query = "SELECT ROUND(SUM(P.price * I.quantity), 2) as total FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id_order);
@@ -278,7 +237,7 @@ class DatabaseHelper
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
+
 
     //UPDATE SECTION
 

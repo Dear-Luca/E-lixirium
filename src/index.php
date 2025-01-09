@@ -37,8 +37,14 @@ switch ($_GET["page"]) {
         break;
     case "product":
         if (isset($_POST["amount"]) && isUserLoggedIn()) {
-            $dbh->insertIntoCart($_POST["id_product"], $_SESSION["username"], $_POST["amount"]);
+            $cartProduct = $dbh->checkCartProduct($_SESSION["username"], $_POST["id_product"]);
+            if (count($cartProduct)) {
+                $dbh->updateCartQuantity($_SESSION["username"], $_POST["id_product"], $_POST["amount"] + $cartProduct[0]["quantity"]);
+            } else {
+                $dbh->insertIntoCart($_POST["id_product"], $_SESSION["username"], $_POST["amount"]);
+            }
             header("Location: ?page=cart");
+            exit();
         }
         if (isset($_GET["id"])) {
             $templateParams["product"] = $dbh->getProduct($_GET["id"]);

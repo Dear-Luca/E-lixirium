@@ -83,6 +83,16 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getProductsOfName($name)
+    {
+        $query = "SELECT * FROM product WHERE name = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $name);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getProductsOfCategory($category, $n = -1)
     {
         $query = "SELECT product.* FROM product, `is` WHERE product.id_product = is.id_product AND is.name = ? ORDER BY RAND()";
@@ -168,6 +178,16 @@ class DatabaseHelper
         $query = "SELECT W.id_product, P.name, P.price, W.quantity FROM wishes as W, product as P WHERE W.username=? and W.id_product=P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function checkCartProduct($username, $id_product)
+    {
+        $query = "SELECT * FROM wishes WHERE username=? and id_product=?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('si', $username, $id_product);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);

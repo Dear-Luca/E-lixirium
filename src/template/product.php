@@ -35,19 +35,23 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                 <p><?php echo $product["description"]; ?></p>
             </header>
             <section>
-                <h3>Configure your spell:</h3>
+                <h3">Configure your spell:</h3>
                 <form action="#" method="POST">
-                    <input type="hidden" name="id_product" id="id_product"
-                        value="<?php echo $product["id_product"]; ?>" />
                     <div class="row">
                         <div class="form-floating col-8">
-                            <select class="form-select" id="duration" name="duration" aria-label="Spell duration"
-                                required>
-                                <option selected class="text-secondary" value="">Select duration</option>
-                                <option value="1">1 minute</option>
-                                <option value="2">1 hour</option>
-                                <option value="3">1 week</option>
-                                <option value="4">1 month</option>
+                            <select class="form-select" id="id_product" name="id_product"
+                                aria-label="Spell duration" required>
+                                <option selected value="<?php echo $product["id_product"]; ?>">
+                                    <?php echo $product["duration"]; ?>
+                                </option>
+                                <?php
+                                $matchProducts = $dbh->getProductsOfName($product["name"]);
+                                foreach ($matchProducts as $matchProduct) {
+                                    if ($matchProduct["duration"] != $product["duration"] && $matchProduct["amount_left"] > 0) {
+                                        echo "<option value='" . $matchProduct["id_product"] . "'>" . $matchProduct["duration"] . "</option>";
+                                    }
+                                }
+                                ?>
                             </select>
                             <label class="m-2 mt-0" for="duration">Spell duration</label>
                         </div>

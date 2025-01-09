@@ -253,13 +253,32 @@ class DatabaseHelper
 
     public function getOrders($username)
     {
-        $query = "SELECT * FROM `order` WHERE username = ?";
+        $query = "SELECT * FROM `order` WHERE username = ? ";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getOrderDetail($id_order){
+        $query = "SELECT P.name, P.price, I.quantity FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id_order);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getOrderTotal($id_order){
+        $query = "SELECT ROUND(SUM(P.price * I.quantity), 2) as total FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id_order);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
 
     //UPDATE SECTION
 

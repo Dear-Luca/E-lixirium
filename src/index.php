@@ -195,6 +195,8 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Orders";
             $templateParams["content"] = "orders.php";
             $templateParams["orders"] = $dbh->getOrders($_SESSION["username"]);
+            $templateParams["totalOrder"] = $dbh->getOrderTotal($templateParams["orders"][0]["id_order"]);
+            // var_dump($templateParams["totalOrder"]);
 
         } else {
             header("Location: ?page=home");
@@ -203,9 +205,11 @@ switch ($_GET["page"]) {
     case "order_detail":
         if (isUserLoggedIn()) {
             if (isset($_GET["id_order"])) {
-                var_dump($_GET);
+                // var_dump($_GET);
                 $templateParams["title"] = "E-lixirium - Order Detail";
                 $templateParams["content"] = "order-detail.php";
+                $templateParams["order-detail"] = $dbh->getOrderDetail($_GET["id_order"]);
+                // var_dump($templateParams["order-detail"]);
             } else {
                 header("Location: ?page=orders");
             }

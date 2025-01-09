@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             <?php foreach ($templateParams["orders"] as $order): ?>
-                <tr onclick="window.location.href='order_detail?id_order=<?php echo $order["id_order"]; ?>'">
+                <tr onclick="window.location.href='?page=order_detail&id_order=<?php echo $order["id_order"]; ?>'">
                     <td><?php echo $order["id_order"]; ?></td>
                     <td><?php echo $order["date"]; ?></td>
                 </tr>

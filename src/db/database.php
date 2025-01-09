@@ -302,6 +302,5 @@ class DatabaseHelper
         $stmt->bind_param("ii", $quantity, $id_product);
         $stmt->execute();
     }
-
 }
 ?>

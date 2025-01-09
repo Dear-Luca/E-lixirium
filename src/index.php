@@ -196,20 +196,19 @@ switch ($_GET["page"]) {
             $templateParams["content"] = "orders.php";
             $templateParams["orders"] = $dbh->getOrders($_SESSION["username"]);
 
-
         } else {
             header("Location: ?page=home");
         }
         break;
     case "order_detail":
         if (isUserLoggedIn()) {
-            // if (isset($_GET["id_order"])) {
-            //     $templateParams["title"] = "E-lixirium - Order Detail";
-            //     $templateParams["content"] = "order_detail.php";
-            //     $templateParams["order"] = $dbh->getOrderDetail($_GET["id_order"]);
-            // } else {
-            //     header("Location: ?page=orders");
-            // }
+            if (isset($_GET["id_order"])) {
+                var_dump($_GET);
+                $templateParams["title"] = "E-lixirium - Order Detail";
+                $templateParams["content"] = "order-detail.php";
+            } else {
+                header("Location: ?page=orders");
+            }
         } else {
             header("Location: ?page=home");
         }

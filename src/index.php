@@ -15,7 +15,9 @@ if (!isset($_GET["page"])) {
 switch ($_GET["page"]) {
     case "home":
         $templateParams["title"] = "E-lixirium - Home";
-        // $templateParams["content"] = "PAGE.php";
+        $templateParams["content"] = "home.php";
+        $templateParams["products"] = $dbh->getProducts(10);
+        $templateParams["categories"] = $dbh->getCategories();
         break;
     case "products":
         foreach ($dbh->getCategories() as $category) {

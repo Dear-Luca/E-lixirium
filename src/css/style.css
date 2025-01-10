@@ -3,6 +3,16 @@ nav img {
     height: auto;
 }
 
+div.container.my-5.text-center.mb-4 img {
+    width: 500px;
+    height: auto;
+}
+
+.container-sm .row .card {
+    width: 100px;
+    height: 100px;
+}
+
 article div img, section.col header img, div.container section.row img{
     width: 20px;
     height: auto;

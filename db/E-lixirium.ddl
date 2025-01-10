@@ -63,7 +63,7 @@ create table REVIEW (
      constraint ID_REVIEW_ID primary key (id_product, username));
 
 create table NOTIFICATION (
-     id_notification int not null,
+     id_notification int not null auto_increment,
      title char(30) not null,
      data date not null,
      description varchar(300) not null,

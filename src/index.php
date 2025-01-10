@@ -33,7 +33,7 @@ switch ($_GET["page"]) {
         break;
     case "about":
         $templateParams["title"] = "E-lixirium - About Us";
-        // $templateParams["content"] = "PAGE.php";
+        $templateParams["content"] = "about.php";
         break;
     case "product":
         if (isset($_POST["rating"]) && isset($_POST["comment"]) && isset($_POST["id_product"]) && isUserLoggedIn()) {

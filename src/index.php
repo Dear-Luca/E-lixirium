@@ -229,11 +229,10 @@ switch ($_GET["page"]) {
     case "order_detail":
         if (isUserLoggedIn()) {
             if (isset($_GET["id_order"])) {
-                // var_dump($_GET);
                 $templateParams["title"] = "E-lixirium - Order Detail";
                 $templateParams["content"] = "order-detail.php";
                 $templateParams["order-detail"] = $dbh->getOrderDetail($_GET["id_order"]);
-                // var_dump($templateParams["order-detail"]);
+                var_dump($templateParams["order-detail"]);               
             } else {
                 header("Location: ?page=orders");
             }

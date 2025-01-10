@@ -19,7 +19,12 @@
                 <tbody>
                     <?php foreach ($templateParams["order-detail"] as $product): ?>
                         <tr>
-                            <td><?php echo $product["name"]; ?></td>
+                            <td>
+                                <a href="?page=product&id=<?php echo $product['id_product']; ?>"
+                                    class="text-decoration-none text-dark">
+                                    <?php echo $product['name']; ?>
+                                </a>
+                            </td>
                             <td><?php echo $product["price"] . "€"; ?></td>
                             <td><?php echo $product["quantity"]; ?></td>
                             <td><?php echo $product["price"] * $product["quantity"] . "€"; ?></td>

@@ -246,7 +246,7 @@ class DatabaseHelper
 
     public function getOrders($username)
     {
-        $query = "SELECT * FROM `order` WHERE username = ? ";
+        $query = "SELECT * FROM `order` WHERE username = ? Order by date DESC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
@@ -256,7 +256,7 @@ class DatabaseHelper
 
     public function getOrderDetail($id_order)
     {
-        $query = "SELECT P.name, P.price, I.quantity FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
+        $query = "SELECT P.name, P.price, P.id_product, I.quantity FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id_order);
         $stmt->execute();

@@ -56,6 +56,7 @@ function logout()
     unset($_SESSION["name"]);
     unset($_SESSION["surname"]);
     unset($_SESSION["email"]);
+    unset($_SESSION["card_number"]);
 }
 
 function updateUser($templateParams){

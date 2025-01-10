@@ -315,7 +315,7 @@ class DatabaseHelper
 
     public function getNotifications($username)
     {
-        $query = "SELECT * FROM notification WHERE username = ?";
+        $query = "SELECT * FROM notification WHERE username = ? ORDER BY date DESC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();

@@ -6,7 +6,7 @@
         <ul class="list-group">
             <?php foreach ($templateParams["notifications"] as $notification): ?>
                 <li class="list-group-item list-group-item-action">
-                    <a href="?page=notification-detail&id=<?php echo $notification['id']; ?>"
+                    <a href="?page=notification-detail&id=<?php echo $notification['id_notification']; ?>"
                         class="d-flex justify-content-between text-decoration-none text-dark">
                         <div>
                             <h5 class="mb-1"><?php echo $notification["title"]; ?></h5>

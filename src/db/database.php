@@ -323,6 +323,15 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getNotificationDetail($id_notification){
+        $query = "SELECT * FROM notification WHERE id_notification = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $id_notification);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     //UPDATE SECTION
 
     public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)

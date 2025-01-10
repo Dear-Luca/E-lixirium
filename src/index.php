@@ -194,7 +194,7 @@ switch ($_GET["page"]) {
             if (isset($_POST["checkout-confirm"])) {
                 if ($_SESSION["card_number"] == NULL) {
                     $templateParams["error"] = "You need to insert a card number in your account";
-                } else{
+                } else {
                     $dbh->insertOrder($_SESSION["username"]);
                     $id_order = $dbh->getLastInsertId();
                     foreach ($templateParams["cart"] as $product) {
@@ -202,10 +202,10 @@ switch ($_GET["page"]) {
                         $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
                     }
                     $templateParams["admins"] = $dbh->getAdmins();
-                    foreach ($templateParams["admins"] as $admin){
-                        $dbh->insertNotification("New order",generateOrderMessage($id_order, $_SESSION["username"]), admin: $admin["username"]);
+                    foreach ($templateParams["admins"] as $admin) {
+                        $dbh->insertNotification("New order", generateOrderMessage($id_order, $_SESSION["username"], $templateParams["cart"]), admin: $admin["username"]);
                     }
-                    $dbh->insertNotification("New order",generateOrderMessage($id_order, $_SESSION["username"]), username: $_SESSION["username"]);
+                    $dbh->insertNotification("New order", generateOrderMessage($id_order, $_SESSION["username"], $templateParams["cart"]), username: $_SESSION["username"]);
                     $dbh->deleteCart($_SESSION["username"]);
                     header("Location: ?page=orders");
                 }
@@ -246,7 +246,20 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Notifications";
             $templateParams["content"] = "notifications.php";
             $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
-            //$dbh->updateNotifications($_SESSION["username"]);
+        } else {
+            header("Location: ?page=home");
+        }
+        break;
+    case "notification-detail":
+        if (isUserLoggedIn()) {
+            if (isset($_GET["id"])) {
+                $templateParams["title"] = "E-lixirium - Notification Detail";
+                $templateParams["content"] = "notification-detail.php";
+                $templateParams["notification-detail"] = $dbh->getNotificationDetail($_GET["id"]);
+                //var_dump($templateParams["notification-detail"]);
+            } else {
+                header("Location: ?page=notifications");
+            }
         } else {
             header("Location: ?page=home");
         }

@@ -75,6 +75,14 @@ class DatabaseHelper
         $stmt->execute();
     }
 
+    public function insertNotification($title, $description, $username=null, $admin=null)
+    {
+        $query = "INSERT INTO notification (title, description, username, SEN_username) VALUES (?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ssss', $title, $description, $username, $admin);
+        $stmt->execute();
+    }
+
     //GET SECTION
     public function getProducts($n = -1)
     {
@@ -291,6 +299,25 @@ class DatabaseHelper
         $query = "SELECT * FROM review WHERE id_product = ? AND username != ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('is', $id_product, $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAdmins()
+    {
+        $query = "SELECT * FROM admin";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNotifications($username)
+    {
+        $query = "SELECT * FROM notification WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);

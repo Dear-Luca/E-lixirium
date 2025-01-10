@@ -75,6 +75,11 @@ function getCartTotal($templateParams){
     return $total;
 }
 
+function generateOrderMessage($id_order, $username){
+    $message = "A new order has been placed with id" . $id_order . "by the user" . $username;
+    return $message;
+}
+
 // TODO: rewrite for empty product (only in the case we decide to opt for a separate edit page)
 // function getEmptyArticle()
 // {

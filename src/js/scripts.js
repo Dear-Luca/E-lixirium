@@ -7,9 +7,9 @@ document.querySelector("nav a.dropdown-toggle").addEventListener('click', functi
     }
 });
 
-document.querySelector("select#id_product").addEventListener("change", function () {
-    location.href = 'index.php?page=product&id=' + this.value;
-});
+// document.querySelector("select#id_product").addEventListener("change", function () {
+//     location.href = 'index.php?page=product&id=' + this.value;
+// });
 
 document.querySelector(".btn-primary").addEventListener("click", function () {
     // enable fields

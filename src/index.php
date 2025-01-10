@@ -192,17 +192,20 @@ switch ($_GET["page"]) {
             }
 
             if (isset($_POST["checkout-confirm"])) {
-                //var_dump($templateParams["curr"]);
                 if ($_SESSION["card_number"] == NULL) {
                     $templateParams["error"] = "You need to insert a card number in your account";
-                } else {
+                } else{
                     $dbh->insertOrder($_SESSION["username"]);
-                    var_dump($templateParams["cart"]);
                     $id_order = $dbh->getLastInsertId();
                     foreach ($templateParams["cart"] as $product) {
                         $dbh->insertIncludeOrder($product["id_product"], $id_order, $product["quantity"]);
                         $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
                     }
+                    $templateParams["admins"] = $dbh->getAdmins();
+                    foreach ($templateParams["admins"] as $admin){
+                        $dbh->insertNotification("New order",generateOrderMessage($id_order, $_SESSION["username"]), admin: $admin["username"]);
+                    }
+                    $dbh->insertNotification("New order",generateOrderMessage($id_order, $_SESSION["username"]), username: $_SESSION["username"]);
                     $dbh->deleteCart($_SESSION["username"]);
                     header("Location: ?page=orders");
                 }
@@ -218,8 +221,6 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Orders";
             $templateParams["content"] = "orders.php";
             $templateParams["orders"] = $dbh->getOrders($_SESSION["username"]);
-            $templateParams["totalOrder"] = $dbh->getOrderTotal($templateParams["orders"][0]["id_order"]);
-            // var_dump($templateParams["totalOrder"]);
 
         } else {
             header("Location: ?page=home");
@@ -236,6 +237,16 @@ switch ($_GET["page"]) {
             } else {
                 header("Location: ?page=orders");
             }
+        } else {
+            header("Location: ?page=home");
+        }
+        break;
+    case "notifications":
+        if (isUserLoggedIn()) {
+            $templateParams["title"] = "E-lixirium - Notifications";
+            $templateParams["content"] = "notifications.php";
+            $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
+            //$dbh->updateNotifications($_SESSION["username"]);
         } else {
             header("Location: ?page=home");
         }

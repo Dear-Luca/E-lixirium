@@ -15,7 +15,7 @@
                 <tr onclick="window.location.href='?page=order_detail&id_order=<?php echo $order["id_order"]; ?>'">
                     <td><?php echo $order["id_order"]; ?></td>
                     <td><?php echo $order["date"]; ?></td>
-                    <th><?php echo $templateParams["totalOrder"][0]["total"];  ?></th>
+                    <th><?php echo $dbh->getOrderTotal($order["id_order"])[0]["total"] . '€';?></th>
                 </tr>
             <?php endforeach; ?>
         </tbody>

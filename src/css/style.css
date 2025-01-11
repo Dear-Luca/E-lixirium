@@ -3,7 +3,7 @@ nav img {
     height: auto;
 }
 
-div.container.my-5.text-center.mb-4 img {
+div.container-fluid>section.row>img {
     width: 500px;
     height: auto;
 }
@@ -13,9 +13,36 @@ div.container.my-5.text-center.mb-4 img {
     height: 100px;
 } */
 
-article div img, section.col header img, div.container section.row img{
+article div img,
+section.col header img,
+div.container section.row img,
+div.container-fluid section div div div.card div.card-body span img {
     width: 20px;
     height: auto;
+}
+
+@media (min-width: 544px) {
+    div.container-fluid section div div div.card div.card-body p {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    div.container-fluid section div div div.card div.card-body p {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    div.container-fluid section div div div.card div.card-body p {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    div.container-fluid section div div div.card div.card-body p {
+        font-size: 2rem;
+    }
 }
 
 /* buttons to update user info */

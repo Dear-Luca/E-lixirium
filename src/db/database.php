@@ -99,6 +99,21 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getTopProducts($n = -1)
+    {
+        $query = "SELECT * FROM product ORDER BY stars DESC";
+        if ($n > 0) {
+            $query .= " LIMIT ?";
+        }
+        $stmt = $this->db->prepare($query);
+        if ($n > 0) {
+            $stmt->bind_param('i', $n);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getProductsOfName($name)
     {
         $query = "SELECT * FROM product WHERE name = ?";

@@ -1,49 +1,56 @@
 <!-- Image and Title -->
-<div class="container my-5 text-center mb-4">
-        <img src="<?php echo UPLOAD_DIR . "potion.jpg"; ?>" alt="Logo" class="img-fluid"/>
-        <h1 class="mt-3">The Best Spell Shop</h1>
-    </div>
+<div class="container-fluid">
+    <section class="row m-0 justify-content-center text-center">
+        <img src="<?php echo UPLOAD_DIR . "potion.jpg"; ?>" alt="Logo" class="img-fluid" />
+        <h2 class="mt-3">The Best Spell Shop</h2>
+    </section>
 
     <!-- Categories Carousel -->
-    <div class="mb-5">
-        <h3>Categories</h3>
-        <div class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="d-flex justify-content-center">
-                        <?php foreach ($templateParams["categories"] as $category): ?>
-                            <div class="p-3 border mx-2">
-                                <?php echo $category["name"]; ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Products List -->
-    <div>
-        <h3>Products</h3>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <?php foreach ($templateParams["products"] as $product): ?>
+    <section>
+        <h2>Random categories</h2>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6 m-0">
+            <?php foreach ($templateParams["categories"] as $category): ?>
                 <div class="col">
-                    <div class="card">
-                        <img src="<?php echo UPLOAD_DIR . "potion.jpg"; ?>" class="card-img-top" alt="<?php echo "potion.jpg"; ?>" />
+                    <div class="card borders-0">
+                        <img src="<?php echo UPLOAD_DIR; ?>/potion.jpg" class="card-img-top" alt="">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $product["name"]; ?></h5>
-                            <p class="card-text"><strong>Price: </strong><?php echo $product["price"]; ?> €</p>
+                            <p class="text-nowrap text-center h-md-4 h-lg-5"><?php echo $category["name"]; ?></p>
+                            <a href="?page=products&category=<?php echo $category["name"]; ?>" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
-    </div>
+    </section>
+
+    <!-- Product List -->
+    <section>
+        <h2>Top products</h2>
+        <div class="row row-cols-2 row-cols-md-3 g-4 m-0">
+            <?php foreach ($templateParams["products"] as $product): ?>
+                <div class="col">
+                    <div class="card">
+                        <img src="<?php echo UPLOAD_DIR . "potion.jpg"; ?>" class="card-img-top" alt="" />
+                        <div class="card-body">
+                            <h3 class="card-title"><?php echo $product["name"]; ?></h3>
+                            <span class="d-flex">
+                                <?php
+                                $stars = $product["stars"];
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $stars) {
+                                        echo "<img src='" . UPLOAD_DIR . "star-full.svg' alt='Filled star' />";
+                                    } else {
+                                        echo "<img src='" . UPLOAD_DIR . "star-empty.svg' alt='Empty star' />";
+                                    }
+                                }
+                                ?>
+                                <p class="m-0">(<?php echo $stars; ?>)</p>
+                            </span>
+                            <a href="?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+</div>

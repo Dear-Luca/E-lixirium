@@ -59,7 +59,8 @@ function logout()
     unset($_SESSION["card_number"]);
 }
 
-function updateUser($templateParams){
+function updateUser($templateParams)
+{
     $_SESSION["name"] = $templateParams["userInfo"][0]["name"];
     $_SESSION["surname"] = $templateParams["userInfo"][0]["surname"];
     $_SESSION["email"] = $templateParams["userInfo"][0]["email"];
@@ -67,18 +68,20 @@ function updateUser($templateParams){
     $_SESSION["card_number"] = $templateParams["userInfo"][0]["card_number"];
 }
 
-function getCartTotal($templateParams){
+function getCartTotal($templateParams)
+{
     $total = 0;
-    foreach($templateParams["cart"] as $product){
+    foreach ($templateParams["cart"] as $product) {
         $total += $product["price"] * $product["quantity"];
     }
     return $total;
 }
 
-function generateOrderMessage($id_order, $username, $products){
+function generateOrderMessage($id_order, $username, $products)
+{
     $message = "A new order has been placed with id " . $id_order . " by the user " . $username;
     $message .= "\nThe order will be delivered to the following address: " . "Via dell'università 50, Cesena, FC";
-    foreach($products as $product){
+    foreach ($products as $product) {
         $total = $product["price"] * $product["quantity"];
         $message .= "\n" . $product["quantity"] . "x " . $product["name"] . " - " . $total . "€";
     }

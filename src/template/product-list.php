@@ -25,7 +25,7 @@
                         ?>
                         <p class="m-0">(<?php echo $stars; ?>)</p>
                     </span>
-                    <a href="/?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
+                    <a href="?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                 </div>
             </article>
         <?php endforeach; ?>

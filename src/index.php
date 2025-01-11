@@ -80,8 +80,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Register";
             $templateParams["content"] = "register-form.php";
             if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["birthday"])) {
-                $register_result = $dbh->checkRegister($_POST["username"]);
-                if (count($register_result)) {
+                if (count($dbh->checkAdmin($_POST["username"])) || count($dbh->checkUsername($_POST["username"]))) {
                     // Registration failed
                     $templateParams["error"] = "A user with that username already exists";
                 } else {
@@ -99,7 +98,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Login";
             $templateParams["content"] = "login-form.php";
             if (isset($_POST["username"]) && isset($_POST["password"])) {
-                $login_result = $dbh->checkAdmin($_POST["username"], $_POST["password"]);
+                $login_result = $dbh->checkAdminLogin($_POST["username"], $_POST["password"]);
                 if (count($login_result) != 0) {
                     // Admin login
                     registerAdminLogged($login_result[0]);
@@ -128,7 +127,7 @@ switch ($_GET["page"]) {
             if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) && isset($_POST["card_number"]) && isset($_POST["password"])) {
                 if ($_POST["password"] == $_POST["confirmPassword"]) {
                     // if username does't change or new username is not used
-                    if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkRegister($_POST["username"])) == 0)) {
+                    if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkUsername($_POST["username"])) == 0)) {
                         if ($_POST["card_number"] == "") {
                             $_POST["card_number"] = NULL;
                         }
@@ -234,7 +233,7 @@ switch ($_GET["page"]) {
                 $templateParams["title"] = "E-lixirium - Order Detail";
                 $templateParams["content"] = "order-detail.php";
                 $templateParams["order-detail"] = $dbh->getOrderDetail($_GET["id_order"]);
-                var_dump($templateParams["order-detail"]);               
+                var_dump($templateParams["order-detail"]);
             } else {
                 header("Location: ?page=orders");
             }

@@ -75,7 +75,7 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function insertNotification($title, $description, $username=null, $admin=null)
+    public function insertNotification($title, $description, $username = null, $admin = null)
     {
         $query = "INSERT INTO notification (title, description, username, SEN_username) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
@@ -159,7 +159,7 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkAdmin($username, $password)
+    public function checkAdminLogin($username, $password)
     {
         $query = "SELECT * FROM admin WHERE username = ? AND password = ?";
         $stmt = $this->db->prepare($query);
@@ -179,9 +179,19 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkRegister($username)
+    public function checkUsername($username)
     {
         $query = "SELECT username FROM user WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function checkAdmin($username)
+    {
+        $query = "SELECT username FROM admin WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
@@ -323,7 +333,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getNotificationDetail($id_notification){
+    public function getNotificationDetail($id_notification)
+    {
         $query = "SELECT * FROM notification WHERE id_notification = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id_notification);

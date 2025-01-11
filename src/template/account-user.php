@@ -1,3 +1,4 @@
+<?php $templateParams["js"][] = "account.js"; ?>
 <div class="card">
     <header class="card-header">
         <h2>Account</h2>
@@ -66,9 +67,9 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="button"  class="btn btn-primary">Edit</button>
-                <button type="submit"  class="btn btn-success">Save</button>
-                <button type="button"  class="btn btn-danger">Cancel</button>
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-danger">Cancel</button>
             </div>
         </form>
     </section>

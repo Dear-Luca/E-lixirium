@@ -3,7 +3,7 @@ require_once 'bootstrap.php';
 
 //Base Template
 $templateParams["title"] = "E-lixirium - Home";
-$templateParams["js"] = array("scripts.js");
+$templateParams["js"] = array("global.js");
 $templateParams["categories"] = $dbh->getCategories();
 // TODO: replace with actual products and categories getters
 // $templateParams["articolicasuali"] = $dbh->getRandomPosts(2);

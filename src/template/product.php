@@ -1,5 +1,6 @@
 <!-- $templateParams["product"] name id_product description image_name price amount_left duration -->
-<?php $product = $templateParams["product"][0];
+<?php $templateParams["js"][] = "product.js";
+$product = $templateParams["product"][0];
 $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">
     <div class="row row-cols-1 row-cols-lg-2 m-0 justify-content-center">

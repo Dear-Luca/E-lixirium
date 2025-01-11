@@ -1,16 +1,3 @@
-document.querySelector("nav a.dropdown-toggle").addEventListener('click', function (event) {
-    const dropdownMenu = document.querySelector("nav ul.dropdown-menu");
-    // Check if dropdown is expanded
-    if (!dropdownMenu.classList.contains('show')) {
-        // Redirect to all products page
-        window.location.href = "?page=products";
-    }
-});
-
-// document.querySelector("select#id_product").addEventListener("change", function () {
-//     location.href = 'index.php?page=product&id=' + this.value;
-// });
-
 document.querySelector(".btn-primary").addEventListener("click", function () {
     // enable fields
     document.querySelectorAll("input[type='text'], input[type='email'], input[type='date'], input[type='password']").forEach(input => {

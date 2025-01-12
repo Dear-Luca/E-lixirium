@@ -60,12 +60,25 @@ main>div>form {
     max-width: 330px;
 }
 
-h1, h2, h3{
+h1,
+h2,
+h3 {
     font-family: 'Cinzel', 'Times New Roman', serif;
     font-weight: bold;
 }
 
-/* Bootstrap-derived styles */
+section.col p>strong {
+    font-size: xx-large;
+    color: rgb(95, 110, 102);
+}
+
+a.bg-light-purple.border-0.text-purple:hover,
+button.bg-light-purple.border-0.text-purple:hover {
+    background-color: rgb(155, 109, 198) !important;
+    color: white !important;
+}
+
+/* Custom Bootstrap-derived styles */
 @media (min-width: 1400px) {
     .row-cols-xxl-7>* {
         flex: 0 0 auto;
@@ -77,8 +90,16 @@ h1, h2, h3{
     background-color: rgba(155, 109, 198, 1) !important;
 }
 
+.bg-light-purple {
+    background-color: rgba(203, 195, 227, 1) !important;
+}
+
 .bg-light-green {
     background-color: rgba(109, 198, 155, 1) !important;
+}
+
+.text-purple {
+    color: rgb(105, 0, 168) !important;
 }
 
 .nav-link {
@@ -87,4 +108,9 @@ h1, h2, h3{
 
 .nav-link:hover {
     color: white;
+}
+
+.card-text {
+    font-size: large;
+    font-weight: 500;
 }

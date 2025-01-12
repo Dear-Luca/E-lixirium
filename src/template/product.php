@@ -4,22 +4,24 @@ $product = $templateParams["product"][0];
 $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">
     <div class="row row-cols-1 row-cols-lg-2 m-0 justify-content-center">
-        <section class="col py-3">
+        <section class="col py-3 px-0 px-lg-3">
             <a href="?page=products&category=<?php echo $category; ?>"
-                class="btn btn-outline-primary mb-3 d-lg-none">Back to <?php echo $category; ?></a>
-            <h2 class="d-block d-lg-none"><?php echo $product["name"]; ?></h2>
+                class="btn btn-outline-primary mb-3 d-lg-none bg-light-purple border-0 text-purple">Back to
+                <?php echo $category; ?></a>
+            <h2 class="d-block d-lg-none display-5"><?php echo $product["name"]; ?></h2>
             <img src="<?php echo UPLOAD_DIR . $product["image_name"]; ?>" alt="<?php echo $product["image_name"]; ?>"
                 class="img-fluid w-100" />
         </section>
-        <section class="col py-3">
+        <section class="col py-3 px-0 px-lg-3">
             <header>
                 <a href="?page=products&category=<?php echo $category; ?>"
-                    class="btn btn-outline-primary mb-3 d-none d-lg-inline-block">Back to <?php echo $category; ?></a>
-                <h2 class="d-none d-lg-block"><?php echo $product["name"]; ?></h2>
+                    class="btn btn-outline-primary mb-3 d-none d-lg-inline-block bg-light-purple border-0 text-purple">Back
+                    to <?php echo $category; ?></a>
+                <h2 class="d-none d-lg-block display-5"><?php echo $product["name"]; ?></h2>
                 <?php if ($product["amount_left"] < 5): ?>
                     <p class="text-danger mb-0">Only <?php echo $product["amount_left"]; ?> left!</p>
                 <?php endif; ?>
-                <p>€<?php echo $product["price"]; ?></p>
+                <p><strong>€<?php echo $product["price"]; ?></strong></p>
                 <span class="d-flex">
                     <?php
                     $stars = $product["stars"];
@@ -62,7 +64,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                                 <label class="m-2 mt-0" for="amount">Amount</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 my-3" <?php if ($product["amount_left"] < 1 || !isUserLoggedIn())
+                        <button type="submit" class="btn btn-primary w-100 my-3 bg-light-purple border-0 text-purple" <?php if ($product["amount_left"] < 1 || !isUserLoggedIn())
                             echo "disabled"; ?>>
                             <?php
                             if ($product["amount_left"] < 1) {
@@ -104,7 +106,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                         required><?php echo htmlspecialchars($existingComment); ?></textarea>
                     <label class="m-2 mt-0" for="comment">Comment</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 my-3">
+                <button type="submit" class="btn btn-primary w-100 my-3 bg-light-purple border-0 text-purple">
                     <?php echo $existingReview ? "Update Review" : "Submit Review"; ?>
                 </button>
             </form>

@@ -79,7 +79,7 @@
             <form class="d-flex" role="search" method="GET" action="search.php">
                 <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
                     name="value" id="search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn bg-light-purple border-0 text-purple" type="submit">Search</button>
             </form>
             <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>

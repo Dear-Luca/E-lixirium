@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-items-center">
     <form action="#" method="POST" class="w-100 m-5">
         <h2 class="h3 mb-3 fw-normal">Register</h2>
-        <p>Already registered? <a href="?page=login">Login</a></p>
+        <p>Already registered? <a href="?page=login" class="text-purple">Login</a></p>
         <?php if (isset($templateParams["error"])): ?>
             <p><?php echo $templateParams["error"]; ?></p>
         <?php endif; ?>
@@ -29,6 +29,6 @@
             <input type="password" class="form-control" id="password" name="password" required />
             <label for="password" class="form-label">Password</label>
         </div>
-        <button class="btn btn-primary w-100 my-4" type="submit">Register</button>
+        <button class="btn btn-primary w-100 my-4 bg-light-purple border-0 text-purple" type="submit">Register</button>
     </form>
 </div>

@@ -4,7 +4,7 @@
     <?php else: ?>
 
         <div class="card">
-            <div class="card-header bg-purple text-white">
+            <div class="card-header bg-table">
                 <h2 class="mb-0"> Shopping-Cart</h2>
             </div>
             <div class="card-body">
@@ -31,7 +31,13 @@
                                         <?php echo $product['name']; ?>
                                     </a>
                                 </td>
-                                <td> <img src="<?php echo UPLOAD_DIR . $product["image_name"] ?>" /> </td>
+                                <td>
+                                    <a href="?page=product&id=<?php echo $product['id_product']; ?>"
+                                        class="text-decoration-none text-dark">
+                                        <img src="<?php echo UPLOAD_DIR . $product["image_name"] ?>" />
+                                    </a>
+
+                                </td>
                                 <td><?php echo $product["price"] . "€"; ?></td>
                                 <td>
                                     <form method="POST" action="?page=cart">

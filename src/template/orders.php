@@ -3,7 +3,7 @@
         <p>You have no orders</p>
     <?php else: ?>
         <div class="card">
-            <div class="card-header bg-purple text-white">
+            <div class="card-header bg-table">
                 <h2 class="mb-0">Orders</h2>
             </div>
             <div class="card-body">

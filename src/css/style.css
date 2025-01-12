@@ -56,7 +56,16 @@ div section form div:nth-child(8) {
     display: none;
 }
 
-/* Bootstrap-derived new layout */
+main>div>form {
+    max-width: 330px;
+}
+
+h1, h2, h3{
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    font-weight: bold;
+}
+
+/* Bootstrap-derived styles */
 @media (min-width: 1400px) {
     .row-cols-xxl-7>* {
         flex: 0 0 auto;
@@ -64,6 +73,18 @@ div section form div:nth-child(8) {
     }
 }
 
-main>div>form {
-    max-width: 330px;
+.bg-purple {
+    background-color: rgba(155, 109, 198, 1) !important;
+}
+
+.bg-light-green {
+    background-color: rgba(109, 198, 155, 1) !important;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: white;
 }

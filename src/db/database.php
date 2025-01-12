@@ -271,7 +271,7 @@ class DatabaseHelper
 
     public function getOrders($username)
     {
-        $query = "SELECT * FROM `order` WHERE username = ? Order by date DESC";
+        $query = "SELECT * FROM `order` WHERE username = ? Order by `date` DESC";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
@@ -340,9 +340,9 @@ class DatabaseHelper
 
     public function getNotifications($username)
     {
-        $query = "SELECT * FROM notification WHERE username = ? ORDER BY date DESC";
+        $query = "SELECT * FROM notification WHERE username = ? OR SEN_username = ? ORDER BY `date` DESC";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s', $username);
+        $stmt->bind_param('ss', $username, $username); 
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -353,6 +353,16 @@ class DatabaseHelper
         $query = "SELECT * FROM notification WHERE id_notification = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id_notification);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getCreditCard($username)
+    {
+        $query = "SELECT card_number FROM user WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);

@@ -51,7 +51,7 @@ create table ADMIN (
 
 create table `ORDER` (
      id_order int not null auto_increment,
-     date timestamp default current_timestamp,
+     `date` timestamp default current_timestamp,
      username char(30) not null,
      constraint ID_ORDER_ID primary key (id_order));
 
@@ -65,7 +65,7 @@ create table REVIEW (
 create table NOTIFICATION (
      id_notification int not null auto_increment,
      title char(30) not null,
-     date timestamp default current_timestamp,
+     `date` timestamp default current_timestamp,
      description varchar(300) not null,
      username char(30),
      SEN_username char(30),

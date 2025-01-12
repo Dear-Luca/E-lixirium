@@ -192,8 +192,9 @@ switch ($_GET["page"]) {
                 $templateParams["total"] = getCartTotal($templateParams);
             }
 
+            // var_dump($dbh->getCreditCard($_SESSION["username"]));
             if (isset($_POST["checkout-confirm"])) {
-                if ($_SESSION["card_number"] == NULL) {
+                if ($dbh->getCreditCard($_SESSION["username"])[0]["card_number"] == NULL) {
                     $templateParams["error"] = "You need to insert a card number in your account";
                 } else {
                     $dbh->insertOrder($_SESSION["username"]);
@@ -242,7 +243,7 @@ switch ($_GET["page"]) {
         }
         break;
     case "notifications":
-        if (isUserLoggedIn()) {
+        if (isUserLoggedIn() || isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Notifications";
             $templateParams["content"] = "notifications.php";
             $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
@@ -251,7 +252,7 @@ switch ($_GET["page"]) {
         }
         break;
     case "notification-detail":
-        if (isUserLoggedIn()) {
+        if (isUserLoggedIn() || isAdminLoggedIn()) {
             if (isset($_GET["id"])) {
                 $templateParams["title"] = "E-lixirium - Notification Detail";
                 $templateParams["content"] = "notification-detail.php";

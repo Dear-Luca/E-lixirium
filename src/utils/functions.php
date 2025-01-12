@@ -56,7 +56,6 @@ function logout()
     unset($_SESSION["name"]);
     unset($_SESSION["surname"]);
     unset($_SESSION["email"]);
-    unset($_SESSION["card_number"]);
 }
 
 function updateUser($templateParams)
@@ -65,7 +64,6 @@ function updateUser($templateParams)
     $_SESSION["surname"] = $templateParams["userInfo"][0]["surname"];
     $_SESSION["email"] = $templateParams["userInfo"][0]["email"];
     $_SESSION["birthday"] = $templateParams["userInfo"][0]["birthday"];
-    $_SESSION["card_number"] = $templateParams["userInfo"][0]["card_number"];
 }
 
 function getCartTotal($templateParams)

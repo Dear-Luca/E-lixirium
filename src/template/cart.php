@@ -8,7 +8,7 @@
                 <h2 class="mb-0"> Shopping-Cart</h2>
             </div>
             <div class="card-body">
-                <table class="table table-hover">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Product</th>
@@ -24,8 +24,13 @@
                             <?php
                             $productInfo = $dbh->getProduct($product["id_product"]);
                             ?>
-                            <tr onclick="window.location='?page=product&id=<?php echo $product['id_product']; ?>';">
-                                <td><?php echo $product['name']; ?></td>
+                            <tr>
+                                <td>
+                                    <a href="?page=product&id=<?php echo $product['id_product']; ?>"
+                                        class="text-decoration-none text-dark">
+                                        <?php echo $product['name']; ?>
+                                    </a>
+                                </td>
                                 <td> <img src="<?php echo UPLOAD_DIR . $product["image_name"] ?>" /> </td>
                                 <td><?php echo $product["price"] . "€"; ?></td>
                                 <td>
@@ -51,13 +56,10 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-
-
             </div>
-
         </div>
 
-        <p>Total: <?php echo $templateParams["total"] . "€"; ?></p>
+        <p class="h5 my-3">Total: <?php echo $templateParams["total"] . "€"; ?></p>
         <!-- Modal -->
         <div class="modal fade" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
             <div class="modal-dialog">

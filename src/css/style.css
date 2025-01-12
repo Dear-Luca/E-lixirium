@@ -50,8 +50,6 @@ div.container-fluid section div div div.card div.card-body span img {
     }
 }
 
-/* buttons to update user info */
-/* Nascondi i bottoni "Save" e "Cancel" inizialmente */
 form div button:nth-of-type(2),
 form div button:nth-of-type(3) {
     display: none;

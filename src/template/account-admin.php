@@ -18,7 +18,7 @@
             <input type="text" class="form-control" id="categoryName" name="categoryName"
                 placeholder="Enter category name" required />
         </div>
-        <button type="submit" class="btn btn-success">Create Category</button>
+        <button type="submit" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Create Category</button>
     </form>
 
     <div class="d-flex align-items-center mb-4 mt-4">
@@ -92,13 +92,8 @@
             <input type="file" class="form-control" id="productImages" name="productImages" multiple required />
         </div>
 
-        <div class="d-grid">
-            <button type="submit" class="btn btn-success">Create product</button>
+        <div>
+            <button type="submit" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Create product</button>
         </div>
     </form>
-
-    <div class="mt-4">
-        <a href="#" class="btn btn-outline-secondary d-block mb-2">Users list</a>
-        <a href="#" class="btn btn-outline-secondary d-block">Top k products</a>
-    </div>
 </div>

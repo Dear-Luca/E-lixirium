@@ -1,16 +1,17 @@
-<div class="container my-5">
-    <div class="mb-4">
-        <a href="?page=orders" class="btn btn-secondary">Back to Orders</a>
+<div class="container">
+    <div class="mb-3">
+        <a href="?page=orders" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Back to Orders</a>
     </div>
     <div class="card">
-        <div class="card-header bg-dark text-white">
-            <h5 class="mb-0">Order Details</h5>
+        <div class="card-header bg-purple text-white">
+            <h2 class="mb-0">Order Details</h2>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
+            <table class="table table-hover">
+                <thead>
                     <tr>
                         <th scope="col">Product</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Total</th>
@@ -18,12 +19,11 @@
                 </thead>
                 <tbody>
                     <?php foreach ($templateParams["order-detail"] as $product): ?>
-                        <tr>
+                        <tr onclick="window.location='?page=product&id=<?php echo $product['id_product']; ?>';">
+                            <td><?php echo $product['name']; ?></td>
                             <td>
-                                <a href="?page=product&id=<?php echo $product['id_product']; ?>"
-                                    class="text-decoration-none text-dark">
-                                    <?php echo $product['name']; ?>
-                                </a>
+                                <img src="<?php echo UPLOAD_DIR . $product["image_name"]; ?>"
+                                    alt="<?php echo $product['name']; ?>" />
                             </td>
                             <td><?php echo $product["price"] . "€"; ?></td>
                             <td><?php echo $product["quantity"]; ?></td>

@@ -3,6 +3,11 @@ nav img {
     height: auto;
 }
 
+table img{
+    width: 50px;
+    height: auto;
+}
+
 div.container-fluid>section.row>img {
     width: 500px;
     height: auto;
@@ -67,13 +72,16 @@ h3 {
     font-weight: bold;
 }
 
+
+
 section.col p>strong {
     font-size: xx-large;
     color: rgb(95, 110, 102);
 }
 
 a.bg-light-purple.border-0.text-purple:hover,
-button.bg-light-purple.border-0.text-purple:hover {
+button.bg-light-purple.border-0.text-purple:hover,
+input.bg-light-purple.border-0.text-purple:hover{
     background-color: rgb(155, 109, 198) !important;
     color: white !important;
 }
@@ -88,6 +96,10 @@ button.bg-light-purple.border-0.text-purple:hover {
 
 .bg-purple {
     background-color: rgba(155, 109, 198, 1) !important;
+}
+
+.bg-platinum{
+    background-color: rgba(234, 234, 234, 1) !important;
 }
 
 .bg-light-purple {

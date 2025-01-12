@@ -216,7 +216,7 @@ class DatabaseHelper
 
     public function getCartProducts($username)
     {
-        $query = "SELECT W.id_product, P.name, P.price, W.quantity FROM wishes as W, product as P WHERE W.username=? and W.id_product=P.id_product";
+        $query = "SELECT W.id_product, P.name, P.price, P.image_name, W.quantity FROM wishes as W, product as P WHERE W.username=? and W.id_product=P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
         $stmt->execute();
@@ -281,7 +281,7 @@ class DatabaseHelper
 
     public function getOrderDetail($id_order)
     {
-        $query = "SELECT P.name, P.price, P.id_product, I.quantity FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
+        $query = "SELECT P.name, P.price, P.id_product, P.image_name, I.quantity FROM includes as I, product as P WHERE I.id_order = ? and I.id_product = P.id_product";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i', $id_order);
         $stmt->execute();

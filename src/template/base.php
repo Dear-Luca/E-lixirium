@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet" />
 </head>
 
-<body class="bg-light-green">
+<body class="bg-platinum">
     <header>
         <h1>E-lixirium</h1>
     </header>

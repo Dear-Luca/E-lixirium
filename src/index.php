@@ -192,7 +192,6 @@ switch ($_GET["page"]) {
                 $templateParams["total"] = getCartTotal($templateParams);
             }
 
-            // var_dump($dbh->getCreditCard($_SESSION["username"]));
             if (isset($_POST["checkout-confirm"])) {
                 if ($dbh->getCreditCard($_SESSION["username"])[0]["card_number"] == NULL) {
                     $templateParams["error"] = "You need to insert a card number in your account";
@@ -234,7 +233,6 @@ switch ($_GET["page"]) {
                 $templateParams["title"] = "E-lixirium - Order Detail";
                 $templateParams["content"] = "order-detail.php";
                 $templateParams["order-detail"] = $dbh->getOrderDetail($_GET["id_order"]);
-                var_dump($templateParams["order-detail"]);
             } else {
                 header("Location: ?page=orders");
             }

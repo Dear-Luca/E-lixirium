@@ -8,6 +8,11 @@ table img{
     height: auto;
 }
 
+div.container div.row section.col-12 form div button img{
+    width: 20px;
+    height: auto;
+}
+
 div.container-fluid>section.row>img {
     width: 500px;
     height: auto;

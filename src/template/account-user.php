@@ -8,8 +8,23 @@
     <?php endif; ?>
     <div class="row">
         <section class="col-12 col-md-3 mb-3">
-            <h2><?php echo $templateParams['userInfo'][0]['name']; ?></h2>
-            <p class="h3"><?php echo $templateParams['userInfo'][0]['email']; ?></p>
+            <h2 class="text-center"><?php echo $templateParams['userInfo'][0]['name']; ?></h2>
+            <p class="h3 mb-5 text-center"><?php echo $templateParams['userInfo'][0]['email']; ?></p>
+            <div class="m-4 text-center">
+                <a href="?page=cart" class="text-decoration-none">
+                    <div class="card p-2 shadow-sm rounded-lg">
+                        <h3>Shopping Cart</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div class="m-4 text-center">
+                <a href="?page=orders" class="text-decoration-none">
+                    <div class="card p-2 shadow-sm rounded-lg">
+                        <h3>Order History</h3>
+                    </div>
+                </a>
+            </div>
         </section>
         <section class="col-12 col-md-9">
             <h2>Personal Information</h2>

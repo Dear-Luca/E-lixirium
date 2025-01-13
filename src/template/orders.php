@@ -1,6 +1,8 @@
 <div class="container">
     <?php if (count($templateParams["orders"]) == 0): ?>
-        <p>You have no orders</p>
+        <div class="alert alert-info text-center">
+            <p class="h5">You have no orders</p>
+        </div>
     <?php else: ?>
         <div class="card">
             <div class="card-header bg-purple-mid">
@@ -20,7 +22,7 @@
                             <tr onclick="window.location.href='?page=order_detail&id_order=<?php echo $order["id_order"]; ?>'">
                                 <td><?php echo $order["id_order"]; ?></td>
                                 <td><?php echo $order["date"]; ?></td>
-                                <th><?php echo $dbh->getOrderTotal($order["id_order"])[0]["total"] . '€'; ?></th>
+                                <td><strong><?php echo $dbh->getOrderTotal($order["id_order"])[0]["total"] . '€'; ?></strong></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -117,6 +117,10 @@ input.bg-light-purple.border-0.text-purple:hover{
     background-color: rgba(109, 198, 155, 1) !important;
 }
 
+.bg-purple-gray{
+    background-color: rgb(192, 173, 208) !important;
+}
+
 .text-purple {
     color: rgb(105, 0, 168) !important;
 }

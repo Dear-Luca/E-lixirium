@@ -1,6 +1,8 @@
 <div class="container">
     <?php if (count($templateParams["cart"]) == 0): ?>
-        <p>Your cart is empty</p>
+        <div class="alert alert-info text-center">
+            <p class="h5">Your cart is empty</p>
+        </div>
     <?php else: ?>
 
         <div class="card">

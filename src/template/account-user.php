@@ -17,7 +17,7 @@
                 <div class="row">
                     <!-- Card 1 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="name">Name:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="name" name="name"
@@ -29,7 +29,7 @@
                     </div>
                     <!-- Card 2 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="surname">Surname:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="surname" name="surname"
@@ -41,7 +41,7 @@
                     </div>
                     <!-- Card 3 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="username">Username:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="username" name="username"
@@ -53,7 +53,7 @@
                     </div>
                     <!-- Card 4 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="email">E-mail:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="email" name="email"
@@ -65,7 +65,7 @@
                     </div>
                     <!-- Card 5 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="birthday">Birthday:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="date" id="birthday" name="birthday"
@@ -77,7 +77,7 @@
                     </div>
                     <!-- Card 6 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="card_number">Card number:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="card_number" name="card_number"
@@ -89,7 +89,7 @@
                     </div>
                     <!-- Card 7 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="password">Password:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="password" name="password"
@@ -104,7 +104,7 @@
                     </div>
                     <!-- Card 8 -->
                     <div class="col-12 col-md-6 mb-3">
-                        <div class="card bg-purple-mid">
+                        <div class="card bg-purple-gray">
                             <label class="card-header form-label" for="confirmPassword">Confirm password:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="confirmPassword" name="confirmPassword"

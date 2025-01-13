@@ -4,7 +4,7 @@
     <?php else: ?>
 
         <div class="card">
-            <div class="card-header bg-table">
+            <div class="card-header bg-purple-mid">
                 <h2 class="mb-0"> Shopping-Cart</h2>
             </div>
             <div class="card-body">

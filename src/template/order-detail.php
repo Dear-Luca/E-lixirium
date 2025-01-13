@@ -3,7 +3,7 @@
         <a href="?page=orders" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Back to Orders</a>
     </div>
     <div class="card">
-        <div class="card-header bg-table">
+        <div class="card-header bg-purple-mid">
             <h2 class="mb-0">Order Details</h2>
         </div>
         <div class="card-body">

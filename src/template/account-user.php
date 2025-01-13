@@ -18,7 +18,7 @@
                 <div class="row">
                     <!-- Card 1 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="name">Name:</label>
                             <input class="card-body form-control" type="text" id="name" name="name"
                                 value="<?php echo $templateParams['userInfo'][0]['name']; ?>"
@@ -27,7 +27,7 @@
                     </div>
                     <!-- Card 2 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="surname">Surname:</label>
                             <input class="card-body form-control" type="text" id="surname" name="surname"
                                 value="<?php echo $templateParams['userInfo'][0]['surname']; ?>"
@@ -37,7 +37,7 @@
                     </div>
                     <!-- Card 3 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="username">Userame:</label>
                             <input class="card-body form-control" type="text" id="username" name="username"
                                 value="<?php echo $templateParams['userInfo'][0]['username']; ?>"
@@ -47,7 +47,7 @@
                     </div>
                     <!-- Card 4 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="email">E-mail:</label>
                             <input class="card-body form-control" type="text" id="email" name="email"
                                 value="<?php echo $templateParams['userInfo'][0]['email']; ?>"
@@ -56,7 +56,7 @@
                     </div>
                     <!-- Card 5 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="birthday">Birthday:</label>
                             <input class="card-body form-control" type="date" id="birthday" name="birthday"
                                 value="<?php echo $templateParams['userInfo'][0]['birthday']; ?>"
@@ -66,7 +66,7 @@
                     </div>
                     <!-- Card 6 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="card_number">Card number:</label>
                             <input class="card-body form-control" type="text" id="card_number" name="card_number"
                                 value="<?php echo $templateParams['userInfo'][0]['card_number']; ?>"
@@ -76,7 +76,7 @@
                     </div>
                     <!-- Card 7 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="password">Password:</label>
                             <input class="card-body form-control" type="password" id="password" name="password"
                                 value="<?php echo $templateParams['userInfo'][0]['password']; ?>"
@@ -86,7 +86,7 @@
                     </div>
                     <!-- Card 8 -->
                     <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card mb-3 bg-purple-mid">
                             <label class="card-header form-label" for="confirmPassword">Confirm password:</label>
                             <input class="card-body form-control" type="password" id="confirmPassword"
                                 name="confirmPassword"
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary">Edit</button>
+                    <button type="button" class="btn btn-primary bg-light-purple border-0 text-purple">Edit</button>
                     <button type="submit" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-danger">Cancel</button>
                 </div>

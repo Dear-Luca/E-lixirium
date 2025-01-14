@@ -261,6 +261,9 @@ switch ($_GET["page"]) {
         if (isUserLoggedIn() || isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Notifications";
             $templateParams["content"] = "notifications.php";
+            if($dbh->checkNotifications()){
+                var_dump($dbh->checkNotifications());
+            }
             $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
         } else {
             header("Location: ?page=home");

@@ -309,6 +309,15 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function checkNotifications(){
+        $query = "SELECT * FROM notification WHERE seen = 0 AND username = ? OR SEN_username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ss', $_SESSION["username"], $_SESSION["username"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getReviews($id_product)
     {
         $query = "SELECT * FROM review WHERE id_product = ?";

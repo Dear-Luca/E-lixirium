@@ -37,12 +37,12 @@ function togglePasswordVisibility(passwordSelector, imageSelector) {
 
     if (password.type === "password") {
         password.type = "text";
-        var newUrl = baseUrl + "upload/open-eye.svg";
+        const newUrl = baseUrl + "upload/open-eye.svg";
         image.src = newUrl;
         image.alt = "show password";
     } else {
         password.type = "password";
-        var newUrl = baseUrl + "upload/closed-eye.svg";
+        const newUrl = baseUrl + "upload/closed-eye.svg";
         image.src = newUrl;
         image.alt = "hide password";
     }

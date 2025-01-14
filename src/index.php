@@ -13,12 +13,15 @@ if (!isset($_GET["page"])) {
     $_GET["page"] = "home";
 }
 
+
 switch ($_GET["page"]) {
     case "home":
         $templateParams["title"] = "E-lixirium - Home";
         $templateParams["content"] = "home.php";
         $templateParams["products"] = $dbh->getTopProducts(6);
         $templateParams["categories"] = $dbh->getCategories(6);
+        // EXECUTE JUST ONE TIME!
+        //insertAdmin($dbh);
         break;
     case "products":
         foreach ($dbh->getCategories() as $category) {

@@ -104,6 +104,15 @@ function outOfStockMessageAdmin($admin, $productName, $idProduct){
     return $message;
 }
 
+function insertAdmin($dbh){
+    $admin1 = "dear_luca";
+    $admin2 = "baldo3000";
+    $password = "admin";
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $dbh->insertAdmin($admin1, $hashed_password);
+    $dbh->insertAdmin($admin2, $hashed_password);
+}
+
 // TODO: rewrite for empty product (only in the case we decide to opt for a separate edit page)
 // function getEmptyArticle()
 // {

@@ -83,6 +83,13 @@ class DatabaseHelper
         $stmt->execute();
     }
 
+    public function insertAdmin($username, $password){
+        $query = "INSERT INTO admin (username, password) VALUES (?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('ss', $username, $password);
+        $stmt->execute();
+    }
+
     // GET SECTION
     public function getProducts($n = -1)
     {

@@ -5,7 +5,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">
     <div class="row row-cols-1 row-cols-lg-2 m-0 justify-content-center">
         <section class="col py-3 px-0 px-lg-3">
-            <a href="?page=products&category=<?php echo $category; ?>"
+            <a href="./?page=products&category=<?php echo $category; ?>"
                 class="btn btn-outline-primary mb-3 d-lg-none bg-light-purple border-0 text-purple">Back to
                 <?php echo $category; ?></a>
             <h2 class="d-block d-lg-none display-5"><?php echo $product["name"]; ?></h2>
@@ -16,7 +16,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
             <form action="#" method="POST">
                 <input type="hidden" id="id_product" name="id_product" value="<?php echo $product["id_product"]; ?>" />
                 <header>
-                    <a href="?page=products&category=<?php echo $category; ?>"
+                    <a href="./?page=products&category=<?php echo $category; ?>"
                         class="btn btn-outline-primary mb-3 d-none d-lg-inline-block bg-light-purple border-0 text-purple">Back
                         to <?php echo $category; ?></a>
                     <h2 class="d-none d-lg-block display-5"><?php echo $product["name"]; ?></h2>
@@ -114,7 +114,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
         if (count($comments) > 0):
             foreach ($comments as $comment): ?>
                 <div class="mb-3">
-                    <p><?php echo htmlspecialchars($comment["username"]); ?>:</p>
+                    <h4 class="h5"><?php echo htmlspecialchars($comment["username"]); ?>:</h4>
                     <?php
                     $stars = $comment["stars"];
                     for ($i = 1; $i <= 5; $i++) {

@@ -15,7 +15,7 @@
                         <img src="<?php echo UPLOAD_DIR; ?>/potion.jpg" class="card-img-top" alt="">
                         <div class="card-body">
                             <p class="text-nowrap text-center h-md-4 h-lg-5"><?php echo $category["name"]; ?></p>
-                            <a href="?page=products&category=<?php echo $category["name"]; ?>" class="stretched-link"></a>
+                            <a href="./?page=products&category=<?php echo $category["name"]; ?>" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                 ?>
                                 <p class="m-0">(<?php echo $stars; ?>)</p>
                             </span>
-                            <a href="?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
+                            <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@
         </div>
         <div class="row mt-4">
             <div class="col text-center">
-                <a href="?page=products" class="btn btn-primary btn-lg bg-light-purple border-0 text-purple">Explore Our Collection</a>
+                <a href="./?page=products" class="btn btn-primary btn-lg bg-light-purple border-0 text-purple">Explore Our Collection</a>
             </div>
         </div>
     </div>

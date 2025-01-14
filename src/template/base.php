@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=home">Home</a>
+                        <a class="nav-link" href="./?page=home">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -47,31 +47,31 @@
                             <?php foreach ($templateParams["categories"] as $category): ?>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="?page=products&category=<?php echo $category["name"] ?>"><?php echo $category["name"] ?></a>
+                                        href="./?page=products&category=<?php echo $category["name"] ?>"><?php echo $category["name"] ?></a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?page=about">About Us</a>
+                        <a class="nav-link" href="./?page=about">About Us</a>
                     </li>
                     <!-- <hr class="d-block d-md-none" /> -->
                     <div class="nav-link d-block d-md-none p-0">
                         <?php if (isUserLoggedIn()): ?>
                             <!-- User logged in: -->
-                            <li class="nav-item"><a class="nav-link" href="?page=cart">Shopping Cart</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?page=orders">Orders</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?page=notifications">Notifications</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?page=account">Account</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?page=logout">Logout</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=cart">Shopping Cart</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=orders">Orders</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=notifications">Notifications</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=account">Account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
                         <?php elseif (isAdminLoggedIn()): ?>
                             <!-- Admin logged in: -->
-                            <li class="nav-item"><a class="nav-link" href="?page=account">Admin account</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?page=logout">Logout</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=account">Admin account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
                         <?php else: ?>
                             <!-- User not logged in: -->
-                            <li class="nav-item"><a class="nav-link" href="?page=register">Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="?page=login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=register">Register</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./?page=login">Login</a></li>
                         <?php endif; ?>
                     </div>
                 </ul>
@@ -84,25 +84,25 @@
             <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>
                     <!-- User logged in: -->
-                    <a href="?page=cart"><img src="<?php echo UPLOAD_DIR ?>cart-speed.svg" alt="Shopping Cart" /></a>
-                    <a href="?page=orders"><img src="<?php echo UPLOAD_DIR ?>box-check.svg" alt="Orders" /></a>
-                    <?php if ($dbh->checkNotifications()) :?>
-                        <a href="?page=notifications"><img src="<?php echo UPLOAD_DIR ?>newNotification.svg"
-                            alt="newNotifications" />
+                    <a href="./?page=cart"><img src="<?php echo UPLOAD_DIR ?>cart-speed.svg" alt="Shopping Cart" /></a>
+                    <a href="./?page=orders"><img src="<?php echo UPLOAD_DIR ?>box-check.svg" alt="Orders" /></a>
+                    <?php if ($dbh->checkNotifications()): ?>
+                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>newNotification.svg"
+                                alt="newNotifications" />
                         </a>
                     <?php else: ?>
-                    <a href="?page=notifications"><img src="<?php echo UPLOAD_DIR ?>notification-13.svg"
-                            alt="Notifications" /></a>
-                    <?php endif;?>
-                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
-                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
+                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>notification-13.svg"
+                                alt="Notifications" /></a>
+                    <?php endif; ?>
+                    <a href="./?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
+                    <a href="./?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php elseif (isAdminLoggedIn()): ?>
                     <!-- Admin logged in: -->
-                    <a href="?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
-                    <a href="?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
+                    <a href="./?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
+                    <a href="./?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php else: ?>
                     <!-- User not logged in: -->
-                    <a href="?page=login"><img src="<?php echo UPLOAD_DIR ?>sign-in.svg" alt="Login" /></a>
+                    <a href="./?page=login"><img src="<?php echo UPLOAD_DIR ?>sign-in.svg" alt="Login" /></a>
                 <?php endif; ?>
             </div>
         </div>
@@ -118,13 +118,13 @@
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item">
-                    <a href="?page=home" class="nav-link px-2 text-body-secondary">Home</a>
+                    <a href="./?page=home" class="nav-link px-2 text-body-secondary">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="?page=products" class="nav-link px-2 text-body-secondary">Products</a>
+                    <a href="./?page=products" class="nav-link px-2 text-body-secondary">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a href="?page=about" class="nav-link px-2 text-body-secondary">About Us</a>
+                    <a href="./?page=about" class="nav-link px-2 text-body-secondary">About Us</a>
                 </li>
             </ul>
             <p class="text-center text-body-secondary">© 2024 E-lixirium</p>

@@ -1,5 +1,5 @@
 <!-- $templateParams["product"] name id_product description image_name price amount_left duration -->
-<?php $templateParams["js"][] = "product.js";
+<?php array_push($templateParams["js"], "product.js");
 $product = $templateParams["product"][0];
 $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">

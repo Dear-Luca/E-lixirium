@@ -1,5 +1,5 @@
 <!-- $templateParams["product"] name id_product description image_name price amount_left duration -->
-<?php $templateParams["js"][] = "product.js";
+<?php array_push($templateParams["js"], "product.js");
 $product = $templateParams["product"][0];
 $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">
@@ -97,7 +97,8 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                                         <button type="submit"
                                             class="btn btn-outline-primary bg-light-purple border-0 text-purple">Confirm</button>
                                     </form>
-                                    <button type="button" class="btn btn-danger d-inline-block" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-danger d-inline-block"
+                                        data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
                         </div>

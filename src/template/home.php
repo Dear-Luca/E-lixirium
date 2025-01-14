@@ -1,3 +1,4 @@
+<?php array_push($templateParams["js"], "particles.js"); ?>
 <!-- Image and Title -->
 <div class="container-fluid">
     <section class="row m-0 justify-content-center text-center">
@@ -29,7 +30,7 @@
         <div class="row row-cols-2 row-cols-md-3 g-4 m-0">
             <?php foreach ($templateParams["products"] as $product): ?>
                 <div class="col">
-                    <div class="card card-hover">
+                    <div class="card magic-card card-hover">
                         <img src="<?php echo UPLOAD_DIR . "potion.jpg"; ?>" class="card-img-top" alt="" />
                         <div class="card-body">
                             <h3 class="card-title"><?php echo $product["name"]; ?></h3>
@@ -48,6 +49,7 @@
                             </span>
                             <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                         </div>
+                        <div class="magic-particles"></div>
                     </div>
                 </div>
             <?php endforeach; ?>

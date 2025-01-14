@@ -1,4 +1,4 @@
-<?php $templateParams["js"][] = "account.js"; ?>
+<?php array_push($templateParams["js"], "account.js"); ?>
 <div class="container">
     <?php if (isset($templateParams["error"])): ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">

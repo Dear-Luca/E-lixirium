@@ -127,42 +127,36 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Login";
             $templateParams["content"] = "login-form.php";
             if (isset($_POST["username"]) && isset($_POST["password"])) {
-                $hashedPassword = $dbh->getHashedPasswordAdmin($_POST["username"])[0]["password"];
-                $loginResult = password_verify($_POST["password"], $hashedPassword);
-                if ($loginResult) {
-                    // Admin login
-                    registerAdminLogged($_POST);
-                    header("Location: ?page=account");
-                } else {
-                    $hashedPassword = $dbh->getHashedPasswordUser($_POST["username"])[0]["password"];
+                // get hashed admin password 
+                $adminResult = $dbh->getHashedPasswordAdmin($_POST["username"]);
+                if (!empty($adminResult) && isset($adminResult[0]["password"])) {
+                    $hashedPassword = $adminResult[0]["password"];
                     $loginResult = password_verify($_POST["password"], $hashedPassword);
-                    if (!$loginResult) {
-                        $templateParams["error"] = "Error! Check username or password!";
-                    }else{
-                        //User login
-                        $user = $dbh->getUserInfo($_POST["username"])[0];
-                        registerLoggedUser($user);
+                    if ($loginResult) {
+                        // Admin login
+                        registerAdminLogged($_POST);
                         header("Location: ?page=account");
+                        exit();
                     }
                 }
 
-                // $login_result = $dbh->checkAdminLogin($_POST["username"], $_POST["password"]);
-
-                // if (count($login_result) != 0) {
-                //     // Admin login
-                //     registerAdminLogged($login_result[0]);
-                //     header("Location: ?page=account");
-                // } else {
-                //     $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
-                //     if (!count($login_result)) {
-                //         // Login failed
-                //         $templateParams["error"] = "Error! Check username or password!";
-                //     } else {
-                //         // User login
-                //         registerLoggedUser($login_result[0]);
-                //         header("Location: ?page=account");
-                //     }
-                // }
+                // try with the user
+                $userResult = $dbh->getHashedPasswordUser($_POST["username"]);
+                if (!empty($userResult) && isset($userResult[0]["password"])) {
+                    $hashedPassword = $userResult[0]["password"];
+                    $loginResult = password_verify($_POST["password"], $hashedPassword);
+                    if ($loginResult) {
+                        // User login
+                        $user = $dbh->getUserInfo($_POST["username"])[0];
+                        registerLoggedUser($user);
+                        header("Location: ?page=account");
+                        exit(); 
+                    } else {
+                        $templateParams["error"] = "Error! Check username or password!";
+                    }
+                } else {
+                    $templateParams["error"] = "Error! Check username or password!";
+                }
             }
         } else {
             header("Location: ?page=account");

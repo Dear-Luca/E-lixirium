@@ -114,6 +114,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
     <?php endif; ?>
     <section class="row pt-3">
         <h3>Comments:</h3>
+        <hr />
         <?php
         $comments = $dbh->getReviews($product["id_product"]);
         if (count($comments) > 0):
@@ -132,6 +133,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                     ?>
                     <p><?php echo htmlspecialchars($comment["comment"]); ?></p>
                 </div>
+                <hr />
             <?php endforeach;
         else: ?>
             <p>No comments yet. Be the first to comment!</p>

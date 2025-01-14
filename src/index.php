@@ -38,6 +38,15 @@ switch ($_GET["page"]) {
         $templateParams["content"] = "about.php";
         break;
     case "product":
+        // Admin
+        if (isAdminLoggedIn() && isset($_POST["description"]) && isset($_POST["price"]) && isset($_POST["amount"]) && isset($_POST["id_product"])) {
+            if (count($dbh->getProduct($_POST["id_product"]))) {
+                // Product existing
+                $dbh->updateProduct($_POST["id_product"], $_POST["description"], $_POST["price"], $_POST["amount"]);
+            }
+        }
+
+        // Review
         if (isset($_POST["rating"]) && isset($_POST["comment"]) && isset($_POST["id_product"]) && isUserLoggedIn()) {
             if (count($dbh->getProduct($_POST["id_product"]))) {
                 // Product existing
@@ -51,6 +60,8 @@ switch ($_GET["page"]) {
                 $dbh->updateProductStars($_POST["id_product"], $_POST["rating"]);
             }
         }
+
+        // Cart
         if (isset($_POST["amount"]) && isUserLoggedIn()) {
             $cartProduct = $dbh->checkCartProduct($_SESSION["username"], $_POST["id_product"]);
             if (count($cartProduct)) {
@@ -61,12 +72,18 @@ switch ($_GET["page"]) {
             header("Location: ?page=cart");
             exit();
         }
+
+        // Product page
         if (isset($_GET["id"])) {
             $templateParams["product"] = $dbh->getProduct($_GET["id"]);
             if (count($templateParams["product"])) {
                 // Product existing
                 $templateParams["title"] = "E-lixirium - " . $templateParams["product"][0]["name"];
-                $templateParams["content"] = "product.php";
+                if (isUserLoggedIn()) {
+                    $templateParams["content"] = "product-user.php";
+                } else if (isAdminLoggedIn()) {
+                    $templateParams["content"] = "product-admin.php";
+                }
             } else {
                 // Product not existing
                 header("Location: ?page=products");

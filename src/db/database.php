@@ -342,7 +342,7 @@ class DatabaseHelper
     {
         $query = "SELECT * FROM notification WHERE username = ? OR SEN_username = ? ORDER BY `date` DESC";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ss', $username, $username); 
+        $stmt->bind_param('ss', $username, $username);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -432,6 +432,14 @@ class DatabaseHelper
         $query = "UPDATE review SET stars = ?, comment = ? WHERE id_product = ? AND username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("isis", $stars, $comment, $id_product, $username);
+        $stmt->execute();
+    }
+
+    public function updateProduct($id_product, $description, $price, $amount_left)
+    {
+        $query = "UPDATE product SET description = ?, price = ?, amount_left = ? WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sdii', $description, $price, $amount_left, $id_product);
         $stmt->execute();
     }
 }

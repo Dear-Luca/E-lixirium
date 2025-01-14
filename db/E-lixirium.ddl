@@ -35,7 +35,7 @@ create table USER (
      surname char(30) not null,
      username char(30) not null,
      email char(40) not null,
-     password char(30) not null,
+     password varchar(70) not null,
      birthday date not null,
      card_number varchar(20),
      constraint ID_USER_ID primary key (username));
@@ -46,7 +46,7 @@ create table CATEGORY (
 
 create table ADMIN (
      username char(30) not null,
-     password char(30) not null,
+     password varchar(70) not null,
      constraint ID_ADMIN_ID primary key (username));
 
 create table `ORDER` (

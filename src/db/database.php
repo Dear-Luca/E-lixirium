@@ -214,6 +214,24 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getHashedPasswordAdmin($username){
+        $query = "SELECT password FROM admin WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getHashedPasswordUser($username){
+        $query = "SELECT password FROM user WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getCartProducts($username)
     {
         $query = "SELECT W.id_product, P.name, P.price, P.image_name, W.quantity FROM wishes as W, product as P WHERE W.username=? and W.id_product=P.id_product";

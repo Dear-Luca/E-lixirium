@@ -112,7 +112,8 @@ switch ($_GET["page"]) {
                     // Registration failed
                     $templateParams["error"] = "A user with that username already exists";
                 } else {
-                    $dbh->insertUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["password"], $_POST["birthday"]);
+                    $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                    $dbh->insertUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $hashedPassword, $_POST["birthday"]);
                     $templateParams["error"] = "Registration succesfull";
                     header("Location: ?page=login");
                 }
@@ -126,22 +127,42 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Login";
             $templateParams["content"] = "login-form.php";
             if (isset($_POST["username"]) && isset($_POST["password"])) {
-                $login_result = $dbh->checkAdminLogin($_POST["username"], $_POST["password"]);
-                if (count($login_result) != 0) {
+                $hashedPassword = $dbh->getHashedPasswordAdmin($_POST["username"])[0]["password"];
+                $loginResult = password_verify($_POST["password"], $hashedPassword);
+                if ($loginResult) {
                     // Admin login
-                    registerAdminLogged($login_result[0]);
+                    registerAdminLogged($_POST);
                     header("Location: ?page=account");
                 } else {
-                    $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
-                    if (!count($login_result)) {
-                        // Login failed
+                    $hashedPassword = $dbh->getHashedPasswordUser($_POST["username"])[0]["password"];
+                    $loginResult = password_verify($_POST["password"], $hashedPassword);
+                    if (!$loginResult) {
                         $templateParams["error"] = "Error! Check username or password!";
-                    } else {
-                        // User login
-                        registerLoggedUser($login_result[0]);
+                    }else{
+                        //User login
+                        $user = $dbh->getUserInfo($_POST["username"])[0];
+                        registerLoggedUser($user);
                         header("Location: ?page=account");
                     }
                 }
+
+                // $login_result = $dbh->checkAdminLogin($_POST["username"], $_POST["password"]);
+
+                // if (count($login_result) != 0) {
+                //     // Admin login
+                //     registerAdminLogged($login_result[0]);
+                //     header("Location: ?page=account");
+                // } else {
+                //     $login_result = $dbh->checkLogin($_POST["username"], $_POST["password"]);
+                //     if (!count($login_result)) {
+                //         // Login failed
+                //         $templateParams["error"] = "Error! Check username or password!";
+                //     } else {
+                //         // User login
+                //         registerLoggedUser($login_result[0]);
+                //         header("Location: ?page=account");
+                //     }
+                // }
             }
         } else {
             header("Location: ?page=account");
@@ -153,7 +174,6 @@ switch ($_GET["page"]) {
             $templateParams["content"] = "account-user.php";
             $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
-            //$templateParams["total"] = getCartTotal($templateParams);
 
             if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) && isset($_POST["card_number"]) && isset($_POST["password"])) {
                 if ($_POST["password"] == $_POST["confirmPassword"]) {
@@ -162,7 +182,8 @@ switch ($_GET["page"]) {
                         if ($_POST["card_number"] == "") {
                             $_POST["card_number"] = NULL;
                         }
-                        $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["birthday"], $_POST["card_number"], $_POST["password"], $_SESSION["username"]);
+                        $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                        $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["birthday"], $_POST["card_number"], $hashedPassword, $_SESSION["username"]);
                         $templateParams["error"] = "Update successful";
                         $_SESSION["username"] = $_POST["username"];
                         $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
@@ -185,7 +206,7 @@ switch ($_GET["page"]) {
                     // notify user
                     $description = outOfStockMessageUser($_SESSION["username"], $product["name"]);
                     $dbh->insertNotification("Product out of stock", $description, username: $_SESSION["username"]);
-                }elseif($product["quantity"] > $amountLeft){
+                } elseif ($product["quantity"] > $amountLeft) {
                     $description = amountChangedMessage($_SESSION["username"], $product["name"]);
                     $dbh->insertNotification("Availability changed", $description, username: $_SESSION["username"]);
                     $dbh->updateCartQuantity($_SESSION["username"], $product["id_product"], $amountLeft);
@@ -238,7 +259,7 @@ switch ($_GET["page"]) {
                 $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
                 $templateParams["total"] = getCartTotal($templateParams);
             }
-            
+
             // checkout
             if (isset($_POST["checkout-confirm"])) {
                 if ($dbh->getCreditCard($_SESSION["username"])[0]["card_number"] == NULL) {
@@ -249,7 +270,7 @@ switch ($_GET["page"]) {
                     foreach ($templateParams["cart"] as $product) {
                         $dbh->insertIncludeOrder($product["id_product"], $id_order, $product["quantity"]);
                         $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
-                        
+
                         // notify admin if product is out of stock
                         $amountLeft = $dbh->getProduct($product["id_product"])[0]["amount_left"];
                         if ($amountLeft == 0) {

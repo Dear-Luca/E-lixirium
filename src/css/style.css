@@ -64,6 +64,10 @@ div section form div:nth-child(8) {
     display: none;
 }
 
+div section form div:nth-child(7) {
+    display: none;
+}
+
 main>div>form {
     max-width: 330px;
 }

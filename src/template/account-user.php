@@ -108,9 +108,7 @@
                             <label class="card-header form-label" for="password">Password:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="password" name="password"
-                                    value="<?php echo $templateParams['userInfo'][0]['password']; ?>"
-                                    data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>"
-                                    disabled />
+                                    data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" />
                                 <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                     <img src="<?php echo UPLOAD_DIR; ?>closed-eye.svg" alt="Hide password" />
                                 </button>
@@ -123,7 +121,6 @@
                             <label class="card-header form-label" for="confirmPassword">Confirm password:</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="confirmPassword" name="confirmPassword"
-                                    value="<?php echo $templateParams['userInfo'][0]['password']; ?>"
                                     data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" />
                                 <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                     <img src="<?php echo UPLOAD_DIR; ?>closed-eye.svg" alt="Show password" />

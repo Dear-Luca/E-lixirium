@@ -1,10 +1,11 @@
 document.querySelector(".btn-primary").addEventListener("click", function () {
     // enable fields
-    document.querySelectorAll("input[type='text'], input[type='email'], input[type='date'], input[type='password']").forEach(input => {
+    document.querySelectorAll("input[type='text'], input[type='email'], input[type='date']").forEach(input => {
         input.disabled = false;
     });
 
     document.querySelector("div section form div:nth-child(8)").style.display = "block";
+    document.querySelector("div section form div:nth-child(7)").style.display = "block";
     // show buttons save and cancel
     document.querySelector(".btn-success").style.display = "block";
     document.querySelector(".btn-danger").style.display = "block";
@@ -12,14 +13,21 @@ document.querySelector(".btn-primary").addEventListener("click", function () {
 });
 
 document.querySelector(".btn-danger").addEventListener("click", function () {
+    //reset password to type password
+    document.querySelector("div.container div.row section.col-12 form div div:nth-child(7) input").type = "password";
+    document.querySelector("div.container div.row section.col-12 form div div:nth-child(8) input").type = "password";
+    document.querySelector("div.container div.row section.col-12 form div div:nth-child(7) input").value = "";
+    document.querySelector("div.container div.row section.col-12 form div div:nth-child(8) input").value = "";
     // show current values (of the session)
-    document.querySelectorAll("input[type='text'], input[type='email'], input[type='date'], input[type='password']").forEach(input => {
+    document.querySelectorAll("input[type='text'], input[type='email'], input[type='date']").forEach(input => {
         input.value = input.getAttribute("data-original-value");
     });
 
+    document.querySelector("div section form div:nth-child(7)").style.display = "none";
     document.querySelector("div section form div:nth-child(8)").style.display = "none";
 
-    document.querySelectorAll("input[type='text'], input[type='email'], input[type='date'], input[type='password']").forEach(input => {
+
+    document.querySelectorAll("input[type='text'], input[type='email'], input[type='date']").forEach(input => {
         input.disabled = true;
     });
 

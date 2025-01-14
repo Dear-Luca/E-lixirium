@@ -97,6 +97,14 @@ input.bg-light-purple.border-0.text-purple:hover{
     }
 }
 
+.dot.bg-primary {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 10px;
+}
+
 .bg-purple {
     background-color: rgba(155, 109, 198, 1) !important;
 }

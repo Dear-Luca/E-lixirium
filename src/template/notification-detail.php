@@ -1,6 +1,6 @@
 <div class="container">
     <div class="mb-3">
-        <a href="?page=notifications" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Back to Orders</a>
+        <a href="?page=notifications" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Back to Notifications</a>
     </div>
 
     <div class="card shadow-lg rounded">

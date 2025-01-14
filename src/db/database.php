@@ -434,5 +434,12 @@ class DatabaseHelper
         $stmt->bind_param("isis", $stars, $comment, $id_product, $username);
         $stmt->execute();
     }
+
+    public function updateNotificationStatus($value, $id_notification){
+        $query = "UPDATE notification SET seen = ? WHERE id_notification = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ii", $value, $id_notification);
+        $stmt->execute();
+    }
 }
 ?>

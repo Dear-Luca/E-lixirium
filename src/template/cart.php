@@ -4,7 +4,12 @@
             <p class="h5">Your cart is empty</p>
         </div>
     <?php else: ?>
-
+        <?php if (isset($templateParams["error"])): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <?php echo $templateParams["error"]; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
         <div class="card">
             <div class="card-header bg-purple-mid">
                 <h2 class="mb-0"> Shopping-Cart</h2>

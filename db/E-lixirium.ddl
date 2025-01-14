@@ -62,14 +62,15 @@ create table REVIEW (
      comment varchar(300),
      constraint ID_REVIEW_ID primary key (id_product, username));
 
-create table NOTIFICATION (
-     id_notification int not null auto_increment,
-     title char(30) not null,
-     `date` timestamp default current_timestamp,
-     description varchar(300) not null,
-     username char(30),
-     SEN_username char(30),
-     constraint ID_NOTIFICATION_ID primary key (id_notification));
+CREATE TABLE NOTIFICATION (
+    id_notification INT NOT NULL AUTO_INCREMENT,
+    title CHAR(30) NOT NULL,
+    `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(300) NOT NULL,
+    username CHAR(30),
+    SEN_username CHAR(30),
+    seen TINYINT(1) DEFAULT 0,
+    CONSTRAINT ID_NOTIFICATION_ID PRIMARY KEY (id_notification));
 
 create table INCLUDES (
      id_order int not null,

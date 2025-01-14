@@ -255,7 +255,9 @@ switch ($_GET["page"]) {
                 $templateParams["title"] = "E-lixirium - Notification Detail";
                 $templateParams["content"] = "notification-detail.php";
                 $templateParams["notification-detail"] = $dbh->getNotificationDetail($_GET["id"]);
-                //var_dump($templateParams["notification-detail"]);
+                if ($templateParams["notification-detail"][0]["seen"] == 0){
+                    $dbh->updateNotificationStatus(1, $templateParams["notification-detail"][0]["id_notification"]);
+                }
             } else {
                 header("Location: ?page=notifications");
             }

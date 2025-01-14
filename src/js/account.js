@@ -30,10 +30,10 @@ document.querySelector(".btn-danger").addEventListener("click", function () {
 });
 
 function togglePasswordVisibility(passwordSelector, imageSelector) {
-    var password = document.querySelector(passwordSelector);
-    var image = document.querySelector(imageSelector);
-    var currentUrl = window.location.href;
-    var baseUrl = currentUrl.split('?')[0];
+    const password = document.querySelector(passwordSelector);
+    const image = document.querySelector(imageSelector);
+    const currentUrl = window.location.href;
+    const baseUrl = currentUrl.split('?')[0];
 
     if (password.type === "password") {
         password.type = "text";

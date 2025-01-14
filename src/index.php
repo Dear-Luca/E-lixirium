@@ -38,7 +38,17 @@ switch ($_GET["page"]) {
         $templateParams["content"] = "about.php";
         break;
     case "product":
-        // Admin
+        // Admin delete
+        if (isAdminLoggedIn() && isset($_POST["delete-confirm"]) && isset($_POST["id_product"])) {
+            if (count($dbh->getProduct($_POST["id_product"]))) {
+                // Product existing
+                $dbh->deleteCategoriesOfProduct($_POST["id_product"]);
+                $dbh->deleteReviewsOfProduct($_POST["id_product"]);
+                $dbh->deleteProduct($_POST["id_product"]);
+            }
+        }
+
+        // Admin update
         if (isAdminLoggedIn() && isset($_POST["description"]) && isset($_POST["price"]) && isset($_POST["amount"]) && isset($_POST["id_product"])) {
             if (count($dbh->getProduct($_POST["id_product"]))) {
                 // Product existing
@@ -272,7 +282,7 @@ switch ($_GET["page"]) {
                 $templateParams["title"] = "E-lixirium - Notification Detail";
                 $templateParams["content"] = "notification-detail.php";
                 $templateParams["notification-detail"] = $dbh->getNotificationDetail($_GET["id"]);
-                if ($templateParams["notification-detail"][0]["seen"] == 0){
+                if ($templateParams["notification-detail"][0]["seen"] == 0) {
                     $dbh->updateNotificationStatus(1, $templateParams["notification-detail"][0]["id_notification"]);
                 }
             } else {

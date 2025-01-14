@@ -87,12 +87,12 @@
                     <a href="./?page=cart"><img src="<?php echo UPLOAD_DIR ?>cart-speed.svg" alt="Shopping Cart" /></a>
                     <a href="./?page=orders"><img src="<?php echo UPLOAD_DIR ?>box-check.svg" alt="Orders" /></a>
                     <?php if ($dbh->checkNotifications()): ?>
-                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>newNotification.svg"
-                                alt="newNotifications" />
+                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>bell-active.svg"
+                                alt="Active bell" />
                         </a>
                     <?php else: ?>
-                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>notification-13.svg"
-                                alt="Notifications" /></a>
+                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>bell-inactive.svg"
+                                alt="Inactive bell" /></a>
                     <?php endif; ?>
                     <a href="./?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
                     <a href="./?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>

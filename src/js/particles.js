@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const magicCards = document.querySelectorAll('.magic-card');
 
-    // Palette di colori
+    // Colors
     const colorPalette = [
         'rgb(155, 109, 198)',
         'rgb(185, 158, 225)',
@@ -12,44 +12,44 @@ document.addEventListener('DOMContentLoaded', () => {
     magicCards.forEach((magicCard) => {
         const particleContainer = magicCard.querySelector('.magic-particles');
 
-        // Funzione per generare una particella
+        // Generate a new particle
         function createParticle(x, y, directionX, directionY) {
             const particle = document.createElement('div');
             particle.className = 'particle';
 
-            // Colore casuale dalla palette
+            // Random color
             const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
             particle.style.setProperty('--particle-color', randomColor);
 
-            // Posizione iniziale della particella
+            // Initial position
             particle.style.left = `${x}px`;
             particle.style.top = `${y}px`;
 
-            // Direzione dell'animazione
+            // Direction
             particle.style.setProperty('--x', `${directionX}px`);
             particle.style.setProperty('--y', `${directionY}px`);
 
-            // Aggiungi particella al contenitore
+            // Append to container
             particleContainer.appendChild(particle);
 
-            // Rimuovi particella al termine dell'animazione
+            // Remove the particle after the animation ends
             particle.addEventListener('animationend', () => {
                 particle.remove();
             });
         }
 
-        // Funzione per generare particelle randomicamente dentro la card
+        // Generate particles
         function generateParticles() {
             const rect = magicCard.getBoundingClientRect();
-            const numParticles = 15; // Numero di particelle generate
-            const distance = 250; // Distanza verso cui si espandono le particelle
+            const numParticles = 15; // Number of particles to generate
+            const distance = 250; // Travel distance
 
             for (let i = 0; i < numParticles; i++) {
-                // Posizione casuale all'interno della card
+                // Random start position
                 const startX = Math.random() * rect.width;
                 const startY = Math.random() * rect.height;
 
-                // Direzione casuale
+                // Random direction
                 const angle = Math.random() * Math.PI * 2; // Angolo casuale
                 const directionX = Math.cos(angle) * distance;
                 const directionY = Math.sin(angle) * distance;
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Genera particelle al passaggio del cursore sopra la card
+        // Generate particles on mouse enter
         magicCard.addEventListener('mouseenter', generateParticles);
     });
 });

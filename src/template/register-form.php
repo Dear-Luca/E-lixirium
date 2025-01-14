@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-items-center">
     <form action="#" method="POST" class="w-100 m-5">
         <h2 class="h3 mb-3 fw-normal">Register</h2>
-        <p>Already registered? <a href="?page=login" class="text-purple">Login</a></p>
+        <p>Already registered? <a href="./?page=login" class="text-purple">Login</a></p>
         <?php if (isset($templateParams["error"])): ?>
             <p><?php echo $templateParams["error"]; ?></p>
         <?php endif; ?>

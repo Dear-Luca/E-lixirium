@@ -5,7 +5,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">
     <div class="row row-cols-1 row-cols-lg-2 m-0 justify-content-center">
         <section class="col py-3 px-0 px-lg-3">
-            <a href="?page=products&category=<?php echo $category; ?>"
+            <a href="./?page=products&category=<?php echo $category; ?>"
                 class="btn btn-outline-primary mb-3 d-lg-none bg-light-purple border-0 text-purple">Back to
                 <?php echo $category; ?></a>
             <h2 class="d-block d-lg-none display-5"><?php echo $product["name"]; ?></h2>
@@ -16,7 +16,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
             <form action="#" method="POST">
                 <input type="hidden" id="id_product" name="id_product" value="<?php echo $product["id_product"]; ?>" />
                 <header>
-                    <a href="?page=products&category=<?php echo $category; ?>"
+                    <a href="./?page=products&category=<?php echo $category; ?>"
                         class="btn btn-outline-primary mb-3 d-none d-lg-inline-block bg-light-purple border-0 text-purple">Back
                         to <?php echo $category; ?></a>
                     <h2 class="d-none d-lg-block display-5"><?php echo $product["name"]; ?></h2>
@@ -39,7 +39,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                         <p class="m-0 fw-semibold">(<?php echo $stars; ?>)</p>
                     </span>
                     <div class="form-floating">
-                        <textarea class="pe-3 m-0 form-control h-100"  name="description" id="description"
+                        <textarea class="pe-3 m-0 form-control h-100" name="description" id="description"
                             rows="4"><?php echo $product["description"]; ?></textarea>
                         <label for="price">Description</label>
                     </div>
@@ -70,8 +70,38 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                             <label class="m-2 mt-0" for="amount">Amount</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 my-3 bg-light-purple border-0 text-purple">
-                        Update product</button>
+                    <div class="d-flex mt-3">
+                        <button type="submit" class="btn bg-light-purple me-1 border-0 text-purple">
+                            Update product
+                        </button>
+                        <button class="btn btn-danger d-inline-block" type="button" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">
+                            <img src="<?php echo UPLOAD_DIR ?>trash.svg" alt="Trash" height="35" />Delete product
+                        </button>
+                    </div>
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteProductModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete product</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete this product?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="#" method="POST">
+                                        <input type="hidden" name="delete-confirm" />
+                                        <button type="submit"
+                                            class="btn btn-outline-primary bg-light-purple border-0 text-purple">Confirm</button>
+                                    </form>
+                                    <button type="button" class="btn btn-danger d-inline-block" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </form>
         </section>
@@ -84,7 +114,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
         if (count($comments) > 0):
             foreach ($comments as $comment): ?>
                 <div class="mb-3">
-                    <p><?php echo htmlspecialchars($comment["username"]); ?>:</p>
+                    <h4 class="h5"><?php echo htmlspecialchars($comment["username"]); ?>:</h4>
                     <?php
                     $stars = $comment["stars"];
                     for ($i = 1; $i <= 5; $i++) {

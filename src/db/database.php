@@ -11,7 +11,7 @@ class DatabaseHelper
         }
     }
 
-    //INSERT SECTION
+    // INSERT SECTION
     public function insertUser($name, $surname, $username, $email, $password, $birthday)
     {
         $query = "INSERT INTO user (name, surname, username, email, password, birthday) VALUES (?, ?, ?, ?, ?, ?)";
@@ -83,7 +83,7 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    //GET SECTION
+    // GET SECTION
     public function getProducts($n = -1)
     {
         $query = "SELECT * FROM product ORDER BY RAND()";
@@ -385,7 +385,49 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    //UPDATE SECTION
+    // DELETE SECTION
+
+    public function deleteCartProduct($username, $id_product)
+    {
+        $query = "DELETE FROM wishes WHERE username = ? AND id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("si", $username, $id_product);
+        $stmt->execute();
+    }
+
+    public function deleteCart($username)
+    {
+        $query = "DELETE FROM wishes WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+    }
+
+    public function deleteCategoriesOfProduct($id_product)
+    {
+        $query = "DELETE FROM `is` WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_product);
+        $stmt->execute();
+    }
+
+    public function deleteReviewsOfProduct($id_product)
+    {
+        $query = "DELETE FROM review WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_product);
+        $stmt->execute();
+    }
+
+    public function deleteProduct($id_product)
+    {
+        $query = "DELETE FROM product WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_product);
+        $stmt->execute();
+    }
+
+    // UPDATE SECTION
 
     public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)
     {
@@ -403,14 +445,6 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function deleteCartProduct($username, $id_product)
-    {
-        $query = "DELETE FROM wishes WHERE username = ? AND id_product = ?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("si", $username, $id_product);
-        $stmt->execute();
-    }
-
     public function updateProductStars($id_product, $newRating)
     {
         $othersReviews = $this->getOthersReviews($id_product, $_SESSION["username"]);
@@ -425,14 +459,6 @@ class DatabaseHelper
         $query = "UPDATE product SET stars = ? WHERE id_product = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("di", $finalRating, $id_product);
-        $stmt->execute();
-    }
-
-    public function deleteCart($username)
-    {
-        $query = "DELETE FROM wishes WHERE username = ?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param("s", $username);
         $stmt->execute();
     }
 
@@ -467,7 +493,8 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function updateNotificationStatus($value, $id_notification){
+    public function updateNotificationStatus($value, $id_notification)
+    {
         $query = "UPDATE notification SET seen = ? WHERE id_notification = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("ii", $value, $id_notification);

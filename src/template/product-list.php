@@ -1,4 +1,5 @@
-<?php if (isset($templateParams["header"])): ?>
+<?php array_push($templateParams["js"], "particles.js");
+if (isset($templateParams["header"])): ?>
     <h2 class="text-center"><?php echo $templateParams["header"]; ?></h2>
 <?php endif; ?>
 <div class="container-sm">
@@ -6,7 +7,7 @@
         class="row m-0 row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 row-cols-xxl-7 justify-content-center">
         <?php foreach ($templateParams["products"] as $product): ?>
             <!-- name id_product description image_name price amount_left duration -->
-            <article class="card card-hover col p-0 g-4 bg-purple-gray">
+            <article class="card card-hover magic-card col p-0 g-4 bg-purple-gray">
                 <img src="<?php echo UPLOAD_DIR . $product["image_name"]; ?>" class="card-img-top"
                     alt="<?php echo $product["image_name"]; ?>" />
                 <div class="card-body">
@@ -27,6 +28,7 @@
                     </span>
                     <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                 </div>
+                <div class="magic-particles"></div>
             </article>
         <?php endforeach; ?>
     </div>

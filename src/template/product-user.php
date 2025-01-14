@@ -21,8 +21,8 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                 <?php if ($product["amount_left"] < 5): ?>
                     <p class="text-danger mb-0">Only <?php echo $product["amount_left"]; ?> left!</p>
                 <?php endif; ?>
-                <p><strong>€<?php echo $product["price"]; ?></strong></p>
-                <span class="d-flex">
+                <span class="d-flex align-items-center">
+                    <p class="text-purple pe-3 m-0"><strong>€<?php echo $product["price"]; ?></strong></p>
                     <?php
                     $stars = $product["stars"];
                     for ($i = 1; $i <= 5; $i++) {
@@ -33,50 +33,50 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                         }
                     }
                     ?>
-                    <p class="m-0">(<?php echo $stars; ?>)</p>
+                    <p class="m-0 fw-semibold">(<?php echo $stars; ?>)</p>
                 </span>
-                <p><?php echo $product["description"]; ?></p>
+                <p class="my-4"><?php echo $product["description"]; ?></p>
             </header>
             <section>
-                <h3">Configure your spell:</h3>
-                    <form action="#" method="POST">
-                        <div class="row">
-                            <div class="form-floating col-8">
-                                <select class="form-select" id="id_product" name="id_product"
-                                    aria-label="Spell duration" required>
-                                    <option selected value="<?php echo $product["id_product"]; ?>">
-                                        <?php echo $product["duration"]; ?>
-                                    </option>
-                                    <?php
-                                    $matchProducts = $dbh->getProductsOfName($product["name"]);
-                                    foreach ($matchProducts as $matchProduct) {
-                                        if ($matchProduct["duration"] != $product["duration"] && $matchProduct["amount_left"] > 0) {
-                                            echo "<option value='" . $matchProduct["id_product"] . "'>" . $matchProduct["duration"] . "</option>";
-                                        }
+                <h3>Configure your spell:</h3>
+                <form action="#" method="POST">
+                    <div class="row">
+                        <div class="form-floating col-8">
+                            <select class="form-select" id="id_product" name="id_product" aria-label="Spell duration"
+                                required>
+                                <option selected value="<?php echo $product["id_product"]; ?>">
+                                    <?php echo $product["duration"]; ?>
+                                </option>
+                                <?php
+                                $matchProducts = $dbh->getProductsOfName($product["name"]);
+                                foreach ($matchProducts as $matchProduct) {
+                                    if ($matchProduct["duration"] != $product["duration"] && $matchProduct["amount_left"] > 0) {
+                                        echo "<option value='" . $matchProduct["id_product"] . "'>" . $matchProduct["duration"] . "</option>";
                                     }
-                                    ?>
-                                </select>
-                                <label class="m-2 mt-0" for="duration">Spell duration</label>
-                            </div>
-                            <div class="form-floating col-4">
-                                <input type="number" id="amount" name="amount" class="form-control" required value="1"
-                                    min="1" max="<?php echo $product["amount_left"]; ?>" />
-                                <label class="m-2 mt-0" for="amount">Amount</label>
-                            </div>
+                                }
+                                ?>
+                            </select>
+                            <label class="m-2 mt-0" for="duration">Spell duration</label>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 my-3 bg-light-purple border-0 text-purple" <?php if ($product["amount_left"] < 1 || !isUserLoggedIn())
-                            echo "disabled"; ?>>
-                            <?php
-                            if ($product["amount_left"] < 1) {
-                                echo "Product finished";
-                            } elseif (!isUserLoggedIn()) {
-                                echo "Login to add to cart";
-                            } else {
-                                echo "Add to cart";
-                            }
-                            ?>
-                        </button>
-                    </form>
+                        <div class="form-floating col-4">
+                            <input type="number" id="amount" name="amount" class="form-control" required value="1"
+                                min="1" max="<?php echo $product["amount_left"]; ?>" />
+                            <label class="m-2 mt-0" for="amount">Amount</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 my-3 bg-light-purple border-0 text-purple" <?php if ($product["amount_left"] < 1 || !isUserLoggedIn())
+                        echo "disabled"; ?>>
+                        <?php
+                        if ($product["amount_left"] < 1) {
+                            echo "Product finished";
+                        } elseif (!isUserLoggedIn()) {
+                            echo "Login to add to cart";
+                        } else {
+                            echo "Add to cart";
+                        }
+                        ?>
+                    </button>
+                </form>
             </section>
         </section>
     </div>
@@ -112,8 +112,9 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
             </form>
         </section>
     <?php endif; ?>
-    <section class="row">
+    <section class="row pt-3">
         <h3>Comments:</h3>
+        <hr />
         <?php
         $comments = $dbh->getReviews($product["id_product"]);
         if (count($comments) > 0):
@@ -132,6 +133,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                     ?>
                     <p><?php echo htmlspecialchars($comment["comment"]); ?></p>
                 </div>
+                <hr />
             <?php endforeach;
         else: ?>
             <p>No comments yet. Be the first to comment!</p>

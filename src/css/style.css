@@ -3,12 +3,12 @@ nav img {
     height: auto;
 }
 
-table img{
+table img {
     width: 50px;
     height: auto;
 }
 
-div.container div.row section.col-12 form div button img{
+div.container div.row section.col-12 form div button img {
     width: 20px;
     height: auto;
 }
@@ -75,18 +75,19 @@ h3 {
     font-weight: bold;
 }
 
-
-
 section.col p>strong {
     font-size: xx-large;
-    color: rgb(95, 110, 102);
 }
 
 a.bg-light-purple.border-0.text-purple:hover,
 button.bg-light-purple.border-0.text-purple:hover,
-input.bg-light-purple.border-0.text-purple:hover{
+input.bg-light-purple.border-0.text-purple:hover {
     background-color: rgb(155, 109, 198) !important;
     color: white !important;
+}
+
+textarea[name="description"] {
+    resize: none;
 }
 
 /* Custom Bootstrap-derived styles */
@@ -109,11 +110,11 @@ input.bg-light-purple.border-0.text-purple:hover{
     background-color: rgba(155, 109, 198, 1) !important;
 }
 
-.bg-purple-mid{
+.bg-purple-mid {
     background-color: rgb(185, 158, 225);
 }
 
-.bg-platinum{
+.bg-platinum {
     background-color: rgb(234, 234, 234) !important;
 }
 
@@ -125,7 +126,7 @@ input.bg-light-purple.border-0.text-purple:hover{
     background-color: rgba(109, 198, 155, 1) !important;
 }
 
-.bg-purple-gray{
+.bg-purple-gray {
     background-color: rgb(192, 173, 208) !important;
 }
 

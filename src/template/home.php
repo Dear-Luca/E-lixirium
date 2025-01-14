@@ -6,12 +6,12 @@
     </section>
 
     <!-- Categories Carousel -->
-    <section>
+    <section class="mt-5">
         <h2>Random categories</h2>
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6 m-0">
             <?php foreach ($templateParams["categories"] as $category): ?>
                 <div class="col">
-                    <div class="card borders-0">
+                    <div class="card card-hover borders-0">
                         <img src="<?php echo UPLOAD_DIR; ?>/potion.jpg" class="card-img-top" alt="">
                         <div class="card-body">
                             <p class="text-nowrap text-center h-md-4 h-lg-5"><?php echo $category["name"]; ?></p>
@@ -24,12 +24,12 @@
     </section>
 
     <!-- Product List -->
-    <section>
+    <section class="mt-5">
         <h2>Top products</h2>
         <div class="row row-cols-2 row-cols-md-3 g-4 m-0">
             <?php foreach ($templateParams["products"] as $product): ?>
                 <div class="col">
-                    <div class="card">
+                    <div class="card card-hover">
                         <img src="<?php echo UPLOAD_DIR . "potion.jpg"; ?>" class="card-img-top" alt="" />
                         <div class="card-body">
                             <h3 class="card-title"><?php echo $product["name"]; ?></h3>
@@ -44,7 +44,7 @@
                                     }
                                 }
                                 ?>
-                                <p class="m-0">(<?php echo $stars; ?>)</p>
+                                <p class="m-0 small fw-semibold">(<?php echo $stars; ?>)</p>
                             </span>
                             <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                         </div>

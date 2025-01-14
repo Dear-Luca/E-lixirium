@@ -86,6 +86,10 @@ input.bg-light-purple.border-0.text-purple:hover {
     color: white !important;
 }
 
+textarea[name="description"] {
+    resize: none;
+}
+
 /* Custom Bootstrap-derived styles */
 @media (min-width: 1400px) {
     .row-cols-xxl-7>* {

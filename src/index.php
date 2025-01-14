@@ -79,10 +79,10 @@ switch ($_GET["page"]) {
             if (count($templateParams["product"])) {
                 // Product existing
                 $templateParams["title"] = "E-lixirium - " . $templateParams["product"][0]["name"];
-                if (isUserLoggedIn()) {
-                    $templateParams["content"] = "product-user.php";
-                } else if (isAdminLoggedIn()) {
+                if (isAdminLoggedIn()) {
                     $templateParams["content"] = "product-admin.php";
+                } else {
+                    $templateParams["content"] = "product-user.php";
                 }
             } else {
                 // Product not existing

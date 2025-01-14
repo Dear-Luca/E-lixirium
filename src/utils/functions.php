@@ -66,6 +66,7 @@ function updateUser($templateParams)
     $_SESSION["birthday"] = $templateParams["userInfo"][0]["birthday"];
 }
 
+
 function getCartTotal($templateParams)
 {
     $total = 0;
@@ -75,7 +76,7 @@ function getCartTotal($templateParams)
     return $total;
 }
 
-function generateOrderMessage($id_order, $username, $products)
+function orderMessage($id_order, $username, $products)
 {
     $message = "A new order has been placed with id " . $id_order . " by the user " . $username;
     $message .= "\nThe order will be delivered to the following address: " . "Via dell'università 50, Cesena, FC";
@@ -84,6 +85,22 @@ function generateOrderMessage($id_order, $username, $products)
         $message .= "\n" . $product["quantity"] . "x " . $product["name"] . " - " . $total . "€";
     }
 
+    return $message;
+}
+
+function amountChangedMessage($username, $product){
+    $message = "The amount of the product " . $product . " in you cart was bigger than our availability in the storage.";
+    $message .= "\nWe have updated it to the maximum possible amount.";
+    return $message;
+}
+
+function outOfStockMessageUser($username, $product){
+    $message = "The item in your cart " . $product . " has become out of stock.\nSorry for the inconvenience, we will provide new ones soon.";
+    return $message;
+}
+
+function outOfStockMessageAdmin($admin, $productName, $idProduct){
+    $message = "The item " . $productName . " with id " . $idProduct . " has become out of stock.";
     return $message;
 }
 

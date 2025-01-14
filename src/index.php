@@ -5,6 +5,7 @@ require_once 'bootstrap.php';
 $templateParams["title"] = "E-lixirium - Home";
 $templateParams["js"] = array("global.js");
 $templateParams["categories"] = $dbh->getCategories();
+
 // TODO: replace with actual products and categories getters
 // $templateParams["articolicasuali"] = $dbh->getRandomPosts(2);
 
@@ -141,6 +142,9 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Account";
             $templateParams["content"] = "account-user.php";
             $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
+            $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
+            //$templateParams["total"] = getCartTotal($templateParams);
+
             if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) && isset($_POST["card_number"]) && isset($_POST["password"])) {
                 if ($_POST["password"] == $_POST["confirmPassword"]) {
                     // if username does't change or new username is not used
@@ -159,6 +163,22 @@ switch ($_GET["page"]) {
                     }
                 } else {
                     $templateParams["error"] = "You need to confirm the password";
+                }
+            }
+
+            // check products in cart and update them
+            foreach ($templateParams["cart"] as $product) {
+                $amountLeft = $dbh->getProduct($product["id_product"])[0]["amount_left"];
+                if ($amountLeft == 0) {
+                    // remove product
+                    $dbh->deleteProductFromCart($product["id_product"], $_SESSION["username"]);
+                    // notify user
+                    $description = outOfStockMessageUser($_SESSION["username"], $product["name"]);
+                    $dbh->insertNotification("Product out of stock", $description, username: $_SESSION["username"]);
+                }elseif($product["quantity"] > $amountLeft){
+                    $description = amountChangedMessage($_SESSION["username"], $product["name"]);
+                    $dbh->insertNotification("Availability changed", $description, username: $_SESSION["username"]);
+                    $dbh->updateCartQuantity($_SESSION["username"], $product["id_product"], $amountLeft);
                 }
             }
 
@@ -192,7 +212,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Shopping cart";
             $templateParams["content"] = "cart.php";
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
-
+            $templateParams["admins"] = $dbh->getAdmins();
             $templateParams["total"] = getCartTotal($templateParams);
 
             //upate quantity product
@@ -208,7 +228,8 @@ switch ($_GET["page"]) {
                 $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
                 $templateParams["total"] = getCartTotal($templateParams);
             }
-
+            
+            // checkout
             if (isset($_POST["checkout-confirm"])) {
                 if ($dbh->getCreditCard($_SESSION["username"])[0]["card_number"] == NULL) {
                     $templateParams["error"] = "You need to insert a card number in your account";
@@ -218,12 +239,22 @@ switch ($_GET["page"]) {
                     foreach ($templateParams["cart"] as $product) {
                         $dbh->insertIncludeOrder($product["id_product"], $id_order, $product["quantity"]);
                         $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
+                        
+                        // notify admin if product is out of stock
+                        $amountLeft = $dbh->getProduct($product["id_product"])[0]["amount_left"];
+                        if ($amountLeft == 0) {
+                            foreach ($templateParams["admins"] as $admin) {
+                                $description = outOfStockMessageAdmin($admin["username"], $product["name"], $product["id_product"]);
+                                $dbh->insertNotification("Product out of stock", $description, admin: $admin["username"]);
+                            }
+                        }
                     }
-                    $templateParams["admins"] = $dbh->getAdmins();
                     foreach ($templateParams["admins"] as $admin) {
-                        $dbh->insertNotification("New order", generateOrderMessage($id_order, $_SESSION["username"], $templateParams["cart"]), admin: $admin["username"]);
+                        $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
+                        $dbh->insertNotification("New order", $description, admin: $admin["username"]);
                     }
-                    $dbh->insertNotification("New order", generateOrderMessage($id_order, $_SESSION["username"], $templateParams["cart"]), username: $_SESSION["username"]);
+                    $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
+                    $dbh->insertNotification("New order", $description, username: $_SESSION["username"]);
                     $dbh->deleteCart($_SESSION["username"]);
                     header("Location: ?page=orders");
                 }
@@ -261,9 +292,6 @@ switch ($_GET["page"]) {
         if (isUserLoggedIn() || isAdminLoggedIn()) {
             $templateParams["title"] = "E-lixirium - Notifications";
             $templateParams["content"] = "notifications.php";
-            if($dbh->checkNotifications()){
-                var_dump($dbh->checkNotifications());
-            }
             $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
         } else {
             header("Location: ?page=home");
@@ -275,7 +303,7 @@ switch ($_GET["page"]) {
                 $templateParams["title"] = "E-lixirium - Notification Detail";
                 $templateParams["content"] = "notification-detail.php";
                 $templateParams["notification-detail"] = $dbh->getNotificationDetail($_GET["id"]);
-                if ($templateParams["notification-detail"][0]["seen"] == 0){
+                if ($templateParams["notification-detail"][0]["seen"] == 0) {
                     $dbh->updateNotificationStatus(1, $templateParams["notification-detail"][0]["id_notification"]);
                 }
             } else {

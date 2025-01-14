@@ -234,6 +234,14 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getUsers(){
+        $query = "SELECT * FROM user";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getUserInfo($username)
     {
         $query = "SELECT * FROM user WHERE username = ?";
@@ -425,6 +433,13 @@ class DatabaseHelper
         $query = "DELETE FROM wishes WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $username);
+        $stmt->execute();
+    }
+
+    public function deleteProductFromCart($id_product, $username){
+        $query = "DELETE FROM wishes WHERE id_product = ? and username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("is", $id_product, $username);
         $stmt->execute();
     }
 

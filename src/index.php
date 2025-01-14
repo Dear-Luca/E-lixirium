@@ -173,17 +173,20 @@ switch ($_GET["page"]) {
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
 
             if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) && isset($_POST["card_number"]) && isset($_POST["password"])) {
+                var_dump($_POST);
                 if ($_POST["password"] == $_POST["confirmPassword"]) {
                     // if username does't change or new username is not used
                     if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkUsername($_POST["username"])) == 0)) {
                         if ($_POST["card_number"] == "") {
                             $_POST["card_number"] = NULL;
                         }
-                        $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                        
+                        $hashedPassword = $_POST["password"] == "" ? $dbh->getUserInfo($_SESSION["username"])[0]["password"] :  password_hash($_POST["password"], PASSWORD_DEFAULT);
                         $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["birthday"], $_POST["card_number"], $hashedPassword, $_SESSION["username"]);
                         $templateParams["error"] = "Update successful";
                         $_SESSION["username"] = $_POST["username"];
                         $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
+                        var_dump($_SESSION["username"]);
                         // update variable session
                         updateUser($templateParams);
                     } else {

@@ -8,7 +8,7 @@
     <?php endif; ?>
     <div class="row">
         <section class="col-12 col-md-3 mb-3">
-            <h2 class="text-center"><?php echo $templateParams['userInfo'][0]['name']; ?></h2>
+            <h2 class="text-center"><?php echo $templateParams['userInfo'][0]['username']; ?></h2>
             <p class="h3 mb-5 text-center"><?php echo $templateParams['userInfo'][0]['email']; ?></p>
             <div class="m-4 text-center">
                 <a href="?page=cart" class="text-decoration-none">

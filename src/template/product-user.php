@@ -19,7 +19,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                     to <?php echo $category; ?></a>
                 <h2 class="d-none d-lg-block display-5"><?php echo $product["name"]; ?></h2>
                 <?php if ($product["amount_left"] < 5): ?>
-                    <p class="text-danger mb-0">Only <?php echo $product["amount_left"]; ?> left!</p>
+                    <p class="text-danger fw-semibold mb-0">Only <?php echo $product["amount_left"]; ?> left!</p>
                 <?php endif; ?>
                 <div class="d-flex align-items-center">
                     <p class="text-purple pe-3 m-0"><strong>€<?php echo $product["price"]; ?></strong></p>

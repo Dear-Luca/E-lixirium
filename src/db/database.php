@@ -350,7 +350,7 @@ class DatabaseHelper
 
     public function checkNotifications()
     {
-        $query = "SELECT * FROM notification WHERE seen = 0 AND username = ? OR SEN_username = ?";
+        $query = "SELECT * FROM notification WHERE seen = 0 AND (username = ? OR SEN_username = ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ss', $_SESSION["username"], $_SESSION["username"]);
         $stmt->execute();

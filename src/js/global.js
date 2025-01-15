@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const magicCards = document.querySelectorAll('.magic-card');
-    const particlesSwitch = document.getElementById('particlesSwitch');
+    const particlesSwitch = document.querySelector("input[type='checkbox'][role='switch']");
 
     // Colors
     const colorPalette = [

@@ -3,7 +3,10 @@
         <h2 class="h3 mb-3 fw-normal">Login</h2>
         <p>Don't have an account? <a href="./?page=register" class="text-purple">Sign up</a></p>
         <?php if (isset($templateParams["error"])): ?>
-            <p><?php echo $templateParams["error"]; ?></p>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <?php echo $templateParams["error"]; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         <?php endif; ?>
         <div class="form-floating">
             <input type="text" class="form-control" id="username" name="username" required />

@@ -50,6 +50,7 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username, );
         $stmt->execute();
+        return $stmt->insert_id;
     }
 
     public function insertIncludeOrder($id_product, $id_order, $quantity)

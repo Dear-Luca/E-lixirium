@@ -275,29 +275,32 @@ switch ($_GET["page"]) {
                 if ($dbh->getCreditCard($_SESSION["username"])[0]["card_number"] == NULL) {
                     $templateParams["error"] = "You need to insert a card number in your account";
                 } else {
-                    $dbh->insertOrder($_SESSION["username"]);
-                    $id_order = $dbh->getLastInsertId();
-                    foreach ($templateParams["cart"] as $product) {
-                        $dbh->insertIncludeOrder($product["id_product"], $id_order, $product["quantity"]);
-                        $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
-
-                        // notify admin if product is out of stock
-                        $amountLeft = $dbh->getProduct($product["id_product"])[0]["amount_left"];
-                        if ($amountLeft == 0) {
-                            foreach ($templateParams["admins"] as $admin) {
-                                $description = outOfStockMessageAdmin($admin["username"], $product["name"], $product["id_product"]);
-                                $dbh->insertNotification("Product out of stock", $description, admin: $admin["username"]);
+                    $id_order = $dbh->insertOrder($_SESSION["username"]);
+                    if($id_order != false) {
+                        foreach ($templateParams["cart"] as $product) {
+                            $dbh->insertIncludeOrder($product["id_product"], $id_order, $product["quantity"]);
+                            $dbh->updateAmountLeft($product["id_product"], $product["quantity"]);
+    
+                            // notify admin if product is out of stock
+                            $amountLeft = $dbh->getProduct($product["id_product"])[0]["amount_left"];
+                            if ($amountLeft == 0) {
+                                foreach ($templateParams["admins"] as $admin) {
+                                    $description = outOfStockMessageAdmin($admin["username"], $product["name"], $product["id_product"]);
+                                    $dbh->insertNotification("Product out of stock", $description, admin: $admin["username"]);
+                                }
                             }
+                            foreach ($templateParams["admins"] as $admin) {
+                                $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
+                                $dbh->insertNotification("New order", $description, admin: $admin["username"]);
+                            }
+                            $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
+                            $dbh->insertNotification("New order", $description, username: $_SESSION["username"]);
+                            $dbh->deleteCart($_SESSION["username"]);
+                            header("Location: ?page=orders");
                         }
+                    }else{
+                        $templateParams["error"] = "Insertion failed";
                     }
-                    foreach ($templateParams["admins"] as $admin) {
-                        $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
-                        $dbh->insertNotification("New order", $description, admin: $admin["username"]);
-                    }
-                    $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
-                    $dbh->insertNotification("New order", $description, username: $_SESSION["username"]);
-                    $dbh->deleteCart($_SESSION["username"]);
-                    header("Location: ?page=orders");
                 }
             }
 

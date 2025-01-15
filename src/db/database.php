@@ -25,6 +25,7 @@ class DatabaseHelper
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sssdisd', $productName, $productDescription, $productImages, $productPrice, $productAmount, $duration, $stars);
         $stmt->execute();
+        return $stmt->insert_id;
     }
 
     public function insertCategory($name)

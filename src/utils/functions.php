@@ -88,23 +88,27 @@ function orderMessage($id_order, $username, $products)
     return $message;
 }
 
-function amountChangedMessage($username, $product){
+function amountChangedMessage($username, $product)
+{
     $message = "The amount of the product " . $product . " in you cart was bigger than our availability in the storage.";
     $message .= "\nWe have updated it to the maximum possible amount.";
     return $message;
 }
 
-function outOfStockMessageUser($username, $product){
+function outOfStockMessageUser($username, $product)
+{
     $message = "The item in your cart " . $product . " has become out of stock.\nSorry for the inconvenience, we will provide new ones soon.";
     return $message;
 }
 
-function outOfStockMessageAdmin($admin, $productName, $idProduct){
+function outOfStockMessageAdmin($admin, $productName, $idProduct)
+{
     $message = "The item " . $productName . " with id " . $idProduct . " has become out of stock.";
     return $message;
 }
 
-function insertAdmin($dbh){
+function insertAdmin($dbh)
+{
     $admin1 = "dear_luca";
     $admin2 = "baldo3000";
     $password = "admin";
@@ -143,24 +147,24 @@ function uploadImage($path, $image)
     $imageName = basename($image["name"]);
     $fullPath = $path . $imageName;
 
-    $maxKB = 500;
+    $maxKB = 2000;
     $acceptedExtensions = array("jpg", "jpeg", "png", "gif");
     $result = 0;
     $msg = "";
     // Check if it's really an image
     $imageSize = getimagesize($image["tmp_name"]);
     if ($imageSize === false) {
-        $msg .= "File caricato non è un'immagine! ";
+        $msg .= "File uploaded is not an image. ";
     }
-    // Check if image size < 500KB
+    // Check if image size
     if ($image["size"] > $maxKB * 1024) {
-        $msg .= "File caricato pesa troppo! Dimensione massima è $maxKB KB. ";
+        $msg .= "File uploaded is too big. Max size is $maxKB KB. ";
     }
 
     // Check file extension
     $imageFileType = strtolower(pathinfo($fullPath, PATHINFO_EXTENSION));
     if (!in_array($imageFileType, $acceptedExtensions)) {
-        $msg .= "Accettate solo le seguenti estensioni: " . implode(",", $acceptedExtensions);
+        $msg .= "Accepted only extensions: " . implode(",", $acceptedExtensions);
     }
 
     // Check if a file with that name already exists, proceeds to rename it if found
@@ -177,7 +181,7 @@ function uploadImage($path, $image)
     // Check if there are errors, then move image from temp location to destination location
     if (strlen($msg) == 0) {
         if (!move_uploaded_file($image["tmp_name"], $fullPath)) {
-            $msg .= "Errore nel caricamento dell'immagine.";
+            $msg .= "Error in uploading the file.";
         } else {
             $result = 1;
             $msg = $imageName;

@@ -25,7 +25,7 @@
         <h3>Add product</h3>
     </div>
 
-    <form class="mb-4" method="POST" action="?page=account">
+    <form class="mb-4" method="POST" action="?page=account" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="productName" class="form-label">Name</label>
             <input type="text" class="form-control" id="productName" name="productName" placeholder="Enter product name"
@@ -89,7 +89,7 @@
 
         <div class="mb-3">
             <label for="productImages" class="form-label">Images</label>
-            <input type="file" class="form-control" id="productImages" name="productImages" multiple required />
+            <input type="file" class="form-control" id="productImages" name="productImages" required />
         </div>
 
         <div>

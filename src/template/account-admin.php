@@ -63,7 +63,7 @@
             <?php endforeach; ?>
         </div>
 
-        <fieldset class="mb-3" required>
+        <fieldset class="mb-3">
             <legend class="h6">Duration</legend>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="duration" id="durationHour" value="hour" />

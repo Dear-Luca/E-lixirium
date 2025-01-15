@@ -78,8 +78,8 @@ function getCartTotal($templateParams)
 
 function orderMessage($id_order, $username, $products)
 {
-    $message = "A new order has been placed with id " . $id_order . " by the user " . $username;
-    $message .= "\nThe order will be delivered to the following address: " . "Via dell'università 50, Cesena, FC";
+    $message = "A new order has been placed with id " . $id_order . " by the user " . $username . ".";
+    $message .= "\nThe order will be delivered to the following address: " . "Via dell'università 50, Cesena, FC.";
     foreach ($products as $product) {
         $total = $product["price"] * $product["quantity"];
         $message .= "\n" . $product["quantity"] . "x " . $product["name"] . " - " . $total . "€";

@@ -321,7 +321,6 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Notifications";
             $templateParams["content"] = "notifications.php";
             $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
-            var_dump($templateParams["notifications"]);
         } else {
             header("Location: ?page=home");
         }

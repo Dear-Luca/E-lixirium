@@ -40,6 +40,8 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
             <section>
                 <h3>Configure your spell:</h3>
                 <form action="#" method="POST">
+                    <input type="hidden" id="id_product_cart" name="id_product_cart"
+                        value="<?php echo $product["id_product"]; ?>" />
                     <div class="row">
                         <div class="form-floating col-8">
                             <select class="form-select" id="duration" name="duration" aria-label="Spell duration">
@@ -86,7 +88,8 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
         <section class="row">
             <h3><?php echo count($existingReview) ? "Your review:" : "Leave a review:"; ?></h3>
             <form action="#" method="POST">
-                <input type="hidden" id="id_product" name="id_product" value="<?php echo $product["id_product"]; ?>" />
+                <input type="hidden" id="id_product_review" name="id_product_review"
+                    value="<?php echo $product["id_product"]; ?>" />
                 <div class="form-floating">
                     <select class="form-select" id="rating" name="rating" aria-label="Rating" required>
                         <option disabled value="" <?php echo !$existingReview ? "selected" : ""; ?>>

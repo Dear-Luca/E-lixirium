@@ -63,27 +63,27 @@ switch ($_GET["page"]) {
         }
 
         // Review
-        if (isset($_POST["rating"]) && isset($_POST["comment"]) && isset($_POST["id_product"]) && isUserLoggedIn()) {
-            if (count($dbh->getProduct($_POST["id_product"]))) {
+        if (isset($_POST["rating"]) && isset($_POST["comment"]) && isset($_POST["id_product_review"]) && isUserLoggedIn()) {
+            if (count($dbh->getProduct($_POST["id_product_review"]))) {
                 // Product existing
-                if (count($dbh->checkReview($_POST["id_product"], $_SESSION["username"]))) {
+                if (count($dbh->checkReview($_POST["id_product_review"], $_SESSION["username"]))) {
                     // Review existing
-                    $dbh->updateReview($_POST["id_product"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
+                    $dbh->updateReview($_POST["id_product_review"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
                 } else {
                     // Review not existing
-                    $dbh->insertReview($_POST["id_product"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
+                    $dbh->insertReview($_POST["id_product_review"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
                 }
-                $dbh->updateProductStars($_POST["id_product"], $_POST["rating"]);
+                $dbh->updateProductStars($_POST["id_product_review"], $_POST["rating"]);
             }
         }
 
         // Cart
-        if (isset($_POST["amount"]) && isUserLoggedIn()) {
-            $cartProduct = $dbh->checkCartProduct($_SESSION["username"], $_POST["id_product"]);
+        if (isset($_POST["amount"]) && isset($_POST["id_product_cart"]) && isUserLoggedIn()) {
+            $cartProduct = $dbh->checkCartProduct($_SESSION["username"], $_POST["id_product_cart"]);
             if (count($cartProduct)) {
-                $dbh->updateCartQuantity($_SESSION["username"], $_POST["id_product"], $_POST["amount"] + $cartProduct[0]["quantity"]);
+                $dbh->updateCartQuantity($_SESSION["username"], $_POST["id_product_cart"], $_POST["amount"] + $cartProduct[0]["quantity"]);
             } else {
-                $dbh->insertIntoCart($_POST["id_product"], $_SESSION["username"], $_POST["amount"]);
+                $dbh->insertIntoCart($_POST["id_product_cart"], $_SESSION["username"], $_POST["amount"]);
             }
             header("Location: ?page=cart");
             exit();

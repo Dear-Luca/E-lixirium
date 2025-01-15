@@ -18,7 +18,8 @@
             <input type="text" class="form-control" id="categoryName" name="categoryName"
                 placeholder="Enter category name" required />
         </div>
-        <button type="submit" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Create Category</button>
+        <button type="submit" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Create
+            Category</button>
     </form>
 
     <div class="d-flex align-items-center mb-4 mt-4">
@@ -51,13 +52,13 @@
         </div>
 
         <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <?php foreach ($templateParams["categories"] as $category): ?>
+            <span class="form-label">Category</span>
+            <?php foreach ($templateParams["categories"] as $index => $category): ?>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="category[]" value="<?php echo $category["name"]; ?>"
-                        id="category-<?php echo $category["name"]; ?>" />
-                    <label class="form-check-label" for="category-<?php echo $category["name"]; ?>">
-                        <?php echo $category["name"]; ?>
+                    <input class="form-check-input" type="checkbox" name="category[]"
+                        value="<?php echo htmlspecialchars($category["name"]); ?>" id="category-<?php echo $index; ?>" />
+                    <label class="form-check-label" for="category-<?php echo $index; ?>">
+                        <?php echo htmlspecialchars($category["name"]); ?>
                     </label>
                 </div>
             <?php endforeach; ?>
@@ -93,7 +94,8 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Create product</button>
+            <button type="submit" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Create
+                product</button>
         </div>
     </form>
 </div>

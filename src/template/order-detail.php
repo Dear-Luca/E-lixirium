@@ -24,7 +24,7 @@
                                 <td><?php echo $product['name']; ?></td>
                                 <td>
                                     <img src="<?php echo UPLOAD_DIR . $product["image_name"]; ?>"
-                                        alt="<?php echo $product['name']; ?>" />
+                                        alt="<?php echo $product['name']; ?>" class="img-thumbnail img-fluid"/>
                                 </td>
                                 <td><?php echo $product["price"] . "€"; ?></td>
                                 <td><?php echo $product["quantity"]; ?></td>

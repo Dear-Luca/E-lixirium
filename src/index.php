@@ -289,15 +289,15 @@ switch ($_GET["page"]) {
                                     $dbh->insertNotification("Product out of stock", $description, admin: $admin["username"]);
                                 }
                             }
-                            foreach ($templateParams["admins"] as $admin) {
-                                $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
-                                $dbh->insertNotification("New order", $description, admin: $admin["username"]);
-                            }
-                            $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
-                            $dbh->insertNotification("New order", $description, username: $_SESSION["username"]);
-                            $dbh->deleteCart($_SESSION["username"]);
-                            header("Location: ?page=orders");
                         }
+                        foreach ($templateParams["admins"] as $admin) {
+                            $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
+                            $dbh->insertNotification("New order", $description, admin: $admin["username"]);
+                        }
+                        $description = orderMessage($id_order, $_SESSION["username"], $templateParams["cart"]);
+                        $dbh->insertNotification("New order", $description, username: $_SESSION["username"]);
+                        $dbh->deleteCart($_SESSION["username"]);
+                        header("Location: ?page=orders");
                     }else{
                         $templateParams["error"] = "Insertion failed";
                     }

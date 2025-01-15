@@ -15,7 +15,7 @@
                     <div class="card card-hover borders-0">
                         <div class="card-img-top randomColorImage"></div>
                         <div class="card-body">
-                            <p class="text-nowrap text-center fw-semibold"><?php echo $category["name"]; ?></p>
+                            <p class="text-center fw-semibold"><?php echo $category["name"]; ?></p>
                             <a href="./?page=products&category=<?php echo urlencode($category["name"]); ?>"
                                 class="stretched-link" title="<?php echo "Products - " . $category["name"]; ?>"></a>
                         </div>

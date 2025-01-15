@@ -153,7 +153,7 @@ switch ($_GET["page"]) {
                         $user = $dbh->getUserInfo($_POST["username"])[0];
                         registerLoggedUser($user);
                         header("Location: ?page=account");
-                        exit(); 
+                        exit();
                     } else {
                         $templateParams["error"] = "Error! Check username or password!";
                     }
@@ -179,8 +179,8 @@ switch ($_GET["page"]) {
                         if ($_POST["card_number"] == "") {
                             $_POST["card_number"] = NULL;
                         }
-                        
-                        $hashedPassword = $_POST["password"] == "" ? $dbh->getUserInfo($_SESSION["username"])[0]["password"] :  password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+                        $hashedPassword = $_POST["password"] == "" ? $dbh->getUserInfo($_SESSION["username"])[0]["password"] : password_hash($_POST["password"], PASSWORD_DEFAULT);
                         $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["birthday"], $_POST["card_number"], $hashedPassword, $_SESSION["username"]);
                         $templateParams["error"] = "Update successful";
                         $_SESSION["username"] = $_POST["username"];
@@ -353,6 +353,7 @@ switch ($_GET["page"]) {
         break;
     default:
         $templateParams["title"] = "E-lixirium - Home";
+        $templateParams["content"] = "home.php";
 }
 
 require 'template/base.php';

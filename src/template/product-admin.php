@@ -79,33 +79,32 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                             <img src="<?php echo UPLOAD_DIR ?>trash.svg" alt="Trash" height="35" />Delete product
                         </button>
                     </div>
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteProductModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Delete product</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure you want to delete this product?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <form action="#" method="POST">
-                                        <input type="hidden" name="delete-confirm" />
-                                        <button type="submit"
-                                            class="btn btn-outline-primary bg-light-purple border-0 text-purple">Confirm</button>
-                                    </form>
-                                    <button type="button" class="btn btn-danger d-inline-block"
-                                        data-bs-dismiss="modal">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </section>
             </form>
         </section>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete product</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this product?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="#" method="POST">
+                        <input type="hidden" name="delete-confirm" />
+                        <input type="hidden" id="id_product" name="id_product"
+                            value="<?php echo $product["id_product"]; ?>" />
+                        <button type="submit"
+                            class="btn btn-outline-primary bg-light-purple border-0 text-purple">Confirm</button>
+                    </form>
+                    <button type="button" class="btn btn-danger d-inline-block" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
     <section class="row pt-3">
         <h3>Comments:</h3>

@@ -12,20 +12,11 @@
 
 <body class="bg-platinum">
     <header class="magic-card d-inline-block">
-        <h1 class="mb-0">E-lixirium</h1>
-        <div class="magic-particles"></div>
+        <a href="./?page=home" class="text-decoration-none">
+            <h1 class="mb-0 text-purple">E-lixirium</h1>
+            <div class="magic-particles"></div>
+        </a>
     </header>
-    <script>
-        // TODO: debug only, remove before release
-        // Change header color based on login status: black(not logged), green(user logged), red(admin logged)
-        const userLogged = <?php echo isUserLoggedIn() ? "true" : "false"; ?>;
-        const adminLogged = <?php echo isAdminLoggedIn() ? "true" : "false"; ?>;
-        if (adminLogged) {
-            document.querySelector("body header").classList.add("text-danger");
-        } else if (userLogged) {
-            document.querySelector("body header").classList.add("text-success");
-        }
-    </script>
     <nav class="navbar navbar-expand-md bg-purple my-3">
         <div class="container-fluid">
             <!-- <a class="navbar-brand" href="#">E-lixirium</a> -->

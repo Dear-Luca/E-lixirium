@@ -6,9 +6,6 @@ $templateParams["title"] = "E-lixirium - Home";
 $templateParams["js"] = array("global.js");
 $templateParams["categories"] = $dbh->getCategories();
 
-// TODO: replace with actual products and categories getters
-// $templateParams["articolicasuali"] = $dbh->getRandomPosts(2);
-
 if (!isset($_GET["page"])) {
     $_GET["page"] = "home";
 }
@@ -21,7 +18,7 @@ switch ($_GET["page"]) {
         $templateParams["products"] = $dbh->getTopProducts(6);
         $templateParams["categories"] = $dbh->getCategories(6);
         // EXECUTE JUST ONE TIME!
-        //insertAdmin($dbh);
+        // insertAdmin($dbh);
         break;
     case "products":
         foreach ($dbh->getCategories() as $category) {
@@ -46,11 +43,15 @@ switch ($_GET["page"]) {
         if (isAdminLoggedIn() && isset($_POST["delete-confirm"]) && isset($_POST["id_product_delete"])) {
             if (count($dbh->getProduct($_POST["id_product_delete"]))) {
                 // Product existing
-                $dbh->deleteCategoriesOfProduct($_POST["id_product_delete"]);
-                $dbh->deleteReviewsOfProduct($_POST["id_product_delete"]);
-                $dbh->deleteProductFromCarts($_POST["id_product_delete"]);
-                $dbh->deleteProductFromOrders($_POST["id_product_delete"]);
-                $dbh->deleteProduct($_POST["id_product_delete"]);
+                if (
+                    $dbh->deleteCategoriesOfProduct($_POST["id_product_delete"]) &&
+                    $dbh->deleteReviewsOfProduct($_POST["id_product_delete"]) &&
+                    $dbh->deleteProductFromCarts($_POST["id_product_delete"]) &&
+                    $dbh->deleteProductFromOrders($_POST["id_product_delete"])
+                ) {
+                    // If other deletions succeded
+                    $dbh->deleteProduct($_POST["id_product_delete"]);
+                }
             }
         }
 
@@ -66,14 +67,17 @@ switch ($_GET["page"]) {
         if (isset($_POST["rating"]) && isset($_POST["comment"]) && isset($_POST["id_product_review"]) && isUserLoggedIn()) {
             if (count($dbh->getProduct($_POST["id_product_review"]))) {
                 // Product existing
+                $success = false;
                 if (count($dbh->checkReview($_POST["id_product_review"], $_SESSION["username"]))) {
                     // Review existing
-                    $dbh->updateReview($_POST["id_product_review"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
+                    $success = $dbh->updateReview($_POST["id_product_review"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
                 } else {
                     // Review not existing
-                    $dbh->insertReview($_POST["id_product_review"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
+                    $success = $dbh->insertReview($_POST["id_product_review"], $_SESSION["username"], $_POST["rating"], $_POST["comment"]);
                 }
-                $dbh->updateProductStars($_POST["id_product_review"], $_POST["rating"]);
+                if ($success) {
+                    $dbh->updateProductStars($_POST["id_product_review"], $_POST["rating"]);
+                }
             }
         }
 

@@ -1,5 +1,4 @@
-<?php array_push($templateParams["js"], "particles.js");
-if (isset($templateParams["header"])): ?>
+<?php if (isset($templateParams["header"])): ?>
     <h2 class="text-center"><?php echo $templateParams["header"]; ?></h2>
 <?php endif; ?>
 <div class="container-sm">

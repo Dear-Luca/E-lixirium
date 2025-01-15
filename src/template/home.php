@@ -1,5 +1,4 @@
-<?php array_push($templateParams["js"], "particles.js");
-array_push($templateParams["js"], "home.js"); ?>
+<?php array_push($templateParams["js"], "home.js"); ?>
 <!-- Image and Title -->
 <div class="container-fluid">
     <section class="row my-5 justify-content-center text-center">
@@ -16,7 +15,7 @@ array_push($templateParams["js"], "home.js"); ?>
                     <div class="card card-hover borders-0">
                         <div class="card-img-top randomColorImage"></div>
                         <div class="card-body">
-                            <p class="text-nowrap text-center fw-semibold"><?php echo $category["name"]; ?></p>
+                            <p class="text-center fw-semibold"><?php echo $category["name"]; ?></p>
                             <a href="./?page=products&category=<?php echo urlencode($category["name"]); ?>"
                                 class="stretched-link" title="<?php echo "Products - " . $category["name"]; ?>"></a>
                         </div>

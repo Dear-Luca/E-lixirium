@@ -1,5 +1,4 @@
-<?php array_push($templateParams["js"], "particles.js");
-array_push($templateParams["js"], "home.js"); ?>
+<?php array_push($templateParams["js"], "home.js"); ?>
 <!-- Image and Title -->
 <div class="container-fluid">
     <section class="row my-5 justify-content-center text-center">

@@ -73,7 +73,7 @@ class DatabaseHelper
         $query = "INSERT INTO review (id_product, username, stars, comment) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('isis', $id_product, $username, $stars, $comment);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function insertNotification($title, $description, $username = null, $admin = null)
@@ -439,7 +439,7 @@ class DatabaseHelper
         $query = "DELETE FROM `is` WHERE id_product = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id_product);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function deleteReviewsOfProduct($id_product)
@@ -447,7 +447,7 @@ class DatabaseHelper
         $query = "DELETE FROM review WHERE id_product = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id_product);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function deleteProduct($id_product)
@@ -463,7 +463,7 @@ class DatabaseHelper
         $query = "DELETE FROM wishes WHERE id_product = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id_product);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function deleteProductFromOrders($id_product)
@@ -471,7 +471,7 @@ class DatabaseHelper
         $query = "DELETE FROM includes WHERE id_product = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id_product);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     // UPDATE SECTION
@@ -530,7 +530,7 @@ class DatabaseHelper
         $query = "UPDATE review SET stars = ?, comment = ? WHERE id_product = ? AND username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("isis", $stars, $comment, $id_product, $username);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     public function updateProduct($id_product, $description, $price, $amount_left)

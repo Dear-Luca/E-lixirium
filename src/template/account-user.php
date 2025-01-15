@@ -1,15 +1,17 @@
 <?php array_push($templateParams["js"], "account.js"); ?>
 <div class="container">
-    <?php if (isset($templateParams["error"])): ?>
+<?php if (isset($templateParams["error"])): ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <?php echo $templateParams["error"]; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
     <div class="row">
-        <section class="col-12 col-md-3 mb-3">
+        <section class="col-12 mb-3"> 
             <h2 class="text-center"><?php echo $templateParams['userInfo'][0]['username']; ?></h2>
             <p class="h3 mb-5 text-center"><?php echo $templateParams['userInfo'][0]['email']; ?></p>
+        </section>
+        <section class="col-12 col-md-6 mb-3"> 
             <div class="m-4 text-center">
                 <a href="?page=cart" class="text-decoration-none">
                     <div class="card p-2 shadow-sm rounded-lg">
@@ -17,7 +19,8 @@
                     </div>
                 </a>
             </div>
-
+        </section>
+        <section class="col-12 col-md-6 mb-3"> 
             <div class="m-4 text-center">
                 <a href="?page=orders" class="text-decoration-none">
                     <div class="card p-2 shadow-sm rounded-lg">
@@ -26,14 +29,14 @@
                 </a>
             </div>
         </section>
-        <section class="col-12 col-md-9">
+        <section class="col-12 text-center">
             <h2>Personal Information</h2>
             <form method="POST" action="?page=account">
                 <div class="row">
                     <!-- Card 1 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="name">Name:</label>
+                            <label class="card-header form-label" for="name">Name</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="name" name="name"
                                     value="<?php echo $templateParams['userInfo'][0]['name']; ?>"
@@ -45,7 +48,7 @@
                     <!-- Card 2 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="surname">Surname:</label>
+                            <label class="card-header form-label" for="surname">Surname</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="surname" name="surname"
                                     value="<?php echo $templateParams['userInfo'][0]['surname']; ?>"
@@ -57,7 +60,7 @@
                     <!-- Card 3 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="username">Username:</label>
+                            <label class="card-header form-label" for="username">Username</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="username" name="username"
                                     value="<?php echo $templateParams['userInfo'][0]['username']; ?>"
@@ -69,7 +72,7 @@
                     <!-- Card 4 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="email">E-mail:</label>
+                            <label class="card-header form-label" for="email">E-mail</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="email" name="email"
                                     value="<?php echo $templateParams['userInfo'][0]['email']; ?>"
@@ -81,7 +84,7 @@
                     <!-- Card 5 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="birthday">Birthday:</label>
+                            <label class="card-header form-label" for="birthday">Birthday</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="date" id="birthday" name="birthday"
                                     value="<?php echo $templateParams['userInfo'][0]['birthday']; ?>"
@@ -93,7 +96,7 @@
                     <!-- Card 6 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="card_number">Card number:</label>
+                            <label class="card-header form-label" for="card_number">Card number</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="text" id="card_number" name="card_number"
                                     value="<?php echo $templateParams['userInfo'][0]['card_number']; ?>"
@@ -105,7 +108,7 @@
                     <!-- Card 7 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="password">Password:</label>
+                            <label class="card-header form-label" for="password">Password</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="password" name="password"
                                     data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" />
@@ -118,7 +121,7 @@
                     <!-- Card 8 -->
                     <div class="col-12 col-md-6 mb-3">
                         <div class="card bg-purple-gray">
-                            <label class="card-header form-label" for="confirmPassword">Confirm password:</label>
+                            <label class="card-header form-label" for="confirmPassword">Confirm password</label>
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="confirmPassword" name="confirmPassword"
                                     data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" />

@@ -66,6 +66,7 @@
                             <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
                         <?php elseif (isAdminLoggedIn()): ?>
                             <!-- Admin logged in: -->
+                            <li class="nav-item"><a class="nav-link" href="./?page=notifications">Notifications</a></li>
                             <li class="nav-item"><a class="nav-link" href="./?page=account">Admin account</a></li>
                             <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
                         <?php else: ?>
@@ -87,17 +88,27 @@
                     <a href="./?page=cart"><img src="<?php echo UPLOAD_DIR ?>cart-speed.svg" alt="Shopping Cart" /></a>
                     <a href="./?page=orders"><img src="<?php echo UPLOAD_DIR ?>box-check.svg" alt="Orders" /></a>
                     <?php if ($dbh->checkNotifications()): ?>
-                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>bell-active.svg"
-                                alt="Active bell" />
+                        <a href="./?page=notifications">
+                            <img src="<?php echo UPLOAD_DIR ?>bell-active.svg" alt="Active bell" />
                         </a>
                     <?php else: ?>
-                        <a href="./?page=notifications"><img src="<?php echo UPLOAD_DIR ?>bell-inactive.svg"
-                                alt="Inactive bell" /></a>
+                        <a href="./?page=notifications">
+                            <img src="<?php echo UPLOAD_DIR ?>bell-inactive.svg" alt="Inactive bell" />
+                        </a>
                     <?php endif; ?>
                     <a href="./?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
                     <a href="./?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php elseif (isAdminLoggedIn()): ?>
                     <!-- Admin logged in: -->
+                    <?php if ($dbh->checkNotifications()): ?>
+                        <a href="./?page=notifications">
+                            <img src="<?php echo UPLOAD_DIR ?>bell-active.svg" alt="Active bell" />
+                        </a>
+                    <?php else: ?>
+                        <a href="./?page=notifications">
+                            <img src="<?php echo UPLOAD_DIR ?>bell-inactive.svg" alt="Inactive bell" />
+                        </a>
+                    <?php endif; ?>
                     <a href="./?page=account"><img src="<?php echo UPLOAD_DIR ?>user.svg" alt="Account" /></a>
                     <a href="./?page=logout"><img src="<?php echo UPLOAD_DIR ?>sign-out.svg" alt="Logout" /></a>
                 <?php else: ?>

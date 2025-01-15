@@ -14,10 +14,11 @@ array_push($templateParams["js"], "home.js"); ?>
             <?php foreach ($templateParams["categories"] as $category): ?>
                 <div class="col">
                     <div class="card card-hover borders-0">
-                        <img class="card-img-top randomColorImage" alt="">
+                        <div class="card-img-top randomColorImage"></div>
                         <div class="card-body">
                             <p class="text-nowrap text-center fw-semibold"><?php echo $category["name"]; ?></p>
-                            <a href="./?page=products&category=<?php echo $category["name"]; ?>" class="stretched-link"></a>
+                            <a href="./?page=products&category=<?php echo urlencode($category["name"]); ?>"
+                                class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +36,7 @@ array_push($templateParams["js"], "home.js"); ?>
                         <img src="<?php echo UPLOAD_DIR . $product["image_name"]; ?>" class="card-img-top" alt="" />
                         <div class="card-body">
                             <h3 class="card-title"><?php echo $product["name"]; ?></h3>
-                            <span class="d-flex">
+                            <div class="d-flex">
                                 <?php
                                 $stars = $product["stars"];
                                 for ($i = 1; $i <= 5; $i++) {
@@ -47,7 +48,7 @@ array_push($templateParams["js"], "home.js"); ?>
                                 }
                                 ?>
                                 <p class="m-0 small fw-semibold">(<?php echo $stars; ?>)</p>
-                            </span>
+                            </div>
                             <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                         </div>
                         <div class="magic-particles"></div>

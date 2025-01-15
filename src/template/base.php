@@ -11,10 +11,9 @@
 </head>
 
 <body class="bg-platinum">
-    <header>
-        <h1 class="magic-card d-inline-block">E-lixirium
-            <div class="magic-particles"></div>
-        </h1>
+    <header class="magic-card d-inline-block">
+        <h1 class="mb-0">E-lixirium</h1>
+        <div class="magic-particles"></div>
     </header>
     <script>
         // TODO: debug only, remove before release
@@ -49,7 +48,7 @@
                             <?php foreach ($templateParams["categories"] as $category): ?>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="./?page=products&category=<?php echo $category["name"] ?>"><?php echo $category["name"] ?></a>
+                                        href="./?page=products&category=<?php echo urlencode($category["name"]) ?>"><?php echo $category["name"] ?></a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -57,25 +56,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./?page=about">About Us</a>
                     </li>
-                    <div class="nav-link d-block d-md-none p-0">
-                        <?php if (isUserLoggedIn()): ?>
-                            <!-- User logged in: -->
-                            <li class="nav-item"><a class="nav-link" href="./?page=cart">Shopping Cart</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./?page=orders">Orders</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./?page=notifications">Notifications</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./?page=account">Account</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
-                        <?php elseif (isAdminLoggedIn()): ?>
-                            <!-- Admin logged in: -->
-                            <li class="nav-item"><a class="nav-link" href="./?page=notifications">Notifications</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./?page=account">Admin account</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
-                        <?php else: ?>
-                            <!-- User not logged in: -->
-                            <li class="nav-item"><a class="nav-link" href="./?page=register">Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="./?page=login">Login</a></li>
-                        <?php endif; ?>
-                    </div>
+                    <li>
+                        <ul class="nav-link d-block d-md-none p-0">
+                            <?php if (isUserLoggedIn()): ?>
+                                <!-- User logged in: -->
+                                <li class="nav-item"><a class="nav-link" href="./?page=cart">Shopping Cart</a></li>
+                                <li class="nav-item"><a class="nav-link" href="./?page=orders">Orders</a></li>
+                                <li class="nav-item"><a class="nav-link" href="./?page=notifications">Notifications</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="./?page=account">Account</a></li>
+                                <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
+                            <?php elseif (isAdminLoggedIn()): ?>
+                                <!-- Admin logged in: -->
+                                <li class="nav-item"><a class="nav-link" href="./?page=notifications">Notifications</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="./?page=account">Admin account</a></li>
+                                <li class="nav-item"><a class="nav-link" href="./?page=logout">Logout</a></li>
+                            <?php else: ?>
+                                <!-- User not logged in: -->
+                                <li class="nav-item"><a class="nav-link" href="./?page=register">Register</a></li>
+                                <li class="nav-item"><a class="nav-link" href="./?page=login">Login</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <form class="d-flex" role="search" method="GET" action="search.php">

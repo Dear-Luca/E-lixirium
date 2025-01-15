@@ -13,7 +13,7 @@ if (isset($templateParams["header"])): ?>
                 <div class="card-body">
                     <h3 class="card-title"><?php echo $product["name"]; ?></h3>
                     <p class="card-text text-purple">€<?php echo $product["price"] ?></p>
-                    <span class="d-flex">
+                    <div class="d-flex">
                         <?php
                         $stars = $product["stars"];
                         for ($i = 1; $i <= 5; $i++) {
@@ -25,7 +25,7 @@ if (isset($templateParams["header"])): ?>
                         }
                         ?>
                         <p class="m-0 fw-semibold">(<?php echo $stars; ?>)</p>
-                    </span>
+                    </div>
                     <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
                 </div>
                 <div class="magic-particles"></div>

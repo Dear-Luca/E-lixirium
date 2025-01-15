@@ -21,7 +21,7 @@ div.container-fluid>section.row>img {
 article div img,
 section.col header img,
 div.container section.row img,
-div.container-fluid section div div div.card div.card-body span img {
+div.container-fluid section div div div.card div.card-body div img {
     width: 20px;
     height: auto;
 }

@@ -43,22 +43,22 @@ switch ($_GET["page"]) {
         break;
     case "product":
         // Admin delete
-        if (isAdminLoggedIn() && isset($_POST["delete-confirm"]) && isset($_POST["id_product"])) {
-            if (count($dbh->getProduct($_POST["id_product"]))) {
+        if (isAdminLoggedIn() && isset($_POST["delete-confirm"]) && isset($_POST["id_product_delete"])) {
+            if (count($dbh->getProduct($_POST["id_product_delete"]))) {
                 // Product existing
-                $dbh->deleteCategoriesOfProduct($_POST["id_product"]);
-                $dbh->deleteReviewsOfProduct($_POST["id_product"]);
-                $dbh->deleteProductFromCarts($_POST["id_product"]);
-                $dbh->deleteProductFromOrders($_POST["id_product"]);
-                $dbh->deleteProduct($_POST["id_product"]);
+                $dbh->deleteCategoriesOfProduct($_POST["id_product_delete"]);
+                $dbh->deleteReviewsOfProduct($_POST["id_product_delete"]);
+                $dbh->deleteProductFromCarts($_POST["id_product_delete"]);
+                $dbh->deleteProductFromOrders($_POST["id_product_delete"]);
+                $dbh->deleteProduct($_POST["id_product_delete"]);
             }
         }
 
         // Admin update
-        if (isAdminLoggedIn() && isset($_POST["description"]) && isset($_POST["price"]) && isset($_POST["amount"]) && isset($_POST["id_product"])) {
-            if (count($dbh->getProduct($_POST["id_product"]))) {
+        if (isAdminLoggedIn() && isset($_POST["description"]) && isset($_POST["price"]) && isset($_POST["amount"]) && isset($_POST["id_product_update"])) {
+            if (count($dbh->getProduct($_POST["id_product_update"]))) {
                 // Product existing
-                $dbh->updateProduct($_POST["id_product"], $_POST["description"], $_POST["price"], $_POST["amount"]);
+                $dbh->updateProduct($_POST["id_product_update"], $_POST["description"], $_POST["price"], $_POST["amount"]);
             }
         }
 

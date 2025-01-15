@@ -5,7 +5,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
 <div class="container">
     <div class="row row-cols-1 row-cols-lg-2 m-0 justify-content-center">
         <section class="col py-3 px-0 px-lg-3">
-            <a href="./?page=products&category=<?php echo $category; ?>"
+            <a href="./?page=products&category=<?php echo urlencode($category); ?>"
                 class="btn btn-outline-primary mb-3 d-lg-none bg-light-purple border-0 text-purple">Back to
                 <?php echo $category; ?></a>
             <h2 class="d-block d-lg-none display-5"><?php echo $product["name"]; ?></h2>
@@ -14,14 +14,14 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
         </section>
         <section class="col py-3 px-0 px-lg-3">
             <header>
-                <a href="./?page=products&category=<?php echo $category; ?>"
+                <a href="./?page=products&category=<?php echo urlencode($category); ?>"
                     class="btn btn-outline-primary mb-3 d-none d-lg-inline-block bg-light-purple border-0 text-purple">Back
                     to <?php echo $category; ?></a>
                 <h2 class="d-none d-lg-block display-5"><?php echo $product["name"]; ?></h2>
                 <?php if ($product["amount_left"] < 5): ?>
                     <p class="text-danger mb-0">Only <?php echo $product["amount_left"]; ?> left!</p>
                 <?php endif; ?>
-                <span class="d-flex align-items-center">
+                <div class="d-flex align-items-center">
                     <p class="text-purple pe-3 m-0"><strong>€<?php echo $product["price"]; ?></strong></p>
                     <?php
                     $stars = $product["stars"];
@@ -34,7 +34,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                     }
                     ?>
                     <p class="m-0 fw-semibold">(<?php echo $stars; ?>)</p>
-                </span>
+                </div>
                 <p class="my-4"><?php echo $product["description"]; ?></p>
             </header>
             <section>
@@ -42,8 +42,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                 <form action="#" method="POST">
                     <div class="row">
                         <div class="form-floating col-8">
-                            <select class="form-select" id="id_product" name="id_product" aria-label="Spell duration"
-                                required>
+                            <select class="form-select" id="duration" name="duration" aria-label="Spell duration">
                                 <option selected value="<?php echo $product["id_product"]; ?>">
                                     <?php echo $product["duration"]; ?>
                                 </option>

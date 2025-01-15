@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-4">
     <div class="mb-3">
         <a href="?page=orders" class="btn btn-outline-primary bg-light-purple border-0 text-purple">Back to Orders</a>
     </div>

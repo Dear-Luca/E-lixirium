@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-4">
     <?php if (count($templateParams["notifications"]) == 0): ?>
         <div class="alert alert-info text-center">
             <p class="h5">You have not received any notifications yet</p>

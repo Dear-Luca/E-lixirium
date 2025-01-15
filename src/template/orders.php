@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-4">
     <?php if (count($templateParams["orders"]) == 0): ?>
         <div class="alert alert-info text-center">
             <p class="h5">You have no orders</p>
@@ -11,7 +11,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead >
+                        <thead>
                             <tr>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">Date</th>
@@ -20,10 +20,12 @@
                         </thead>
                         <tbody>
                             <?php foreach ($templateParams["orders"] as $order): ?>
-                                <tr onclick="window.location.href='?page=order_detail&id_order=<?php echo $order["id_order"]; ?>'">
+                                <tr
+                                    onclick="window.location.href='?page=order_detail&id_order=<?php echo $order["id_order"]; ?>'">
                                     <td><?php echo $order["id_order"]; ?></td>
                                     <td><?php echo $order["date"]; ?></td>
-                                    <td><strong><?php echo $dbh->getOrderTotal($order["id_order"])[0]["total"] . '€'; ?></strong></td>
+                                    <td><strong><?php echo $dbh->getOrderTotal($order["id_order"])[0]["total"] . '€'; ?></strong>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -34,3 +36,4 @@
         </div>
 
     <?php endif; ?>
+</div>

@@ -109,7 +109,7 @@
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="password" name="password"
                                     data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" />
-                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <button class="btn btn-outline-secondary" type="button">
                                     <img src="<?php echo UPLOAD_DIR; ?>closed-eye.svg" alt="Hide password" />
                                 </button>
                             </div>
@@ -122,7 +122,7 @@
                             <div class="input-group card-body">
                                 <input class="form-control" type="password" id="confirmPassword" name="confirmPassword"
                                     data-original-value="<?php echo $templateParams['userInfo'][0]['password']; ?>" />
-                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <button class="btn btn-outline-secondary" type="button">
                                     <img src="<?php echo UPLOAD_DIR; ?>closed-eye.svg" alt="Show password" />
                                 </button>
                             </div>
@@ -131,8 +131,8 @@
                 </div>
                 <div class="d-flex justify-content-between mt-3">
                     <button type="button" class="btn btn-primary bg-light-purple border-0 text-purple">Edit</button>
-                    <button type="submit" class="btn btn-success" style="display: none;">Save</button>
-                    <button type="button" class="btn btn-danger" style="display: none;">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
                 </div>
             </form>
         </section>

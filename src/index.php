@@ -321,6 +321,7 @@ switch ($_GET["page"]) {
             $templateParams["title"] = "E-lixirium - Notifications";
             $templateParams["content"] = "notifications.php";
             $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
+            var_dump($templateParams["notifications"]);
         } else {
             header("Location: ?page=home");
         }
@@ -331,6 +332,7 @@ switch ($_GET["page"]) {
                 $templateParams["title"] = "E-lixirium - Notification Detail";
                 $templateParams["content"] = "notification-detail.php";
                 $templateParams["notification-detail"] = $dbh->getNotificationDetail($_GET["id"]);
+                $templateParams["notifications"] = $dbh->getNotifications($_SESSION["username"]);
                 if ($templateParams["notification-detail"][0]["seen"] == 0) {
                     $dbh->updateNotificationStatus(1, $templateParams["notification-detail"][0]["id_notification"]);
                 }

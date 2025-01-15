@@ -40,7 +40,7 @@
                                     <td>
                                         <a href="?page=product&id=<?php echo $product['id_product']; ?>"
                                             class="text-decoration-none text-dark">
-                                            <img src="<?php echo UPLOAD_DIR . $product["image_name"] ?>" class="img-fluid" />
+                                            <img src="<?php echo UPLOAD_DIR . $product["image_name"] ?>" class="img-fluid" alt="product"/>
                                         </a>
                                     </td>
                                     <td><?php echo $product["price"] . "€"; ?></td>

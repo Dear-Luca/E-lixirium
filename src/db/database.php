@@ -84,7 +84,8 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function insertAdmin($username, $password){
+    public function insertAdmin($username, $password)
+    {
         $query = "INSERT INTO admin (username, password) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ss', $username, $password);
@@ -222,7 +223,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getHashedPasswordAdmin($username){
+    public function getHashedPasswordAdmin($username)
+    {
         $query = "SELECT password FROM admin WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
@@ -231,7 +233,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getHashedPasswordUser($username){
+    public function getHashedPasswordUser($username)
+    {
         $query = "SELECT password FROM user WHERE username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
@@ -260,7 +263,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUsers(){
+    public function getUsers()
+    {
         $query = "SELECT * FROM user";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
@@ -343,7 +347,8 @@ class DatabaseHelper
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function checkNotifications(){
+    public function checkNotifications()
+    {
         $query = "SELECT * FROM notification WHERE seen = 0 AND username = ? OR SEN_username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ss', $_SESSION["username"], $_SESSION["username"]);
@@ -453,6 +458,22 @@ class DatabaseHelper
         $stmt->execute();
     }
 
+    public function deleteProductFromCarts($id_product)
+    {
+        $query = "DELETE FROM wishes WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_product);
+        $stmt->execute();
+    }
+
+    public function deleteProductFromOrders($id_product)
+    {
+        $query = "DELETE FROM includes WHERE id_product = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $id_product);
+        $stmt->execute();
+    }
+
     // UPDATE SECTION
 
     public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)
@@ -488,7 +509,8 @@ class DatabaseHelper
         $stmt->execute();
     }
 
-    public function deleteProductFromCart($id_product, $username){
+    public function deleteProductFromCart($id_product, $username)
+    {
         $query = "DELETE FROM wishes WHERE id_product = ? and username = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("is", $id_product, $username);

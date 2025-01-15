@@ -48,6 +48,8 @@ switch ($_GET["page"]) {
                 // Product existing
                 $dbh->deleteCategoriesOfProduct($_POST["id_product"]);
                 $dbh->deleteReviewsOfProduct($_POST["id_product"]);
+                $dbh->deleteProductFromCarts($_POST["id_product"]);
+                $dbh->deleteProductFromOrders($_POST["id_product"]);
                 $dbh->deleteProduct($_POST["id_product"]);
             }
         }

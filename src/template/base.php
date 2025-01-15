@@ -81,15 +81,18 @@
                     </li>
                 </ul>
             </div>
-            <form class="d-flex" role="search" method="GET" action="search.php">
+            <div class="d-flex">
                 <div class="form-check form-switch m-0 me-3 pt-2">
                     <input class="form-check-input border-0" type="checkbox" role="switch" id="particlesSwitch" checked>
                     <label class="form-check-label" for="particlesSwitch">Particles</label>
                 </div>
-                <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
-                    name="value" id="search">
-                <button class="btn bg-light-purple border-0 text-purple" type="submit">Search</button>
-            </form>
+                <form class="d-flex" role="search" method="GET" action="search.php">
+                    <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
+                        name="value" id="search">
+                    <label for="search" hidden>Search</label>
+                    <button class="btn bg-light-purple border-0 text-purple" type="submit">Search</button>
+                </form>
+            </div>
             <div class="nav-link d-none d-md-flex">
                 <?php if (isUserLoggedIn()): ?>
                     <!-- User logged in: -->

@@ -26,7 +26,8 @@ if (isset($templateParams["header"])): ?>
                         ?>
                         <p class="m-0 fw-semibold">(<?php echo $stars; ?>)</p>
                     </div>
-                    <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
+                    <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"
+                        title="<?php echo "Product - " . $product["name"]; ?>"></a>
                 </div>
                 <div class="magic-particles"></div>
             </article>

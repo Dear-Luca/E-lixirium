@@ -14,7 +14,8 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
         </section>
         <section class="col py-3 px-0 px-lg-3">
             <form action="#" method="POST">
-                <input type="hidden" id="id_product_update" name="id_product_update" value="<?php echo $product["id_product"]; ?>" />
+                <input type="hidden" id="id_product_update" name="id_product_update"
+                    value="<?php echo $product["id_product"]; ?>" />
                 <header>
                     <a href="./?page=products&category=<?php echo urlencode($category); ?>"
                         class="btn btn-outline-primary mb-3 d-none d-lg-inline-block bg-light-purple border-0 text-purple">Back
@@ -41,7 +42,7 @@ $category = $dbh->getCategoriesOfProduct($product["id_product"])[0]["name"]; ?>
                     <div class="form-floating">
                         <textarea class="pe-3 m-0 form-control h-100" name="description" id="description"
                             rows="4"><?php echo $product["description"]; ?></textarea>
-                        <label for="price">Description</label>
+                        <label for="description">Description</label>
                     </div>
                 </header>
                 <section>

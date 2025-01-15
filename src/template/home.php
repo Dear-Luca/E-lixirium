@@ -18,7 +18,7 @@ array_push($templateParams["js"], "home.js"); ?>
                         <div class="card-body">
                             <p class="text-nowrap text-center fw-semibold"><?php echo $category["name"]; ?></p>
                             <a href="./?page=products&category=<?php echo urlencode($category["name"]); ?>"
-                                class="stretched-link"></a>
+                                class="stretched-link" title="<?php echo "Products - " . $category["name"]; ?>"></a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,8 @@ array_push($templateParams["js"], "home.js"); ?>
                                 ?>
                                 <p class="m-0 small fw-semibold">(<?php echo $stars; ?>)</p>
                             </div>
-                            <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"></a>
+                            <a href="./?page=product&id=<?php echo $product["id_product"]; ?>" class="stretched-link"
+                                title="<?php echo "Product - " . $product["name"]; ?>"></a>
                         </div>
                         <div class="magic-particles"></div>
                     </div>

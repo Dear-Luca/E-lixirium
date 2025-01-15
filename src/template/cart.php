@@ -1,7 +1,7 @@
 <div class="container my-4">
     <?php if (count($templateParams["cart"]) == 0): ?>
         <div class="alert alert-info text-center">
-            <p class="h5">Your cart is empty</p>
+            <h3>Your cart is empty</h3>
         </div>
     <?php else: ?>
         <?php if (isset($templateParams["error"])): ?>
@@ -81,7 +81,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="checkoutModalLabel">Confirm Payment</h5>
+                        <h3 class="modal-title" id="checkoutModalLabel">Confirm Payment</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

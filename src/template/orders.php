@@ -1,7 +1,7 @@
 <div class="container my-4">
     <?php if (count($templateParams["orders"]) == 0): ?>
         <div class="alert alert-info text-center">
-            <p class="h5">You have no orders</p>
+            <h3>You have no orders</h3>
         </div>
     <?php else: ?>
         <div class="card">

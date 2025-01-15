@@ -353,6 +353,8 @@ switch ($_GET["page"]) {
     default:
         $templateParams["title"] = "E-lixirium - Home";
         $templateParams["content"] = "home.php";
+        $templateParams["products"] = $dbh->getTopProducts(6);
+        $templateParams["categories"] = $dbh->getCategories(6);
 }
 
 require 'template/base.php';

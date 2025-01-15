@@ -12,7 +12,9 @@
 
 <body class="bg-platinum">
     <header>
-        <h1>E-lixirium</h1>
+        <h1 class="magic-card d-inline-block">E-lixirium
+            <div class="magic-particles"></div>
+        </h1>
     </header>
     <script>
         // TODO: debug only, remove before release
@@ -55,7 +57,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./?page=about">About Us</a>
                     </li>
-                    <!-- <hr class="d-block d-md-none" /> -->
                     <div class="nav-link d-block d-md-none p-0">
                         <?php if (isUserLoggedIn()): ?>
                             <!-- User logged in: -->
@@ -78,6 +79,10 @@
                 </ul>
             </div>
             <form class="d-flex" role="search" method="GET" action="search.php">
+                <div class="form-check form-switch m-0 me-3 pt-2">
+                    <input class="form-check-input border-0" type="checkbox" role="switch" id="particlesSwitch" checked>
+                    <label class="form-check-label" for="particlesSwitch">Particles</label>
+                </div>
                 <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
                     name="value" id="search">
                 <button class="btn bg-light-purple border-0 text-purple" type="submit">Search</button>

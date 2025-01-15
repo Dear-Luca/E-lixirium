@@ -4,6 +4,8 @@ document.querySelector(".btn-primary").addEventListener("click", function () {
         input.disabled = false;
     });
 
+    document.querySelector("section.col-12.col-md-9 .row > div:nth-of-type(3) input").disabled = true;
+
     document.querySelector("div section form div:nth-child(8)").style.display = "block";
     document.querySelector("div section form div:nth-child(7)").style.display = "block";
     // show buttons save and cancel

@@ -476,11 +476,11 @@ class DatabaseHelper
 
     // UPDATE SECTION
 
-    public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername)
+    public function updateUser($name, $surname, $username, $email, $birthday, $cardNumber, $password)
     {
-        $query = "UPDATE user SET name = ?, surname = ?, username = ?, email = ?, birthday = ?, card_number = ?, password = ? WHERE username = ?";
+        $query = "UPDATE user SET name = ?, surname = ?, email = ?, birthday = ?, card_number = ?, password = ? WHERE username = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssssiss', $name, $surname, $username, $email, $birthday, $cardNumber, $password, $currentUsername);
+        $stmt->bind_param('sssssss', $name, $surname, $email, $birthday, $cardNumber, $password, $username);
         $stmt->execute();
     }
 

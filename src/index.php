@@ -174,23 +174,21 @@ switch ($_GET["page"]) {
             $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
             $templateParams["cart"] = $dbh->getCartProducts($_SESSION["username"]);
 
-            if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["birthday"]) && isset($_POST["card_number"]) && isset($_POST["password"])) {
+            if (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["email"]) && isset($_POST["birthday"]) && isset($_POST["card_number"]) && isset($_POST["password"])) {
                 if ($_POST["password"] == $_POST["confirmPassword"]) {
-                    // if username does't change or new username is not used
-                    if (($_POST["username"] == $_SESSION["username"]) || (count($dbh->checkUsername($_POST["username"])) == 0)) {
-                        if ($_POST["card_number"] == "") {
-                            $_POST["card_number"] = NULL;
-                        }
-
-                        $hashedPassword = $_POST["password"] == "" ? $dbh->getUserInfo($_SESSION["username"])[0]["password"] : password_hash($_POST["password"], PASSWORD_DEFAULT);
-                        $dbh->updateUser($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["birthday"], $_POST["card_number"], $hashedPassword, $_SESSION["username"]);
+                    $_POST["card_number"] = $_POST["card_number"] == "" ? NULL : $_POST["card_number"];
+                    // var_dump($_SESSION);
+                    $userInfo = $dbh->getUserInfo($_SESSION["username"]);
+                    if ($userInfo && isset($userInfo[0])) {
+                        $hashedPassword = $_POST["password"] == "" ? $userInfo[0]["password"] : password_hash($_POST["password"], PASSWORD_DEFAULT);
+                        $username = $_POST["username"] ?? $userInfo[0]["username"]; // Usa il valore di default se `username` non è impostato
+                        
+                        $dbh->updateUser($_POST["name"], $_POST["surname"], $username, $_POST["email"], $_POST["birthday"], $_POST["card_number"], $hashedPassword);
                         $templateParams["error"] = "Update successful";
-                        $_SESSION["username"] = $_POST["username"];
                         $templateParams["userInfo"] = $dbh->getUserInfo($_SESSION["username"]);
-                        // update variable session
                         updateUser($templateParams);
                     } else {
-                        $templateParams["error"] = "A user with that username already exists";
+                        $templateParams["error"] = "User not found";
                     }
                 } else {
                     $templateParams["error"] = "You need to confirm the password";
